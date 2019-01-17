@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Init on opso&#39;s Blog</title>
+    <link>/tags/init/</link>
+    <description>Recent content in Init on opso&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Mon, 05 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/init/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Linux初始化常见方式</title>
+      <link>/post/linux-init/</link>
+      <pubDate>Mon, 05 Mar 2018 00:00:00 +0000</pubDate>
+      
+      <guid>/post/linux-init/</guid>
+      <description>&lt;p&gt;近年来，Linux 系统的 init 进程经历了两次重大的演进，传统的 &lt;code&gt;sysvinit&lt;/code&gt; 已经逐渐淡出历史舞台，新的 &lt;code&gt;UpStart&lt;/code&gt; 和 &lt;code&gt;systemd&lt;/code&gt; 各有特点，越来越多的 Linux 发行版采纳了 &lt;code&gt;systemd&lt;/code&gt; (&lt;strong&gt;Ubuntu15.04+/CentOS7+&lt;/strong&gt;)。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

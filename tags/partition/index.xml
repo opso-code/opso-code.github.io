@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Partition on opso&#39;s Blog</title>
+    <link>/tags/partition/</link>
+    <description>Recent content in Partition on opso&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Mon, 20 Mar 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/partition/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>记一次MySQL维护分区过程</title>
+      <link>/post/mysql-partition/</link>
+      <pubDate>Mon, 20 Mar 2017 00:00:00 +0000</pubDate>
+      
+      <guid>/post/mysql-partition/</guid>
+      <description>&lt;p&gt;前段时间有几台MySQL服务器内容警告，已经超过了80%，达到了40G/50G，这些数据库主要是记录用户的一些操作日志，查看表大小后锁定三个数据量比较大的表。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

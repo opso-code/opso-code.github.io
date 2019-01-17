@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Nodejs on opso&#39;s Blog</title>
+    <link>/tags/nodejs/</link>
+    <description>Recent content in Nodejs on opso&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Thu, 24 Mar 2016 12:18:49 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/nodejs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>cheerio简单网页爬虫应用</title>
+      <link>/post/cheerio-shadowsocks/</link>
+      <pubDate>Thu, 24 Mar 2016 12:18:49 +0000</pubDate>
+      
+      <guid>/post/cheerio-shadowsocks/</guid>
+      <description>&lt;h3 id=&#34;cheerio&#34;&gt;cheerio&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;cheerio&lt;/strong&gt; 是一个为服务器特别定制的，快速、灵活、封装jQuery核心功能工具包。Cheerio包括了 jQuery核心的子集，从jQuery库中去除了所有DOM不一致性和浏览器不兼容的部分，揭示了它真正优雅的API。Cheerio工作在一个非常简单，一致的DOM模型之上，解析、操作、渲染都变得难以置信的高效。基础的端到端的基准测试显示Cheerio大约比JSDOM快八倍(8x)。Cheerio封装了@FB55兼容的htmlparser，几乎能够解析任何的 HTML 和 XML document。&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Hexo使用和nodejs环境搭建</title>
+      <link>/post/hello-hexo/</link>
+      <pubDate>Wed, 16 Mar 2016 21:05:10 +0000</pubDate>
+      
+      <guid>/post/hello-hexo/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Hexo&lt;/strong&gt; &amp;ndash; A fast, simple &amp;amp; powerful blog framework 一个简单、强大、且快速的静态博客生成工具。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

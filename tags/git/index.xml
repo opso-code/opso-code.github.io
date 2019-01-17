@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Git on opso&#39;s Blog</title>
+    <link>/tags/git/</link>
+    <description>Recent content in Git on opso&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Wed, 13 Jan 2016 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Git基本操作</title>
+      <link>/post/git-note/</link>
+      <pubDate>Wed, 13 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/post/git-note/</guid>
+      <description>&lt;p&gt;&lt;code&gt;git&lt;/code&gt;是一个快速的分布式版本控制系统。之前也有了解过，虽然现在公司里用的是&lt;code&gt;SVN&lt;/code&gt;，对照着官方文档，&lt;code&gt;git&lt;/code&gt;的基础入门。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Mariadb on opso&#39;s Blog</title>
+    <link>/tags/mariadb/</link>
+    <description>Recent content in Mariadb on opso&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Tue, 29 Mar 2016 17:23:24 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/mariadb/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MariaDB 10.1.13编译安装</title>
+      <link>/post/mariadb-install/</link>
+      <pubDate>Tue, 29 Mar 2016 17:23:24 +0000</pubDate>
+      
+      <guid>/post/mariadb-install/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;MariaDB&lt;/strong&gt; 数据库管理系统是 &lt;strong&gt;MySQL&lt;/strong&gt; 的一个分支，主要由开源社区在维护，采用GPL授权许可。开发这个分支的原因之一是：Oracle公司收购了MySQL后，有将MySQL闭源的潜在风险，因此社区采用分支的方式来避开这个风险。
+—— &lt;a href=&#34;https://zh.wikipedia.org/wiki/MariaDB&#34;&gt;维基百科&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

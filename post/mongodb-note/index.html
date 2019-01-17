@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+  <meta charset="utf-8" />
+
+  
+  <title>MongoDB学习笔记</title>
+
+  
+  
+  <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
+  <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  <link href="//at.alicdn.com" rel="dns-prefetch">
+  <link href="//fonts.googleapis.com" rel="dns-prefetch">
+  <link href="//fonts.gstatic.com" rel="dns-prefetch">
+  <link href="///disqus.com" rel="dns-prefetch">
+  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
+  <link href="//hm.baidu.com" rel="dns-prefetch">
+
+  
+
+  
+  <meta name="author" content="opso">
+  <meta name="description" content="MongoDB 是一个基于分布式文件存储的数据库。由C&#43;&#43;语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。
+">
+
+  
+  
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@gohugoio">
+    <meta name="twitter:title" content="MongoDB学习笔记">
+    <meta name="twitter:description" content="MongoDB 是一个基于分布式文件存储的数据库。由C&#43;&#43;语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。
+">
+    <meta name="twitter:image" content="/images/avatar.png">
+  
+
+  
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="MongoDB学习笔记">
+  <meta property="og:description" content="MongoDB 是一个基于分布式文件存储的数据库。由C&#43;&#43;语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。
+">
+  <meta property="og:url" content="/post/mongodb-note/">
+  <meta property="og:image" content="/images/avatar.png">
+
+
+
+
+<meta name="generator" content="Hugo 0.51">
+
+
+<link rel="canonical" href="/post/mongodb-note/">
+
+<meta name="renderer" content="webkit">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="format-detection" content="telephone=no,email=no,adress=no">
+<meta http-equiv="Cache-Control" content="no-transform">
+
+
+<meta name="robots" content="index,follow">
+<meta name="referrer" content="origin-when-cross-origin">
+
+
+
+
+
+
+
+<meta name="theme-color" content="#02b875">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="apple-mobile-web-app-title" content="opso&#39;s Blog">
+<meta name="msapplication-tooltip" content="opso&#39;s Blog">
+<meta name='msapplication-navbutton-color' content="#02b875">
+<meta name="msapplication-TileColor" content="#02b875">
+<meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
+<link rel="icon" href="/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
+<link rel="icon" sizes="192x192" href="/icons/icon-192x192.png">
+<link rel="apple-touch-icon" href="/icons/icon-152x152.png">
+<link rel="manifest" href="/manifest.json">
+
+
+<link rel="preload" href="/styles/main.min.css" as="style">
+<link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
+<link rel="preload" href="/images/avatar.png" as="image">
+<link rel="preload" href="/images/grey-prism.svg" as="image">
+
+
+<style>
+  body {
+    background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
+  }
+</style>
+<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/medium-zoom@1.0.2/dist/medium-zoom.min.js"></script>
+
+
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video-js.min.css">
+
+
+
+  
+  
+<!--[if lte IE 8]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/videojs-ie8@1.1.2/dist/videojs-ie8.min.js"></script>
+<![endif]-->
+
+<!--[if lte IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/eligrey-classlist-js-polyfill@1.2.20180112/classList.min.js"></script>
+<![endif]-->
+
+
+</head>
+  <body>
+    
+    <div class="suspension">
+      <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
+      
+        
+        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
+        
+      
+    </div>
+    
+    
+  <header class="site-header">
+  <img class="avatar" src="/images/avatar.png" alt="Avatar">
+  
+  <h2 class="title">opso&#39;s Blog</h2>
+  
+  <p class="subtitle">Talk is cheap, show me the code</p>
+  <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
+    <span class="icon icon-menu" aria-hidden="true"></span>
+  </button>
+
+  <nav class="site-menu collapsed">
+    <h2 class="offscreen">Main Menu</h2>
+    <ul class="menu-list">
+      
+      
+      
+      
+        <li class="menu-item
+          
+          
+           is-active">
+          <a href="/">Home</a>
+        </li>
+      
+        <li class="menu-item
+          
+          
+          ">
+          <a href="/tags/">Tags</a>
+        </li>
+      
+    </ul>
+  </nav>
+  <nav class="social-menu collapsed">
+    <h2 class="offscreen">Social Networks</h2>
+    <ul class="social-list"><li class="social-item">
+          <a href="mailto:945206413@qq.com" title="Email" aria-label="Email">
+            <span class="icon icon-email" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//github.com/opso-code" title="GitHub" aria-label="GitHub">
+            <span class="icon icon-github" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//www.instagram.com/opso92" title="Instagram" aria-label="Instagram">
+            <span class="icon icon-instagram" aria-hidden="true"></span>
+          </a>
+        </li><li class="social-item">
+          <a href="//weibo.com/234920704" title="Weibo" aria-label="Weibo">
+            <span class="icon icon-weibo" aria-hidden="true"></span>
+          </a>
+        </li></ul>
+  </nav>
+</header>
+
+  <section class="main post-detail">
+    <header class="post-header">
+      <h1 class="post-title">MongoDB学习笔记</h1>
+      <p class="post-meta">@opso · Jun 25, 2017 · 3 min read</p>
+    </header>
+    <article class="post-content"><p>MongoDB  是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。</p>
+
+<p>在接触了 <code>Redis</code>、<code>Memcache</code>、<code>MySQL</code>这些数据库之后，由于工作需要，最近在学习另外一个常见的 <strong>NoSQL数据库</strong> ： <code>MongoDB</code>，下面是整理的资料和笔记。</p>
+
+<!--more-->
+
+<table>
+<thead>
+<tr>
+<th align="left">对比项</th>
+<th align="left">Mongodb</th>
+<th align="left">MySQL等</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">数据库</td>
+<td align="left">database</td>
+<td align="left">database</td>
+</tr>
+
+<tr>
+<td align="left">表</td>
+<td align="left">集合collection</td>
+<td align="left">二维表table</td>
+</tr>
+
+<tr>
+<td align="left">一行</td>
+<td align="left">文档document</td>
+<td align="left">一条记录record</td>
+</tr>
+
+<tr>
+<td align="left">字段</td>
+<td align="left">键key</td>
+<td align="left">列column</td>
+</tr>
+</tbody>
+</table>
+
+<h2 id="主要功能特性">主要功能特性</h2>
+
+<ol>
+<li>文件存储格式<code>BSON</code>（一种json的扩展）</li>
+<li>模式自由 数据格式不受限了表的结构</li>
+<li>支持动态查询</li>
+<li>支持完全索引</li>
+<li>支持复制（其主从复制）和故障恢复</li>
+<li>使用高效的二进制数据存储，包括大型对象</li>
+<li>自动处理碎片，以支持云计算层次的扩展。</li>
+<li>支持<code>Java</code>、<code>Ruby</code>、<code>Python</code>、<code>C++</code>、<code>PHP</code>等多种语言</li>
+<li>内部支持<code>JavaScript</code></li>
+</ol>
+
+<h2 id="安装">安装</h2>
+
+<p>linux下安装过程这里简单说明下</p>
+
+<ol>
+<li>下载适合当前系统、编译好的压缩包</li>
+<li>解压缩并移动到 <code>usr/local/mongodb</code></li>
+<li>创建<code>/data/mongo_data</code>和<code>/data/mongo_log</code>,创建<code>mongodb:mongodb</code>用户，修改以上文件夹权限</li>
+<li>将mongodb添加到<code>PATH</code>环境中</li>
+</ol>
+
+<p>这里遇到一个问题，如果直接使用<code>mongodb</code>指定配置文件启动，默认情况下，<code>mongodb</code>会以<code>root</code>用户运行主进程和子进程，这时<code>mongo</code>命令行会警告不安全的root用户权限:</p>
+
+<blockquote>
+<p>[initandlisten] ** WARNING: You are running this process as the root user, which is not recommended.</p>
+</blockquote>
+
+<p>找到一个自启动脚本（<strong>ubuntu</strong>）</p>
+
+<p><a href="https://github.com/mongodb/mongo/blob/master/debian/init.d">https://github.com/mongodb/mongo/blob/master/debian/init.d</a></p>
+
+<p>研究了下，关键命令是：</p>
+
+<blockquote>
+<p>start-stop-daemon &ndash;start &ndash;quiet &ndash;pidfile /var/run/mongodb.pid &ndash;chuid mongodb:mongodb &ndash;exec /usr/local/mongodb/bin/mongod &ndash; -f /usr/local/mongodb/mongo.conf</p>
+</blockquote>
+
+<p>这里的 <code>--chuid mongodb:mongodb</code> 参数表示会将子进程以<code>mongodb</code> 用户运行，确保了数据的安全性。</p>
+
+<h2 id="php扩展">PHP扩展</h2>
+
+<ol>
+<li><a href="http://pecl.php.net/package/mongo">mongo扩展</a></li>
+<li><a href="http://pecl.php.net/package/mongodb">mongodb扩展</a></li>
+</ol>
+
+<p>这里PHP7和PHP5将会有所不同，<code>mongo</code>扩展不支持PHP7，得安装<code>mongodb</code>，支持<code>php5.5</code>及以上，安装过程就不赘述了 : )</p>
+
+<h2 id="索引说明">索引说明</h2>
+
+<p>mongodb索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。</p>
+
+<p>实际项目中基本不允许不带索引的查询；索引大小写敏感，索引分两种 复合索引和单索引，任何类型，包括文档(document)都能作为索引，默认会建立 <code>_id</code> 单索引。</p>
+
+<p>索引也会在插入和删除的时候增加一些系统的负担，所以建立索引更适合读取较多的场景，也是大多数应用的场景。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">ensureIndex</span>({<span style="color:#a6e22e">KEY</span><span style="color:#f92672">:</span><span style="color:#ae81ff">1</span>}) <span style="color:#75715e">// 建立索引
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">getIndexs</span>() <span style="color:#75715e">// 获取索引
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">reIndex</span>()<span style="color:#75715e">//通常这是不必要的，但是在集合的大小变动很大及集合在磁盘空间上占用很多空间时重建索引才有用。对于大数据量的集合来说，重建索引可能会很慢
+</span><span style="color:#75715e"></span></code></pre></div>
+<h2 id="命令操作">命令操作</h2>
+
+<h3 id="数据库">数据库</h3>
+
+<ul>
+<li><code>show dbs</code> 展示数据库 类似SQL的<code>SHOW DATABASES</code></li>
+<li><code>use xxx</code>  创建/切换数据库
+以下皆以 <code>stu</code> 作为举例</li>
+</ul>
+
+<h3 id="文档-document-操作">文档(document)操作</h3>
+
+<p>以 Collection_name = stu 为例</p>
+
+<h4 id="1-插入">1.插入</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">insert</span>(<span style="color:#a6e22e">Document</span>);    <span style="color:#75715e">// 插入一条或多组数据
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">insertOne</span>(<span style="color:#a6e22e">Document</span>); <span style="color:#75715e">// 插入一条数据
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">insertMany</span>(<span style="color:#a6e22e">Document</span>);<span style="color:#75715e">// 插入多条数据
+</span><span style="color:#75715e">// 例：
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">insertOne</span>({<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;xiaoming&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, <span style="color:#e6db74">&#34;height&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">170</span>});
+<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">insertMany</span>([
+    {<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;xiaoming&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, <span style="color:#e6db74">&#34;height&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">170</span>},
+    {<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;billy&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">21</span>, <span style="color:#e6db74">&#34;height&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">172</span>},
+    {<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;xiaohong&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#34;height&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">164</span>},
+    {<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;xiaohua&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">23</span>, <span style="color:#e6db74">&#34;height&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">181</span>},
+    {<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;lisi&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">18</span>, <span style="color:#e6db74">&#34;height&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">171</span>, <span style="color:#e6db74">&#34;extra&#34;</span><span style="color:#f92672">:</span> {<span style="color:#e6db74">&#34;favorite&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;eat&#34;</span>, <span style="color:#e6db74">&#34;sport&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;running&#34;</span>}},
+    {<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;wangwu&#34;</span>, <span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">20</span>, <span style="color:#e6db74">&#34;height&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">170</span>, <span style="color:#e6db74">&#34;extra&#34;</span><span style="color:#f92672">:</span> {<span style="color:#e6db74">&#34;favorite&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;sleep&#34;</span>, <span style="color:#e6db74">&#34;sport&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;swimming&#34;</span>}},
+]);
+</code></pre></div>
+<h4 id="2-删除">2.删除</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">remove</span>({}); <span style="color:#75715e">// 删除所有数据
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">drop</span>(); <span style="color:#75715e">// 同上
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">remove</span>(<span style="color:#a6e22e">query</span> <span style="color:#f92672">&lt;</span>,<span style="color:#a6e22e">options</span><span style="color:#f92672">&gt;</span>);
+<span style="color:#75715e">// query: 查询条件（数据索引或名字）
+</span><span style="color:#75715e">// options: 可选条件
+</span><span style="color:#75715e">//      {
+</span><span style="color:#75715e">//          justOne: &lt;boolean&gt;,     //默认false，删除所有匹配到的。
+</span><span style="color:#75715e">//          writeConcern: &lt;document&gt;//抛出异常的级别。
+</span><span style="color:#75715e">//      }
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">col</span>.<span style="color:#a6e22e">deleteOne</span>(<span style="color:#a6e22e">query</span> <span style="color:#f92672">&lt;</span>,<span style="color:#a6e22e">options</span><span style="color:#f92672">&gt;</span>)   <span style="color:#75715e">// 同上，无justOne参数，只删除第一条
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">col</span>.<span style="color:#a6e22e">deleteMany</span>(<span style="color:#a6e22e">query</span> <span style="color:#f92672">&lt;</span>,<span style="color:#a6e22e">options</span><span style="color:#f92672">&gt;</span>)  <span style="color:#75715e">// 同上，无justOne参数，只删除多条
+</span><span style="color:#75715e"></span></code></pre></div>
+<h4 id="3-更新">3.更新</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">update</span>(<span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">update</span>, <span style="color:#f92672">&lt;</span>,<span style="color:#a6e22e">options</span><span style="color:#f92672">&gt;</span>);
+<span style="color:#75715e">//  query:  查询条件(数据索引或名字)
+</span><span style="color:#75715e">//  update: 更新的内容，语法：{$set:query}
+</span><span style="color:#75715e">//  options:三个可选参数
+</span><span style="color:#75715e">//      {
+</span><span style="color:#75715e">//          upsert: &lt;boolean&gt;,      //如果不存在update的记录，是否插入新数据，默认:false。
+</span><span style="color:#75715e">//          multi: &lt;boolean&gt;,       //只更新找到的第一条记录，默认是false,如果为true,多条记录全部更新。
+</span><span style="color:#75715e">//          writeConcern: &lt;document&gt;//#抛出异常的级别。
+</span><span style="color:#75715e">//      }
+</span><span style="color:#75715e">// 例如：
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">update</span>(
+    {<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;billy&#34;</span>}, 
+    {<span style="color:#a6e22e">$set</span><span style="color:#f92672">:</span> {<span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">18</span>}},
+    {<span style="color:#a6e22e">upsert</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>, <span style="color:#a6e22e">multi</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">true</span>}
+);
+<span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">updateOne</span>(); <span style="color:#75715e">// 同上，无multi参数，只更新第一条
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">updateMany</span>();<span style="color:#75715e">// 同上，无multi参数
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">replaceOne</span>();<span style="color:#75715e">// 同updateOne
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">save</span>(document <span style="color:#f92672">&lt;</span>,<span style="color:#a6e22e">writeConcern</span><span style="color:#f92672">&gt;</span>)   <span style="color:#75715e">// 通过传入的文档整个替换
+</span><span style="color:#75715e">// 例 增加billy age加4
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">update</span>({<span style="color:#e6db74">&#34;name&#34;</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;billy&#34;</span>},{<span style="color:#a6e22e">$inc</span><span style="color:#f92672">:</span>{<span style="color:#e6db74">&#34;age&#34;</span><span style="color:#f92672">:</span><span style="color:#ae81ff">4</span>}});
+</code></pre></div>
+<p><strong>insert 与 save 的区别</strong>
+如果插入的数据<code>_id</code>相同，<code>save</code>将会更新改文档，而<code>insert</code>将会报错</p>
+
+<table>
+<thead>
+<tr>
+<th align="left">操作符</th>
+<th align="left">说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td align="left">$set</td>
+<td align="left">当文档中包含该字段的时候,更新该字段,如果该文档中没有该字段,则为本文档添加一个字段</td>
+</tr>
+
+<tr>
+<td align="left">$unset</td>
+<td align="left">当文档中包含该字段的时候,更新该字段,如果该文档中没有该字段,则为本文档添加一个字段</td>
+</tr>
+
+<tr>
+<td align="left">$rename</td>
+<td align="left">重命名某个列</td>
+</tr>
+
+<tr>
+<td align="left">$inc</td>
+<td align="left">增长某个列</td>
+</tr>
+
+<tr>
+<td align="left">$setOnInsert</td>
+<td align="left">当upsert为true时,并且发生了insert操作时,可以补充的字段</td>
+</tr>
+
+<tr>
+<td align="left">$push</td>
+<td align="left">将一个数字存入一个数组,分为三种情况,如果该字段存在,则直接将数字存入数组.如果该字段不存在,创建字段并且将数字插入该数组.如果更新的字段不是数组,会报错的</td>
+</tr>
+
+<tr>
+<td align="left">$pushAll</td>
+<td align="left">将多个数值一次存入数组.上面的push只能一个一个的存入</td>
+</tr>
+
+<tr>
+<td align="left">$addToSet</td>
+<td align="left">与push功能相同将一个数字存入数组,不同的是如果数组中有这个数字,将不会插入,只会插入新的数据,同样也会有三种情况,与push相同</td>
+</tr>
+
+<tr>
+<td align="left">$pop</td>
+<td align="left">删除数组最后一个元素</td>
+</tr>
+
+<tr>
+<td align="left">$pull</td>
+<td align="left">删除数组中的指定的元素,如果删除的字段不是数组,会报错</td>
+</tr>
+
+<tr>
+<td align="left">$pullAll</td>
+<td align="left">删除数组中的多个值,跟pushAll与push的关系类似</td>
+</tr>
+</tbody>
+</table>
+
+<h4 id="4-查询">4.查询</h4>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>({})          <span style="color:#75715e">// 查询所有文档
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>().<span style="color:#a6e22e">pretty</span>()   <span style="color:#75715e">// 以格式化输出数据
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">collection</span>.<span style="color:#a6e22e">find</span>(<span style="color:#a6e22e">query</span>, <span style="color:#a6e22e">projection</span>)
+<span style="color:#75715e">//  query：查询条件(数据索引或名字)
+</span><span style="color:#75715e">//  projection：可选。指定返回的字段。
+</span><span style="color:#75715e">//  只显示_id,name字段
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>({}, {<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#ae81ff">1</span>});
+</code></pre></div>
+<p>以<code>age</code>字段查询：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>({<span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#a6e22e">value</span>});
+</code></pre></div>
+<table>
+<thead>
+<tr>
+<th>value</th>
+<th>说明</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>{$ne: 20}</td>
+<td>不等于</td>
+</tr>
+
+<tr>
+<td>{$nin: [18,19,20]}</td>
+<td>不包含后面给定的值</td>
+</tr>
+
+<tr>
+<td>{$all: [18,19,20]}</td>
+<td>必须包含后面给定的值</td>
+</tr>
+
+<tr>
+<td>{$in: [18,19,20]}</td>
+<td>包含一个或多个</td>
+</tr>
+
+<tr>
+<td>{$exists: true}</td>
+<td>是否存在，true或1存在，反之不存在</td>
+</tr>
+
+<tr>
+<td>{$mod: [10, 0]}</td>
+<td>取模操作（模10余0）</td>
+</tr>
+
+<tr>
+<td>{$or: [{filed1: vulue1}, {filed2: vulue2}]}</td>
+<td>或，满足其中一个即可</td>
+</tr>
+
+<tr>
+<td>{$nor: [{filed1: vulue1}, {filed2: vulue2}]}</td>
+<td>异或，排除这两种情况的其他情况</td>
+</tr>
+
+<tr>
+<td>{$where: function(){ return &hellip; }}</td>
+<td>回调，符合条件才返回</td>
+</tr>
+
+<tr>
+<td>{$lt: 20}</td>
+<td>&lt;</td>
+</tr>
+
+<tr>
+<td>{$gt: 20}</td>
+<td>&gt;</td>
+</tr>
+
+<tr>
+<td>{$lte: 20}</td>
+<td>&lt;=</td>
+</tr>
+
+<tr>
+<td>{$gte: 20}</td>
+<td>&gt;=</td>
+</tr>
+</tbody>
+</table>
+
+<p>另外，<code>find</code> 还支持正则表达式查询（类似mysql里的<code>like</code>），但效率并不高：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>({<span style="color:#a6e22e">name</span><span style="color:#f92672">:</span> <span style="color:#e6db74">/user.*/i</span>}); <span style="color:#75715e">// 查询filed以user开头不区分大小写
+</span><span style="color:#75715e"></span></code></pre></div>
+<p>其他常见的还有<code>skip</code>、<code>limit</code>、<code>sort</code>、<code>count</code> 等方法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 读取年龄最大的3-8名学生信息
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>().<span style="color:#a6e22e">sort</span>({<span style="color:#a6e22e">age</span><span style="color:#f92672">:</span> <span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>}).<span style="color:#a6e22e">skip</span>(<span style="color:#ae81ff">2</span>).<span style="color:#a6e22e">limit</span>(<span style="color:#ae81ff">5</span>);
+<span style="color:#75715e">// 获取学生人数
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>().<span style="color:#a6e22e">count</span>();
+</code></pre></div>
+<p><strong>distinct</strong> 去重：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">distinct</span>(<span style="color:#e6db74">&#34;age&#34;</span>); <span style="color:#75715e">// 特殊,传入的参数直接是字符串,而不是对象; [ 20, 25, 18, 23 ]
+</span><span style="color:#75715e"></span></code></pre></div>
+<h4 id="5-子文档查询-elemmatch">5.子文档查询 $elemMatch</h4>
+
+<p>elemMatch投影操作符将限制查询返回的数组字段的内容只包含匹配elemMatch条件的数组元素。
+注意：
+(1) 数组中元素是内嵌文档。
+(2) 如果多个元素匹配$elemMatch条件，操作符返回数组中第一个匹配条件的元素。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#75715e">// 1 常规方法
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>({<span style="color:#e6db74">&#39;extra.sport&#39;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;swimming&#39;</span>});
+<span style="color:#75715e">// 2 使用操作符
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">stu</span>.<span style="color:#a6e22e">find</span>({<span style="color:#e6db74">&#34;extra&#34;</span><span style="color:#f92672">:</span> {
+    <span style="color:#a6e22e">$elemMatch</span><span style="color:#f92672">:</span> {<span style="color:#e6db74">&#34;sport&#34;</span><span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;swimming&#34;</span>}}
+});
+</code></pre></div>
+<h3 id="存储过程">存储过程</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">system</span>.<span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">save</span>({<span style="color:#a6e22e">_id</span><span style="color:#f92672">:</span><span style="color:#e6db74">&#34;mypro&#34;</span>,<span style="color:#a6e22e">value</span><span style="color:#f92672">:</span><span style="color:#66d9ef">function</span>(){
+     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">total</span> <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+     <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">arr</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">student</span>.<span style="color:#a6e22e">find</span>().<span style="color:#a6e22e">toArray</span>();
+     <span style="color:#66d9ef">for</span>(<span style="color:#66d9ef">var</span> <span style="color:#a6e22e">i</span><span style="color:#f92672">=</span><span style="color:#a6e22e">arr</span>.<span style="color:#a6e22e">length</span><span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">&gt;=</span><span style="color:#ae81ff">0</span>;<span style="color:#a6e22e">i</span><span style="color:#f92672">--</span>){
+         <span style="color:#a6e22e">total</span> <span style="color:#f92672">+=</span> <span style="color:#a6e22e">arr</span>[<span style="color:#a6e22e">i</span>].<span style="color:#a6e22e">age</span>;
+     }
+     <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">total</span>;
+}});
+<span style="color:#75715e">//查询存储过程
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">system</span>.<span style="color:#a6e22e">js</span>.<span style="color:#a6e22e">find</span>();
+<span style="color:#75715e">//执行存储过程
+</span><span style="color:#75715e"></span><span style="color:#a6e22e">db</span>.eval(<span style="color:#e6db74">&#34;mypro()&#34;</span>);
+</code></pre></div>
+<h3 id="资料">资料</h3>
+
+<p><a href="http://docs.mongoing.com/manual-zh">mongoDB 4.3中文文档</a></p></article>
+    <footer class="post-footer">
+      
+      <ul class="post-tags">
+        
+          <li><a href="/tags/mongo"><span class="tag">Mongo</span></a></li>
+        
+      </ul>
+      
+      <p class="post-copyright">
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>571</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+      </p>
+    </footer>
+    
+      <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "opso" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+      
+    
+  </section>
+  
+<footer class="site-footer">
+  <p>© 2017-2019 opso&#39;s Blog</p>
+  <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
+  
+</footer>
+
+
+<script src="https://cdn.jsdelivr.net/npm/smooth-scroll@15.0.0/dist/smooth-scroll.min.js"></script>
+
+
+
+<script async src="https://cdn.jsdelivr.net/npm/video.js@7.3.0/dist/video.min.js"></script>
+
+
+
+
+<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [['$','$'], ['\\(','\\)']],
+      displayMath: [['$$','$$'], ['\\[','\\]']],
+      processEscapes: true,
+      processEnvironments: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+      TeX: { equationNumbers: { autoNumber: "AMS" },
+      extensions: ["AMSmath.js", "AMSsymbols.js"] }
+    },
+  });
+</script>
+<script type="text/x-mathjax-config">
+  // Fix <code> tags after MathJax finishes running. This is a
+  // hack to overcome a shortcoming of Markdown. Discussion at
+  // https://github.com/mojombo/jekyll/issues/199
+  MathJax.Hub.Queue(() => {
+    MathJax.Hub.getAllJax().map(v => v.SourceElement().parentNode.className += ' has-jax');
+  });
+</script>
+
+
+
+<script src="/scripts/index.min.js"></script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('\/service-worker.js').then(function() {
+      console.log('[ServiceWorker] Registered');
+    });
+  }
+</script>
+
+
+
+
+
+
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+  </body>
+</html>

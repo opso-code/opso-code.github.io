@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Npm on opso&#39;s Blog</title>
+    <link>/tags/npm/</link>
+    <description>Recent content in Npm on opso&#39;s Blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Wed, 16 Mar 2016 21:05:10 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/npm/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hexo使用和nodejs环境搭建</title>
+      <link>/post/hello-hexo/</link>
+      <pubDate>Wed, 16 Mar 2016 21:05:10 +0000</pubDate>
+      
+      <guid>/post/hello-hexo/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;Hexo&lt;/strong&gt; &amp;ndash; A fast, simple &amp;amp; powerful blog framework 一个简单、强大、且快速的静态博客生成工具。&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
