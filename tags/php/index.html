@@ -51,7 +51,7 @@
 
 
 <link rel="canonical" href="/tags/php/">
-<link rel="alternate" type="application/rss+xml" href="/tags/php/index.xml" title="opso's Blog">
+<link rel="alternate" type="application/rss+xml" href="/tags/php/index.xml" title="opso's blog">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -71,8 +71,8 @@
 <meta name="theme-color" content="#02b875">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="opso&#39;s Blog">
-<meta name="msapplication-tooltip" content="opso&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="opso&#39;s blog">
+<meta name="msapplication-tooltip" content="opso&#39;s blog">
 <meta name='msapplication-navbutton-color' content="#02b875">
 <meta name="msapplication-TileColor" content="#02b875">
 <meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
@@ -130,7 +130,7 @@
   <header class="site-header">
   <img class="avatar" src="/images/avatar.png" alt="Avatar">
   
-  <h2 class="title">opso&#39;s Blog</h2>
+  <h2 class="title">opso&#39;s blog</h2>
   
   <p class="subtitle">Talk is cheap, show me the code</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
@@ -195,6 +195,8 @@
     <p class="post-meta">@opso · Aug 17, 2018 · 1 min read</p>
   </header>
   
+    <img class="post-cover" src="/images/php_logo.jpg" alt="PHP交互式控制台——Psysh" lazyload="on">
+  
   <p class="post-summary">今天来介绍一个PHP新的玩具：PsySH : http://psysh.org/
 </p>
   <footer class="post-footer">
@@ -205,9 +207,29 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="/post/swoole-process/" class="post-link">swoole_process实现进程池</a></h3>
+    <p class="post-meta">@opso · Jul 7, 2018 · 3 min read</p>
+  </header>
+  
+    <img class="post-cover" src="/images/swoole_logo.png" alt="swoole_process实现进程池" lazyload="on">
+  
+  <p class="post-summary">Swoole —— 重新定义PHP
+作为一个使用C语言底层实现的PHP扩展，弥补了PHP在多线程、常驻内存相关领域的短处，为广大phper打开了眼界。
+swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另一种是管道(pipe)，对swoole_process 的研究在swoole中显得尤为重要。
+</p>
+  <footer class="post-footer">
+    <a class="read-more" href="/post/swoole-process/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="/post/docker-php/" class="post-link">Docker化PHP环境</a></h3>
     <p class="post-meta">@opso · Jan 29, 2018 · 3 min read</p>
   </header>
+  
+    <img class="post-cover" src="/images/docker_logo.png" alt="Docker化PHP环境" lazyload="on">
   
   <p class="post-summary"> Docker作为一项最流行的虚拟化技术，从2013年发展至今，已经发展的如火如荼。Docker 使用 Google 公司推出的 Go 语言 进行开发实现，基于 Linux 内核的 cgroup，namespace，以及 AUFS 类的 Union FS 等技术，对进程进行封装隔离，属于 操作系统层面的虚拟化技术。由于隔离的进程独立于宿主和其它的隔离的进程，因此也称其为容器。
 </p>
@@ -236,6 +258,8 @@
     <h3 class="post-title"><a href="/post/php-extentions/" class="post-link">PHP常见扩展功能说明</a></h3>
     <p class="post-meta">@opso · Mar 31, 2017 · 1 min read</p>
   </header>
+  
+    <img class="post-cover" src="/images/php_logo.jpg" alt="PHP常见扩展功能说明" lazyload="on">
   
   <p class="post-summary">每次编译安装PHP的时候都会有一堆扩展参数，有些看名字就知道其中的作用，有些不甚了解，有时间查看了下官方文档。
 </p>
@@ -279,6 +303,8 @@
     <p class="post-meta">@opso · Jan 20, 2016 · 4 min read</p>
   </header>
   
+    <img class="post-cover" src="/images/php_logo.jpg" alt="PHP7安装笔记(LNMP环境搭建)" lazyload="on">
+  
   <p class="post-summary">PHP7 一个划时代的大版本，性能比PHP5.6提升两倍，让无数PHPer奔走相告！ php7.0正式版出来也好久了，之前在灵雀云上试着装过，太慢，这次在本地的虚拟机里装，也没遇到什么坎坷，包括php-fpm、nginx配置，整理记录。
 </p>
   <footer class="post-footer">
@@ -293,6 +319,8 @@
     <p class="post-meta">@opso · Oct 31, 2015 · 1 min read</p>
   </header>
   
+    <img class="post-cover" src="/images/php_logo.jpg" alt="PHP游戏抽奖应用" lazyload="on">
+  
   <p class="post-summary">PHP游戏概率中的运用
 </p>
   <footer class="post-footer">
@@ -306,7 +334,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s Blog</p>
+  <p>© 2017-2019 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

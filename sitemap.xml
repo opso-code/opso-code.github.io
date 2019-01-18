@@ -345,6 +345,12 @@
   </url>
   
   <url>
+    <loc>/tags/pattern/</loc>
+    <lastmod>2016-04-21T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>/tags/php/</loc>
     <lastmod>2018-08-17T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -449,12 +455,6 @@
   <url>
     <loc>/</loc>
     <lastmod>2018-08-17T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</loc>
-    <lastmod>2016-04-21T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

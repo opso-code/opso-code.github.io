@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on opso&#39;s Blog</title>
+    <title>Tags on opso&#39;s blog</title>
     <link>/tags/</link>
-    <description>Recent content in Tags on opso&#39;s Blog</description>
+    <description>Recent content in Tags on opso&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
@@ -256,6 +256,15 @@
     </item>
     
     <item>
+      <title>Pattern</title>
+      <link>/tags/pattern/</link>
+      <pubDate>Thu, 21 Apr 2016 00:00:00 +0000</pubDate>
+      
+      <guid>/tags/pattern/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Php</title>
       <link>/tags/php/</link>
       <pubDate>Fri, 17 Aug 2018 00:00:00 +0000</pubDate>
@@ -387,15 +396,6 @@
       <pubDate>Wed, 01 Feb 2017 00:00:00 +0000</pubDate>
       
       <guid>/tags/www/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>设计模式</title>
-      <link>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</link>
-      <pubDate>Thu, 21 Apr 2016 00:00:00 +0000</pubDate>
-      
-      <guid>/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/</guid>
       <description></description>
     </item>
     

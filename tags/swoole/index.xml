@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Swoole on opso&#39;s Blog</title>
+    <title>Swoole on opso&#39;s blog</title>
     <link>/tags/swoole/</link>
-    <description>Recent content in Swoole on opso&#39;s Blog</description>
+    <description>Recent content in Swoole on opso&#39;s blog</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
@@ -18,7 +18,11 @@
       <pubDate>Sat, 07 Jul 2018 00:00:00 +0000</pubDate>
       
       <guid>/post/swoole-process/</guid>
-      <description>&lt;p&gt;&lt;code&gt;swoole&lt;/code&gt; 的进程之间有两种通信方式，一种是&lt;code&gt;消息队列(queue)&lt;/code&gt;，另一种是&lt;code&gt;管道(pipe)&lt;/code&gt;，对&lt;code&gt;swoole_process&lt;/code&gt; 的研究在swoole中显得尤为重要。&lt;/p&gt;</description>
+      <description>&lt;p&gt;&lt;strong&gt;Swoole&lt;/strong&gt; —— 重新定义PHP&lt;/p&gt;
+
+&lt;p&gt;作为一个使用C语言底层实现的PHP扩展，弥补了PHP在多线程、常驻内存相关领域的短处，为广大phper打开了眼界。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;swoole&lt;/code&gt; 的进程之间有两种通信方式，一种是&lt;code&gt;消息队列(queue)&lt;/code&gt;，另一种是&lt;code&gt;管道(pipe)&lt;/code&gt;，对&lt;code&gt;swoole_process&lt;/code&gt; 的研究在swoole中显得尤为重要。&lt;/p&gt;</description>
     </item>
     
     <item>

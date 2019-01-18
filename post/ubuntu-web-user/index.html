@@ -5,7 +5,7 @@
   <meta charset="utf-8" />
 
   
-  <title>ubuntu下php、nginx、web目录权限问题</title>
+  <title>Composer命令root用户权限问题</title>
 
   
   
@@ -24,26 +24,29 @@
 
   
   <meta name="author" content="opso">
-  <meta name="description" content="与CentOS用户权限不同，Ubuntu下php-fpm、nginx、web目录三者权限协调问题一直不怎么明白，今天有空查了一些资料，实际操作了一遍。
+  <meta name="description" content="Composer 作为php的包管理工具，今天在运行composer命令的时候，遇到了 Do not run Composer as root/super user! 权限提示问题，才知道是不能在root用户下运行的。
+为了统一php-fpm、nginx、web目录三者权限，今天有空查了一些资料，实际操作了一遍。
 ">
 
   
   
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@gohugoio">
-    <meta name="twitter:title" content="ubuntu下php、nginx、web目录权限问题">
-    <meta name="twitter:description" content="与CentOS用户权限不同，Ubuntu下php-fpm、nginx、web目录三者权限协调问题一直不怎么明白，今天有空查了一些资料，实际操作了一遍。
+    <meta name="twitter:title" content="Composer命令root用户权限问题">
+    <meta name="twitter:description" content="Composer 作为php的包管理工具，今天在运行composer命令的时候，遇到了 Do not run Composer as root/super user! 权限提示问题，才知道是不能在root用户下运行的。
+为了统一php-fpm、nginx、web目录三者权限，今天有空查了一些资料，实际操作了一遍。
 ">
-    <meta name="twitter:image" content="/images/avatar.png">
+    <meta name="twitter:image" content="/images/linux_logo.jpg">
   
 
   
   <meta property="og:type" content="article">
-  <meta property="og:title" content="ubuntu下php、nginx、web目录权限问题">
-  <meta property="og:description" content="与CentOS用户权限不同，Ubuntu下php-fpm、nginx、web目录三者权限协调问题一直不怎么明白，今天有空查了一些资料，实际操作了一遍。
+  <meta property="og:title" content="Composer命令root用户权限问题">
+  <meta property="og:description" content="Composer 作为php的包管理工具，今天在运行composer命令的时候，遇到了 Do not run Composer as root/super user! 权限提示问题，才知道是不能在root用户下运行的。
+为了统一php-fpm、nginx、web目录三者权限，今天有空查了一些资料，实际操作了一遍。
 ">
   <meta property="og:url" content="/post/ubuntu-web-user/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/linux_logo.jpg">
 
 
 
@@ -71,8 +74,8 @@
 <meta name="theme-color" content="#02b875">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="opso&#39;s Blog">
-<meta name="msapplication-tooltip" content="opso&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="opso&#39;s blog">
+<meta name="msapplication-tooltip" content="opso&#39;s blog">
 <meta name='msapplication-navbutton-color' content="#02b875">
 <meta name="msapplication-TileColor" content="#02b875">
 <meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
@@ -138,7 +141,7 @@
   <header class="site-header">
   <img class="avatar" src="/images/avatar.png" alt="Avatar">
   
-  <h2 class="title">opso&#39;s Blog</h2>
+  <h2 class="title">opso&#39;s blog</h2>
   
   <p class="subtitle">Talk is cheap, show me the code</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
@@ -192,22 +195,20 @@
 
   <section class="main post-detail">
     <header class="post-header">
-      <h1 class="post-title">ubuntu下php、nginx、web目录权限问题</h1>
+      <h1 class="post-title">Composer命令root用户权限问题</h1>
       <p class="post-meta">@opso · Feb 1, 2017 · 1 min read</p>
     </header>
-    <article class="post-content"><p>与CentOS用户权限不同，Ubuntu下php-fpm、nginx、web目录三者权限协调问题一直不怎么明白，今天有空查了一些资料，实际操作了一遍。</p>
+    <article class="post-content"><p><strong>Composer</strong> 作为php的包管理工具，今天在运行<code>composer</code>命令的时候，遇到了 <code>Do not run Composer as root/super user!</code> 权限提示问题，才知道是不能在root用户下运行的。</p>
 
-<p>在运行composer命令的时候:</p>
+<p>为了统一<code>php-fpm</code>、<code>nginx</code>、<code>web</code>目录三者权限，今天有空查了一些资料，实际操作了一遍。</p>
+
+<p>在运行<code>composer</code>命令的时候:</p>
 
 <blockquote>
 <p>php composer.phar install</p>
 </blockquote>
 
-<p>的时候会提示没有权限访问xxx目录，然而加上<code>sudo</code>管理员权限运行的时候又提示:</p>
-
-<blockquote>
-<p>Do not run Composer as root/super user!</p>
-</blockquote>
+<p>的时候会提示没有权限访问xxx目录，然而加上<code>sudo</code>管理员权限运行的时候会导致生成的文件夹权限为root，这就很头疼了。</p>
 
 <p>访问官方网站，给出的原因是出于安全考虑，防止第三方组件以管理员权限运行代码，挺有道理的，于是就很纠结了。</p>
 
@@ -223,20 +224,20 @@
 
 <p>之前也一直觉得给Web目录设置root权限并不安全，每次修改代码都要加上可恶的 <code>sudo</code>，</p>
 
-<p>先查看php-fpm和Nginx运行的用户
-<img src="http://p1.bpimg.com/4851/ee0b404744f0cad3.png" alt="user" /></p>
+<p>先查看php-fpm和Nginx运行的用户</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ps -ef | grep nginx
+$ ps -ef | grep php-fpm</code></pre></div>
+<p>可以判断出nginx和php-fpm主进程都是root权限启动（加入了自启动和<code>sudo service xxx start</code>），nginx子进程用的 <code>nobody</code> 用户下运行，php-fpm子进程则是<code>www-data</code>用户下运行，所以这里统一用户权限为<code>www-data</code>用户</p>
 
-<p>这里可以看到nginx和php-fpm主进程都是root权限启动（加入了自启动和sudo service xxx start），nginx子进程用的 <code>nobody</code> 用户下运行，php-fpm子进程则是<code>www-data</code>用户下运行，这里我想让三个地方的用户权限保持一直。</p>
-
-<p>修改php-fpm配置<code>/usr/local/nginx/conf/nginx.conf</code>如下，保存后重启nginx，访问正常。</p>
+<p>修改<code>php-fpm</code>配置<code>/usr/local/nginx/conf/nginx.conf</code>如下，保存后重启nginx，访问正常。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#75715e">#user  nobody;
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">user</span>  <span style="color:#e6db74">www-data</span>;
 <span style="color:#66d9ef">worker_processes</span>  <span style="color:#ae81ff">1</span>;</code></pre></div>
 <p>接下来修改web目录权限，</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo chown -R www-data:www-data /data/www</code></pre></div>
-<p>当前用户依旧不能编辑文件于是尝试:</p>
+<p>当前用户(opso)依旧不能编辑文件于是尝试:</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo chown -R opso:www-data /data/www</code></pre></div>
-<p>从此修改代码不用再加<code>sudo</code>了，<code>Composer</code> 命令也正常了！:)</p></article>
+<p>从此我的用户修改代码不用非得加<code>sudo</code>了，<code>Composer</code> 命令也正常了！:)</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -248,7 +249,7 @@
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>715</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>716</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -277,7 +278,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s Blog</p>
+  <p>© 2017-2019 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>

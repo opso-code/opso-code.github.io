@@ -24,26 +24,32 @@
 
   
   <meta name="author" content="opso">
-  <meta name="description" content="swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另一种是管道(pipe)，对swoole_process 的研究在swoole中显得尤为重要。
+  <meta name="description" content="Swoole —— 重新定义PHP
+作为一个使用C语言底层实现的PHP扩展，弥补了PHP在多线程、常驻内存相关领域的短处，为广大phper打开了眼界。
+swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另一种是管道(pipe)，对swoole_process 的研究在swoole中显得尤为重要。
 ">
 
   
   
-    <meta name="twitter:card" content="summary">
+    <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="swoole_process实现进程池">
-    <meta name="twitter:description" content="swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另一种是管道(pipe)，对swoole_process 的研究在swoole中显得尤为重要。
+    <meta name="twitter:description" content="Swoole —— 重新定义PHP
+作为一个使用C语言底层实现的PHP扩展，弥补了PHP在多线程、常驻内存相关领域的短处，为广大phper打开了眼界。
+swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另一种是管道(pipe)，对swoole_process 的研究在swoole中显得尤为重要。
 ">
-    <meta name="twitter:image" content="/images/avatar.png">
+    <meta name="twitter:image" content="/images/swoole_logo.png">
   
 
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="swoole_process实现进程池">
-  <meta property="og:description" content="swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另一种是管道(pipe)，对swoole_process 的研究在swoole中显得尤为重要。
+  <meta property="og:description" content="Swoole —— 重新定义PHP
+作为一个使用C语言底层实现的PHP扩展，弥补了PHP在多线程、常驻内存相关领域的短处，为广大phper打开了眼界。
+swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另一种是管道(pipe)，对swoole_process 的研究在swoole中显得尤为重要。
 ">
   <meta property="og:url" content="/post/swoole-process/">
-  <meta property="og:image" content="/images/avatar.png">
+  <meta property="og:image" content="/images/swoole_logo.png">
 
 
 
@@ -71,8 +77,8 @@
 <meta name="theme-color" content="#02b875">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black">
-<meta name="apple-mobile-web-app-title" content="opso&#39;s Blog">
-<meta name="msapplication-tooltip" content="opso&#39;s Blog">
+<meta name="apple-mobile-web-app-title" content="opso&#39;s blog">
+<meta name="msapplication-tooltip" content="opso&#39;s blog">
 <meta name='msapplication-navbutton-color' content="#02b875">
 <meta name="msapplication-TileColor" content="#02b875">
 <meta name="msapplication-TileImage" content="/icons/icon-144x144.png">
@@ -138,7 +144,7 @@
   <header class="site-header">
   <img class="avatar" src="/images/avatar.png" alt="Avatar">
   
-  <h2 class="title">opso&#39;s Blog</h2>
+  <h2 class="title">opso&#39;s blog</h2>
   
   <p class="subtitle">Talk is cheap, show me the code</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
@@ -195,11 +201,11 @@
       <h1 class="post-title">swoole_process实现进程池</h1>
       <p class="post-meta">@opso · Jul 7, 2018 · 3 min read</p>
     </header>
-    <article class="post-content"><p><code>swoole</code> 的进程之间有两种通信方式，一种是<code>消息队列(queue)</code>，另一种是<code>管道(pipe)</code>，对<code>swoole_process</code> 的研究在swoole中显得尤为重要。</p>
+    <article class="post-content"><p><strong>Swoole</strong> —— 重新定义PHP</p>
 
-<blockquote>
-<p>swoole —— 重新定义PHP</p>
-</blockquote>
+<p>作为一个使用C语言底层实现的PHP扩展，弥补了PHP在多线程、常驻内存相关领域的短处，为广大phper打开了眼界。</p>
+
+<p><code>swoole</code> 的进程之间有两种通信方式，一种是<code>消息队列(queue)</code>，另一种是<code>管道(pipe)</code>，对<code>swoole_process</code> 的研究在swoole中显得尤为重要。</p>
 
 <h2 id="预备知识">预备知识</h2>
 
@@ -423,10 +429,12 @@
         
           <li><a href="/tags/swoole"><span class="tag">Swoole</span></a></li>
         
+          <li><a href="/tags/php"><span class="tag">Php</span></a></li>
+        
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>194</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>195</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -455,7 +463,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s Blog</p>
+  <p>© 2017-2019 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
