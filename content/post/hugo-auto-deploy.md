@@ -113,6 +113,7 @@ $ echo "resources/*" >> .gitignore
 $ echo "public/*" >> .gitignore
 $ git add --all
 $ git commit -m "first source commit"
+# 与远程分支产生关联
 $ git push --set-upstream origin source
 ```
 
@@ -185,7 +186,7 @@ $ git push
 
 ![travisci_05](/images/travisci_05.png)
 
-如果显示构建失败，可以在log日志中定位问题，其中有一次构建失败是因为hugo版本使用的最新 `hugo_extended_0.59`，而我使用的`nuo`主题，hugo命令会有一个slice索引报错，切换到`58.3`就好了。
+如果显示构建失败，可以在log日志中定位问题，其中有一次构建失败是因为hugo版本使用的最新 `hugo_extended_0.59.0`，而我使用的`hugo-nuo`主题，hugo命令会有一个slice索引报错，切换到`58.3`就好了。
 
 ![travisci_06](/images/travisci_06.png)
 
@@ -195,7 +196,7 @@ $ git push
 
 ## 使用Coding Pages
 
-如果嫌`github`国内访问有些慢，也可以将 `master` 分支同步一份到 [**Coding.net**](https://coding.net) （一个国内的代码托管仓库）的 [**Coding Pages**](https://coding.net/help/doc/pages)。
+如果嫌`github`国内访问有些慢，也可以将 `master` 分支同步一份到 [**Coding Pages**](https://coding.net/help/doc/pages) —— [**Coding.net**](https://coding.net) 一家国内的代码托管仓库网站提供的静态网站服务。
 
 这样就多一次手动操作 :joy: ，那能不能在构建的时候也发一份到Coding Pages呢？
 
@@ -215,7 +216,7 @@ after_success:
   - git push --force "https://opso:${CODING_TOKEN}@git.dev.tencent.com/<username>/<repo>.git" master:master
 ```
 
-同样的，这里的 **CODING_TOKEN** 环境变量 需要在 `coding.net`（现在叫腾讯云开发者平台） 的 `个人设置` ->`访问令牌` 中生成一个`Token`
+同样的，这里的 **CODING_TOKEN** 环境变量 需要在 `coding.net`的 `个人设置` ->`访问令牌` 中生成一个`Token`
 
 ![travisci_08](/images/travisci_08.png)
 
@@ -235,7 +236,7 @@ after_success:
 
 ### 图片加载较慢
 
-注意：教程里我用的图片都是放到`/static/images`文件夹中，国内访问速度很慢，后期最好更换CDN加载图片资源。:dollar: :dollar:
+注意：教程里我用的图片都是放到`/static/images`文件夹中，国内访问速度很慢，后期最好更换CDN加载图片资源 :dollar: :dollar:
 
 ### 开源分享
 
@@ -243,7 +244,10 @@ after_success:
 
 分享技术，享受开源，感谢 `github`、`coding.net` :+1:  :+1:
 
+我的博客github: https://github.com/opso-code/opso-code.github.io.git
+
 ## 参考
 
+- [Github Pages 文档](https://pages.github.com/)
 - 阮一峰博客 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)
 - Traivis-CI官方文档 [GitHub Pages Deployment](https://docs.travis-ci.com/user/deployment/pages/)
