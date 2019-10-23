@@ -18,8 +18,8 @@ after_success:
   - git config user.name "opso"
   - git config user.email "945206413@qq.com"
   - git add .
-  - git commit -m ":construction_worker: 自动部署"
-  - git push --force --quiet "https://opso:${CODING_TOKEN}@git.dev.tencent.com/opso/opso.git" master:master
+  - git commit -m "Travis CI 自动部署"
+  - git push --force "https://opso:${CODING_TOKEN}@git.dev.tencent.com/opso/opso.git" master:master
 
 # 构建完成后会自动更新Github Pages
 # 详见 https://docs.travis-ci.com/user/deployment/pages/
