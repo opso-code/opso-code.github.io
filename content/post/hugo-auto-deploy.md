@@ -131,12 +131,12 @@ $ touch .travis.yml
 
 ```yml
 dist: bionic
-language: python
+language: python # 不选的化默认是ruby，构建时间挺长
 python: 3.7
 
 install:
-# 安装最新的hugo nuo主题需要extended版本的hugo
-  - wget -qO- https://api.github.com/repos/gohugoio/hugo/releases/latest | grep hugo_extended |sed -r -n '/browser_download_url/{/Linux-64bit.deb/{s@[^:]*:[[:space:]]*"([^"]*)".*@\1@g;p;q}}' | xargs wget
+  # nuo主题需要extended版本的hugo，其他主题可以用最新的就行
+  - wget https://github.com/gohugoio/hugo/releases/download/v0.58.3/hugo_extended_0.58.3_Linux-64bit.deb
   - sudo dpkg -i hugo*.deb
 
 script:
@@ -174,10 +174,20 @@ deploy:
 ![travisci_04](/images/travisci_04.png)
 
 ### 三、更新source分支
+
 ```bash
 $ git add --all
 $ git commit -m "test auto deploy"
+$ git push
 ```
+
+提交后等待一两分钟后可以看到
+
+![travisci_05](/images/travisci_05.png)
+
+其中有一次构建失败是因为hugo版本使用的最新 `hugo_extended_0.59`，而我使用的`nuo`主题，hugo命令会有一个slice索引报错，切换到`58.3`就好了。
+
+![travisci_06](/images/travisci_06.png)
 
 ## 参考
 
