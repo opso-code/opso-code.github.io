@@ -5,7 +5,7 @@ date: 2019-10-22
 author: opso
 tags: 
 - hugo
-- travis-CI
+- Travis-CI
 ---
 
 ## Travis CI是什么
@@ -193,6 +193,38 @@ $ git push
 
 :tada: :tada: :tada: :tada:
 
+## 使用Coding Pages
+
+如果嫌`github`国内访问有些慢，也可以将 `master` 分支同步一份到 [**Coding.net**](https://coding.net) （一个国内的代码托管仓库）的 [**Coding Pages**](https://coding.net/help/doc/pages)。
+
+这样就多一次手动操作 :joy: ，那能不能在构建的时候也发一份到Coding Pages呢？
+
+答案是可以的！:smile:
+
+需要在 `.travis.yml` 文件中加入以下配置：
+
+```yml
+# 构建成功后发一份到Coding Pages
+after_success:
+  - cd ./public
+  - git init
+  - git config user.name "coding的用户名"
+  - git config user.email "coding的email"
+  - git add .
+  - git commit -m "Travis CI 自动部署"
+  - git push --force "https://opso:${CODING_TOKEN}@git.dev.tencent.com/<username>/<repo>.git" master:master
+```
+
+同样的，这里的 **CODING_TOKEN** 环境变量 需要在 `coding.net`（现在叫腾讯云开发者平台） 的 `个人设置` ->`访问令牌` 中生成一个`Token`
+
+![travisci_08](/images/travisci_08.png)
+
+再去`Travis CI`后台配置环境变量  `CODING_TOKEN`
+
+![travisci_07](/images/travisci_07.png)
+
+这样`git push`了`source`分支后，`Github Pages`和`Coding Pages`都可以同时更新了~
+
 ## 其他
 
 ### Github Pages限制
@@ -204,10 +236,6 @@ $ git push
 ### 图片加载较慢
 
 注意：教程里我用的图片都是放到`/static/images`文件夹中，国内访问速度很慢，后期最好更换CDN加载图片资源。:dollar: :dollar:
-
-还有一个github国内访问比较慢问题，也可以将 `master` 分支同步一份到 [**Coding.net**](https://coding.net) （一个国内的代码托管仓库）的 [**Coding Pages**](https://coding.net/help/doc/pages)。
-
-这样就多一次手动操作 :joy:
 
 ### 开源分享
 
