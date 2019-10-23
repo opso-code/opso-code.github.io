@@ -104,51 +104,83 @@ $ git push
 
 ```bash
 # 将仓库移到和blog同级目录下
-$ mv <username>.github.io ../ && cd <username>.github.io
+$ mv <username>.github.io ../
+$ cd ../<username>.github.io
 $ git checkout -b source
 $ rm -rf *
 $ cp -r ../blog/* .
-$ echo ".git" >> .gitignore
+$ echo "resources/*" >> .gitignore
 $ echo "public/*" >> .gitignore
 $ git add --all
 $ git commit -m "first source commit"
-$ git push origin source
+$ git push --set-upstream origin source
 ```
+
+<img src="/images/travisci_02.png" style="margin:0;box-shadow:none;" alt="travisci_02"/>
 
 ## 如何使用Travis CI
 
-### 一、github设置
-
-将创建好的项目添加到github仓库，且仓库名必须为`username.github.io`。比如我自己的是 `opso-code.github.io`
-
-回到项目根目录
+### 一、编写 .travis.yml
 
 ```bash
-$ git init
-$ git remote add origin https://github.com/opso-code/opso-code.github.io.git
-$ git add .
-$ git commit -m "first commit"
-$ git push -u origin master 
+$ git checkout source
+$ touch .travis.yml
 ```
-
-### 二、编写 .travis.yml
 
 只有添加了这个文件，Travis CI才会自动构建。
 
 ```yml
-language: 
+dist: bionic
+language: python
+python: 3.7
+
+install:
+# 安装最新的hugo nuo主题需要extended版本的hugo
+  - wget -qO- https://api.github.com/repos/gohugoio/hugo/releases/latest | grep hugo_extended |sed -r -n '/browser_download_url/{/Linux-64bit.deb/{s@[^:]*:[[:space:]]*"([^"]*)".*@\1@g;p;q}}' | xargs wget
+  - sudo dpkg -i hugo*.deb
+
+script:
+# 运行hugo命令
+  - hugo
+
+# 构建完成后会自动更新Github Pages
+deploy:
+  provider: pages # 重要，指定这是一份github pages的部署配置
+  skip-cleanup: true # 重要，不能省略
+  local-dir: public # 静态站点文件所在目录
+  target-branch: master # 要将静态站点文件发布到哪个分支，默认gh-pages
+  github-token: $GITHUB_TOKEN # 重要，$GITHUB_TOKEN是变量，需要在GitHub上申请、再到配置到Travis
+  keep-history: true
+  on:
+    branch: source # 博客源码的分支
 ```
 
-### 三、登录Travis CI官网
+在`.travis.yml`配置文件中有个环境变量`$GITHUB_TOKEN`需要设置，接着在github申请一个 [personal access token](https://github.com/settings/tokens/new)，只需要勾选 `repo`选项组。
+
+![travisci_03](/images/travisci_03.png)
+
+复制生成的 `Token`（注意：关闭页面后就找不到了），在下一步Travis CI设置里配置 `Environment Variables`
+
+### 二、登录Travis CI官网
 
 [Travis CI官网](https://travis-ci.org)
 
+![travisci_01](/images/travisci_01.png)
+
 - 使用github帐号登录Travis CI，接受权限授权（`delete`权限可以不授权）
 - 勾选 `opso-code.github.io`仓库
+- 点击后面的`settings`，在 `Environment Variables` 中添加`NAME`填 **GITHUB_TOKEN**，`VALUE`填上一步生成的 `Token`
 
-![travisci_01](/images/travisci_01.png)
+![travisci_04](/images/travisci_04.png)
+
+### 三、更新source分支
+```bash
+$ git add --all
+$ git commit -m "test auto deploy"
+```
 
 ## 参考
 
-阮一峰的 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)
+- 阮一峰 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)
+- [Traivis-CI 构建Github Pages](https://docs.travis-ci.com/user/deployment/pages/)
 
