@@ -16,13 +16,11 @@ tags:
 
 <!--more-->
 
-在一些开源的github项目说明中，我们经常会看到 <embed src="/images/passing.svg" /> 这样的标签，表示该项目使用了**Travis CI**持续集成服务。
+在一些开源的github项目页面说明中，我们经常会看到 <embed src="/images/passing.svg" /> 这样的标签，通常表示该项目使用了 [**Travis CI**](https://travis-ci.org) 持续集成服务。
 
-结合 **Travis CI**(Continuous Integration)， 它能够检测到你更新了github仓库代码，从github拉取最新代码,在自己的虚拟服务器上运行构建命令(根据`.travis.yml`)， 再将构建的结果或包，提交到github的特定分支，或是realese列表，或是其他server服务器。
+结合 **Travis CI**(Continuous Integration)服务， 能够检测到github仓库代码的变动，再从github上拉取最新代码在虚拟服务器上运行构建命令(根据`.travis.yml`)， 构建成功后可以进行脚本测试、或是发布release包到github上，或是提交结果到github的特定分支，或是其他server服务器。
 
-简单来说，Travis CI 类似github的一个Webhook，当检测你的github代码变动的时候，会自动拉取代码，实现自动编译打包、测试等操作，提高了软件开发的效率。
-
-流程说明：
+注：:rotating_light: 目前Travis CI 只支持 Github。
 
 <img src="/images/travis_ci_deploy.png" style="margin:0;box-shadow:none;" alt="tracis_ci_deploy"/>
 
@@ -187,11 +185,13 @@ $ git push
 
 ![travisci_05](/images/travisci_05.png)
 
-其中有一次构建失败是因为hugo版本使用的最新 `hugo_extended_0.59`，而我使用的`nuo`主题，hugo命令会有一个slice索引报错，切换到`58.3`就好了。
+如果显示构建失败，可以在log日志中定位问题，其中有一次构建失败是因为hugo版本使用的最新 `hugo_extended_0.59`，而我使用的`nuo`主题，hugo命令会有一个slice索引报错，切换到`58.3`就好了。
 
 ![travisci_06](/images/travisci_06.png)
 
-:tada::tada::tada::tada:
+可以看到`commit`信息都变成了`Deploy...`，访问博客页面就能看到效果了。
+
+:tada: :tada: :tada: :tada:
 
 ## 其他
 
@@ -201,11 +201,21 @@ $ git push
 - 页面的带宽限制是低于每月100 GB 或是每月100,000 次请求。
 - 每小时最多只能部署10 个静态网站。
 
-注意：这里我用的图片都是放到`/static/images`文件夹中，访问速度很慢，后期最好换CDN加载图片资源。
+### 图片加载较慢
 
-有一点要提出的是，**Github Pages** 的主旨就是鼓励大家建立自己或是组织团队的页面，分享技术，感谢`github`！
+注意：教程里我用的图片都是放到`/static/images`文件夹中，国内访问速度很慢，后期最好更换CDN加载图片资源。:dollar: :dollar:
+
+还有一个github国内访问比较慢问题，也可以将 `master` 分支同步一份到 [**Coding.net**](https://coding.net) （一个国内的代码托管仓库）的 [**Coding Pages**](https://coding.net/help/doc/pages)。
+
+这样就多一次手动操作 :joy:
+
+### 开源分享
+
+有一点要提出的是，**Github Pages** 的主旨就是鼓励大家建立自己或是组织或团队的静态页面，它是免费的，无需服务器的；
+
+分享技术，享受开源，感谢 `github`、`coding.net` :+1:  :+1:
 
 ## 参考
 
-- 阮一峰 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)
-- [Traivis-CI 构建Github Pages](https://docs.travis-ci.com/user/deployment/pages/)
+- 阮一峰博客 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)
+- Traivis-CI官方文档 [GitHub Pages Deployment](https://docs.travis-ci.com/user/deployment/pages/)
