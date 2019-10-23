@@ -318,12 +318,12 @@ $ git push --set-upstream origin source</code></pre></div>
 $ touch .travis.yml</code></pre></div>
 <p>只有添加了这个文件，Travis CI才会自动构建。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">dist: bionic
-language: python
+language: python <span style="color:#75715e"># 不选的化默认是ruby，构建时间挺长</span>
 python: <span style="color:#ae81ff">3.7</span>
 
 install:
-<span style="color:#75715e"># 安装最新的hugo nuo主题需要extended版本的hugo</span>
-  - wget -qO- https://api.github.com/repos/gohugoio/hugo/releases/latest | grep hugo_extended |sed -r -n <span style="color:#e6db74">&#39;/browser_download_url/{/Linux-64bit.deb/{s@[^:]*:[[:space:]]*&#34;([^&#34;]*)&#34;.*@\1@g;p;q}}&#39;</span> | xargs wget
+  <span style="color:#75715e"># nuo主题需要extended版本的hugo，其他主题可以用最新的就行</span>
+  - wget https://github.com/gohugoio/hugo/releases/download/v0<span style="color:#ae81ff">.58.3</span>/hugo_extended_0<span style="color:#ae81ff">.58</span>.3_Linux-64bit.deb
   - sudo dpkg -i hugo<span style="color:#75715e">*.deb</span>
 
 script:
@@ -362,7 +362,16 @@ deploy:
 
 <h3 id="三-更新source分支">三、更新source分支</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git add --all
-$ git commit -m <span style="color:#e6db74">&#34;test auto deploy&#34;</span></code></pre></div>
+$ git commit -m <span style="color:#e6db74">&#34;test auto deploy&#34;</span>
+$ git push</code></pre></div>
+<p>提交后等待一两分钟后可以看到</p>
+
+<p><img src="/images/travisci_05.png" alt="travisci_05" /></p>
+
+<p>其中有一次构建失败是因为hugo版本使用的最新 <code>hugo_extended_0.59</code>，而我使用的<code>nuo</code>主题，hugo命令会有一个slice索引报错，切换到<code>58.3</code>就好了。</p>
+
+<p><img src="/images/travisci_06.png" alt="travisci_06" /></p>
+
 <h2 id="参考">参考</h2>
 
 <ul>
