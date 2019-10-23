@@ -1,0 +1,68 @@
+baseURL = ""
+languageCode = "en"
+title = "opso's blog"
+theme = "nuo"
+enableRobotsTXT = true
+PygmentsCodeFences = true
+canonifyurls = true
+enableEmoji = true
+
+# Disqus Username
+# disqusShortname = "opso-coding-me"
+
+# Google Analytics UA number
+# googleAnalytics = "UA-XXXXXXXX-X"
+
+# Copyright of your post
+copyright = "© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce."
+
+# Initial site menu, you can extend menu with content.
+[[menu.main]]
+  name = "Home"
+  weight = 10
+  identifier = "home"
+  url = "/"
+
+# [[menu.main]]
+#   name = "Code"
+#   weight = 20
+#   identifier = "code"
+#   url = "https://github.com/opso-code"
+
+[[menu.main]]
+  name = "Tags"
+  weight = 20
+  identifier = "tags"
+  url = "/tags/"
+
+# Add your own params here
+[params]
+  author = "opso"
+  bg = "images/grey-prism.svg"
+  avatar = "images/avatar.png"
+  seotitle = "opso's blog"
+  subtitle = "Heroes never die"
+  description = "opso的技术博客"
+  paginate = 20
+
+  # Choose your social networks
+  email = "945206413@qq.com"
+  github = "opso-code"
+  instagram = "opso92"
+  # weibo = "234920704"
+  # twitter = "twitter_username"
+  # linkedin = "linkedin_username"
+  # wechat= "images/qrcode.jpg"  # Replace with your wechat qrcode image
+
+  # Changyan Comments (China Only)
+  # changyan = false
+  # changyanId = "cyt3toRiB"
+  # changyanConf = "prod_0908b1cb9a581501753cce1ed074dbe3"
+
+  # Baidu Webmaster (China Only)
+  # https://zhanzhang.baidu.com/
+  # baiduSiteVerification = "MZ23SPxxfa"
+
+  # Baidu Tongji (China Only)
+  # https://tongji.baidu.com/
+  baiduTongji = "6b465630c0fa541cd6b4a9ce07137d82"
