@@ -26,7 +26,8 @@
 
   
   <meta name="author" content="opso">
-  <meta name="description" content="Travis CI是什么  Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科
+  <meta name="description" content="什么是Hugo 
+ Hugo 是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。
 ">
 
   
@@ -34,7 +35,8 @@
     <meta name="twitter:card" content="summary">
     <meta name="twitter:site" content="@gohugoio">
     <meta name="twitter:title" content="Travis CI自动化部署hugo静态博客">
-    <meta name="twitter:description" content="Travis CI是什么  Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科
+    <meta name="twitter:description" content="什么是Hugo 
+ Hugo 是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。
 ">
     <meta name="twitter:image" content="/images/avatar.png">
   
@@ -42,7 +44,8 @@
   
   <meta property="og:type" content="article">
   <meta property="og:title" content="Travis CI自动化部署hugo静态博客">
-  <meta property="og:description" content="Travis CI是什么  Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科
+  <meta property="og:description" content="什么是Hugo 
+ Hugo 是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。
 ">
   <meta property="og:url" content="/post/hugo-auto-deploy/">
   <meta property="og:image" content="/images/avatar.png">
@@ -194,23 +197,15 @@
       <h1 class="post-title">Travis CI自动化部署hugo静态博客</h1>
       <p class="post-meta">@opso · Oct 22, 2019 · 3 min read</p>
     </header>
-    <article class="post-content"><h2 id="travis-ci是什么">Travis CI是什么</h2>
+    <article class="post-content"><h2 id="什么是hugo">什么是Hugo</h2>
 
-<p><img src="/images/travis_ci_logo.png" style="margin:0;box-shadow:none;" alt="tracis_ci_logo"/></p>
-
-<blockquote>
-<p>Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科</p>
-</blockquote>
-
-<p>在一些开源的github项目页面说明中，我们经常会看到 <embed src="/images/passing.svg" /> 这样的标签，通常表示该项目使用了 <a href="https://travis-ci.org"><strong>Travis CI</strong></a> 持续集成服务。</p>
-
-<p>结合 <strong>Travis CI</strong>(Continuous Integration)服务， 能够检测到github仓库代码的变动，再从github上拉取最新代码在虚拟服务器上运行构建命令(根据<code>.travis.yml</code>)， 构建成功后可以进行脚本测试、或是发布release包到github上，或是提交结果到github的特定分支，或是其他server服务器。</p>
-
-<p>注：🚨 目前Travis CI 只支持 Github。</p>
-
-<p><img src="/images/travis_ci_deploy.png" style="margin:0;box-shadow:none;" alt="tracis_ci_deploy"/></p>
-
-<h2 id="hugo是什么">Hugo是什么</h2>
+<p><svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" stroke-width="27" aria-label="Logo" viewBox="0 0 1493 391" width="50%">
+  <path fill="#ebb951" stroke="#fcd804" d="M1345.211 24.704l112.262 64.305a43 43 0 0 1 21.627 37.312v142.237a40 40 0 0 1-20.702 35.037l-120.886 66.584a42 42 0 0 1-41.216-.389l-106.242-61.155a57 57 0 0 1-28.564-49.4V138.71a64 64 0 0 1 31.172-54.939l98.01-58.564a54 54 0 0 1 54.54-.503z"/>
+  <path fill="#33ba91" stroke="#00a88a" d="M958.07 22.82l117.31 66.78a41 41 0 0 1 20.72 35.64v139.5a45 45 0 0 1-23.1 39.32L955.68 369.4a44 44 0 0 1-43.54-.41l-105.82-61.6a56 56 0 0 1-27.83-48.4V140.07a68 68 0 0 1 33.23-58.44l98.06-58.35a48 48 0 0 1 48.3-.46z"/>
+  <path fill="#0594cb" stroke="#0083c0" d="M575.26 20.97l117.23 68.9a40 40 0 0 1 19.73 34.27l.73 138.67a48 48 0 0 1-24.64 42.2l-115.13 64.11a45 45 0 0 1-44.53-.42l-105.83-61.6a55 55 0 0 1-27.33-47.53V136.52a63 63 0 0 1 29.87-53.59l99.3-61.4a49 49 0 0 1 50.6-.56z"/>
+  <path fill="#ff4088" stroke="#c9177e" d="M195.81 24.13l114.41 66.54a44 44 0 0 1 21.88 38.04v136.43a48 48 0 0 1-24.45 41.82L194.1 370.9a49 49 0 0 1-48.48-.23L41.05 310.48a53 53 0 0 1-26.56-45.93V135.08a55 55 0 0 1 26.1-46.8l102.8-63.46a51 51 0 0 1 52.42-.69z"/>
+  <path fill="#fff" d="M1320.72 89.15c58.79 0 106.52 47.73 106.52 106.51 0 58.8-47.73 106.52-106.52 106.52-58.78 0-106.52-47.73-106.52-106.52 0-58.78 47.74-106.51 106.52-106.51zm0 39.57c36.95 0 66.94 30 66.94 66.94a66.97 66.97 0 0 1-66.94 66.94c-36.95 0-66.94-29.99-66.94-66.94a66.97 66.97 0 0 1 66.93-66.94h.01zm-283.8 65.31c0 47.18-8.94 60.93-26.81 80.58-17.87 19.65-41.57 27.57-71.1 27.57-27 0-48.75-9.58-67.61-26.23-20.88-18.45-36.08-47.04-36.08-78.95 0-31.37 11.72-58.48 32.49-78.67 18.22-17.67 45.34-29.18 73.3-29.18 33.77 0 68.83 15.98 90.44 47.53l-31.73 26.82c-13.45-25.03-32.94-33.46-60.82-34.26-30.83-.88-64.77 28.53-62.25 67.75 1.4 21.94 11.65 59.65 60.96 66.57 25.9 3.63 55.36-24.02 55.36-39.04H944.4v-37.5h92.5V194l.02.03zm-562.6-94.65h42.29v112.17c0 17.8.49 29.33 1.47 34.61 1.69 8.48 4.81 14.37 11.17 19.5 6.37 5.13 13.8 6.59 24.84 6.59 11.2 0 14.96-1.74 20.66-6.6 5.69-4.85 9.12-9.46 10.28-16.53 1.15-7.07 3.07-18.8 3.07-35.18V99.38h42.28v108.78c0 24.86-1.07 42.43-3.21 52.69-2.14 10.27-6.08 18.93-11.82 26-5.74 7.06-13.42 12.69-23.03 16.88-9.62 4.19-22.16 6.28-37.65 6.28-18.7 0-32.87-2.28-42.52-6.85-9.66-4.57-17.3-10.5-22.9-17.8-5.61-7.3-9.3-14.95-11.08-22.96-2.58-11.86-3.88-29.38-3.88-52.55V99.38h.03zM93.91 299.92V92.7h43.35v75.48h71.92V92.7h43.48v207.22h-43.48v-90.61h-71.92v90.61z"/>
+</svg></p>
 
 <blockquote>
 <p><strong>Hugo</strong> 是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。</p>
@@ -247,13 +242,16 @@
 <td>Hugo</td>
 <td>golang</td>
 <td>下载后就是一个二进制运行程序，跨平台，性能强，自带emoji✨</td>
-<td>主题没有前两者多，版本更新比较激进</td>
+<td>主题没有前两者多，插件少，版本更新比较激进</td>
 </tr>
 </tbody>
 </table>
 
 <p>下载地址：<a href="https://github.com/gohugoio/hugo/releases">Hugo release</a></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ hugo new site blog <span style="color:#75715e">#生成项目</span></code></pre></div>
+
+<p>注意：🚨 如果你下载的主题用到了<code>Sass/SCSS</code>来生成css样式文件，则需要下载<code>extended</code>版本以支持前端打包工具，否则会报错。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 生成站点项目</span>
+$ hugo new site blog</code></pre></div>
 <p>项目目录结构是这样的：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">blog/
 .
@@ -269,27 +267,25 @@
 └── themes			    <span style="color:#75715e">#主题文件夹</span></code></pre></div>
 <p>hugo官方推荐的主题列表：<a href="https://themes.gohugo.io/">Hugo Themes</a></p>
 
-<p>选择一个主题下载：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd themes
-$ git clone https://github.com/coderzh/hugo-pacman-theme</code></pre></div>
-<p>修改项目根目录下<code>config.toml</code>，添加<code>theme = &quot;hugo-pacman-theme&quot;</code>，还有其他相关配置，这里就省略了，每个主题不尽相同。</p>
+<p>选择一个喜欢的主题下载：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/coderzh/hugo-pacman-theme themes/</code></pre></div>
+<p>修改项目根目录下<code>config.toml</code>，添加<code>theme = &quot;hugo-pacman-theme&quot;</code></p>
+
+<p>还有其他相关配置，每个主题不尽相同，这里就省略了。详细设置可以参考 <a href="https://www.gohugo.org/">Hugo中文文档</a></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd ..
 $ hugo new post/hello.md <span style="color:#75715e">#生成一个md文件</span>
-$ hugo server 	<span style="color:#75715e">#默认监听localhost:1313端口，可以在浏览器上实时预览</span></code></pre></div>
+$ hugo server</code></pre></div>
 <p>打开浏览器访问：<a href="http://localhost:1313">http://localhost:1313</a> 就可以看到博客主页了，第一条博客就是根据 <code>content/post/hello.md</code> 文件生产的页面，修改此文件时候，浏览器可以实时预览</p>
 
-<p>hugo命令会在当前目录下生成public文件夹，里面就是生成的html了</p>
+<p>hugo命令会在当前目录下生成<code>public</code>文件夹，里面就是生成的html文件了。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ hugo</code></pre></div>
-<p>详细可以参考 <a href="https://www.gohugo.org/">Hugo中文文档</a></p>
-
 <h3 id="使用github-pages">使用Github Pages</h3>
 
-<p>之前的博客中有讲到过 <a href="https://pages.github.com/"><strong>Github Pages</strong></a> 是什么，简单来说是<code>github</code>提供的一个免费的服务，用于解析用户的html文件，运行在<code>github</code>提供的网站上。对于没机器嫌建站麻烦的简直是白送 😝</p>
+<p>之前的博客中有讲到过 <a href="https://pages.github.com/"><strong>Github Pages</strong></a> 是什么，简单来说是<code>github</code>提供的一个免费的服务，用于解析用户的html文件，运行在<code>github</code>提供的网站上。对于没机器、嫌建站麻烦的人简直是白送 😝</p>
 
 <p>首先，需要在github上新建一个仓库，仓库名 <strong>必须</strong> 为<code>username.github.io</code>；比如我自己的是 <code>opso-code.github.io</code></p>
-
-<p>然后回到项目根目录下</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd blog
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 回到站点项目根目录下</span>
+$ cd blog
 $ git clone https://github.com/&lt;username&gt;/&lt;username&gt;.github.io.git
 $ rm -rf &lt;username&gt;.github.io/*
 <span style="color:#75715e"># 把之前public/文件夹里的文件复制进去</span>
@@ -304,7 +300,7 @@ $ git push</code></pre></div>
 
 <p>然后访问 <a href="https://opso-code.github.io/">https://opso-code.github.io/</a> 就可以看到博客主页了~ 🎉 ✨</p>
 
-<p>到这一步搭建<code>Github Pages</code>已经学会了，为了避免每次新建了<code>.md</code>文件之后，都要把<code>public/</code>下的文件更新到github，后面将会使用工具自动生成并部署到网站上。</p>
+<p>到这一步搭建<code>Github Pages</code>你已经学会了；为了避免每次新建了<code>.md</code>文件之后，都要把<code>public/</code>下的文件更新到github，后面将会使用工具自动生成并部署到网站上。</p>
 
 <h3 id="新建source分支">新建source分支</h3>
 
@@ -323,7 +319,23 @@ $ git commit -m <span style="color:#e6db74">&#34;first source commit&#34;</span>
 $ git push --set-upstream origin source</code></pre></div>
 <p><img src="/images/travisci_02.png" style="margin:0;box-shadow:none;" alt="travisci_02"/></p>
 
-<h2 id="如何使用travis-ci">如何使用Travis CI</h2>
+<p>这样所有项目代码都上传到github上了。</p>
+
+<h2 id="travis-ci是什么">Travis CI是什么</h2>
+
+<p><img src="/images/travis_ci_logo.png" style="margin:0;box-shadow:none;" alt="tracis_ci_logo"/></p>
+
+<blockquote>
+<p>Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科</p>
+</blockquote>
+
+<p>在一些开源的github项目页面说明中，我们经常会看到 <embed src="/images/passing.svg" /> 这样的标签，通常表示该项目使用了 <a href="https://travis-ci.org"><strong>Travis CI</strong></a> 持续集成服务。</p>
+
+<p>结合 <strong>Travis CI</strong>(Continuous Integration)服务， 能够检测到github仓库代码的变动，再从github上拉取最新代码在虚拟服务器上运行构建命令(根据<code>.travis.yml</code>)， 构建成功后可以进行脚本测试、或是发布release包到github上，或是提交结果到github的特定分支，或是其他server服务器。</p>
+
+<p>注意：🚨 目前Travis CI 只支持 Github。</p>
+
+<p><img src="/images/travis_ci_deploy.png" style="margin:0;box-shadow:none;" alt="tracis_ci_deploy"/></p>
 
 <h3 id="一-编写-travis-yml">一、编写 .travis.yml</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git checkout source
@@ -352,7 +364,7 @@ deploy:
   keep-history: <span style="color:#66d9ef">true</span>
   on:
     branch: source <span style="color:#75715e"># 博客源码的分支</span></code></pre></div>
-<p>在<code>.travis.yml</code>配置文件中有个环境变量<code>$GITHUB_TOKEN</code>需要设置，接着在github申请一个 <a href="https://github.com/settings/tokens/new">personal access token</a>，只需要勾选 <code>repo</code>选项组。</p>
+<p>在<code>.travis.yml</code>配置文件中有个环境变量<code>$GITHUB_TOKEN</code>需要设置，接着在github申请一个 <a href="https://github.com/settings/tokens/new">personal access token</a>，只需要勾选 <code>repo</code> 权限，取名随意。</p>
 
 <p><img src="/images/travisci_03.png" alt="travisci_03" /></p>
 
@@ -408,11 +420,11 @@ after_success:
   - git add .
   - git commit -m <span style="color:#e6db74">&#34;Travis CI 自动部署&#34;</span>
   - git push --force <span style="color:#e6db74">&#34;https://&lt;username&gt;:${CODING_TOKEN}@git.dev.tencent.com/&lt;username&gt;/&lt;repo&gt;.git&#34;</span> master:master</code></pre></div>
-<p>同样的，这里的 <strong>CODING_TOKEN</strong> 环境变量 需要在 <code>coding.net</code>的 <code>个人设置</code> -&gt; <code>访问令牌</code> 中生成一个<code>Token</code></p>
+<p>同样的，这里的 <strong>CODING_TOKEN</strong> 环境变量 需要在 <code>coding.net</code>的 <code>个人设置</code> -&gt; <code>访问令牌</code> 中生成一个<code>Token</code>，勾选<code>project:depot</code>权限。</p>
 
 <p><img src="/images/travisci_08.png" alt="travisci_08" /></p>
 
-<p>再去<code>Travis CI</code>后台配置环境变量 <code>CODING_TOKEN</code></p>
+<p>再去<code>Travis CI</code>后台配置环境变量<code>CODING_TOKEN</code></p>
 
 <p><img src="/images/travisci_07.png" alt="travisci_07" /></p>
 
@@ -430,7 +442,7 @@ after_success:
 
 <h3 id="图片加载较慢">图片加载较慢</h3>
 
-<p>注意：教程里我用的图片都是放到<code>/static/images</code>文件夹中，国内访问速度很慢，后期最好更换CDN加载图片资源 💵 💵</p>
+<p>注意：教程里我用的图片都是放到<code>/static/images</code>文件夹中，国内访问速度很慢，可以更换CDN图库加载图片资源 💵💵</p>
 
 <h3 id="开源分享">开源分享</h3>
 
