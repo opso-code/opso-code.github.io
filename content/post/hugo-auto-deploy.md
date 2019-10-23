@@ -74,20 +74,31 @@ $ git clone https://github.com/coderzh/hugo-pacman-theme
 $ cd ..
 $ hugo new post/hello.md #生成一个md文件
 $ hugo server 	#默认监听localhost:1313端口，可以在浏览器上实时预览
-$ hugo 			#在public下生成静态html文件
+```
+
+打开浏览器访问：http://localhost:1313 就可以看到博客主页了，第一条博客就是根据 `content/post/hello.md` 文件生产的页面，修改此文件时候，浏览器可以实时预览
+
+hugo命令会在当前目录下生成public文件夹，里面就是生成的html了
+
+```bash
+$ hugo
 ```
 
 详细可以参考 [Hugo中文文档](https://www.gohugo.org/)
 
 ### 使用Github Pages
 
-之前的博客中有讲到过 [**Github Pages**](https://pages.github.com/) 是什么，简单来说是`github`提供的一个服务，可以免费的支持用户提交上去的静态html网站。
+之前的博客中有讲到过 [**Github Pages**](https://pages.github.com/) 是什么，简单来说是`github`提供的一个免费的服务，用于解析用户的html文件，运行在`github`提供的网站上。对于没机器嫌建站麻烦的简直是白送 :stuck_out_tongue_closed_eyes:
 
-在github上新建一个仓库，仓库名 **必须** 为`username.github.io`。比如我自己的是 `opso-code.github.io`
+首先，需要在github上新建一个仓库，仓库名 **必须** 为`username.github.io`；比如我自己的是 `opso-code.github.io`
+
+然后回到项目根目录下
 
 ```bash
-$ git clone git clone https://github.com/<username>/<username>.github.io.git
+$ cd blog
+$ git clone https://github.com/<username>/<username>.github.io.git
 $ rm -rf <username>.github.io/*
+# 把之前public/文件夹里的文件复制进去
 $ cp -r public/* <username>.github.io/
 $ cd <username>.github.io/
 $ git add --all
@@ -98,9 +109,13 @@ $ git push
 
 ![github_pages](/images/github_pages.png)
 
-然后访问 https://opso-code.github.io/ 就可以看到博客主页了~ :tada::sparkles:
+然后访问 https://opso-code.github.io/ 就可以看到博客主页了~ :tada: :sparkles:
 
-可以看到我们的静态页面文件都放到了 `master` 分支里，为了方便后面自动部署，我们将blog项目文件夹加入到 `source` 分支下。
+到这一步搭建`Github Pages`已经学会了，为了避免每次新建了`.md`文件之后，都要把`public/`下的文件更新到github，后面将会使用工具自动生成并部署到网站上。
+
+### 新建source分支
+
+可以看到我们的静态页面文件都提交到了 `master` 分支里，为了方便后面自动部署，我们将blog项目文件夹加入到 `source` 分支下。
 
 ```bash
 # 将仓库移到和blog同级目录下
@@ -125,7 +140,7 @@ $ git push --set-upstream origin source
 
 ```bash
 $ git checkout source
-$ touch .travis.yml
+$ vim .travis.yml
 ```
 
 只有添加了这个文件，Travis CI才会自动构建。
@@ -136,7 +151,7 @@ language: python # 不选的化默认是ruby
 python: 3.7
 
 install:
-  # nuo主题需要extended版本的hugo，其他主题可以用最新的就行
+  # nuo主题需要extended版本的hugo，其他主题可以用最新的普通版本就行
   - wget https://github.com/gohugoio/hugo/releases/download/v0.58.3/hugo_extended_0.58.3_Linux-64bit.deb
   - sudo dpkg -i hugo*.deb
 
@@ -160,25 +175,24 @@ deploy:
 
 ![travisci_03](/images/travisci_03.png)
 
-复制生成的 `Token`（注意：关闭页面后就找不到了），在下一步Travis CI设置里配置 `Environment Variables`
+点击生成之后，复制生成的 `Token`（注意：关闭页面后就找不到了），留作下一步`Travis CI`设置用。
 
 ### 二、登录Travis CI官网
 
-[Travis CI官网](https://travis-ci.org)
+- 使用github帐号授权并登录 [**Travis CI**](https://travis-ci.org)（`delete`权限可以不授权）
+- 勾选 `opso-code.github.io` 仓库
 
 ![travisci_01](/images/travisci_01.png)
 
-- 使用github帐号登录Travis CI，接受权限授权（`delete`权限可以不授权）
-- 勾选 `opso-code.github.io`仓库
 - 点击后面的`settings`，在 `Environment Variables` 中添加`NAME`填 **GITHUB_TOKEN**，`VALUE`填上一步生成的 `Token`
 
 ![travisci_04](/images/travisci_04.png)
 
-### 三、更新source分支
+### 三、提交source分支
 
 ```bash
-$ git add --all
-$ git commit -m "test auto deploy"
+$ git add .travis.yml
+$ git commit -m ":construction_worker: create .travis.yml"
 $ git push
 ```
 
@@ -186,19 +200,19 @@ $ git push
 
 ![travisci_05](/images/travisci_05.png)
 
-如果显示构建失败，可以在log日志中定位问题，其中有一次构建失败是因为hugo版本使用的最新 `hugo_extended_0.59.0`，而我使用的`hugo-nuo`主题，hugo命令会有一个slice索引报错，切换到`58.3`就好了。
+如果显示构建失败，可以在log日志中定位问题；其中有一次构建失败是因为hugo版本使用的最新`hugo_extended_0.59.0`，而我使用的`hugo-nuo`主题，hugo命令会有一个slice索引报错，版本降到`0.58.3`就好了。
 
 ![travisci_06](/images/travisci_06.png)
 
-可以看到`commit`信息都变成了`Deploy...`，访问博客页面就能看到效果了。
+可以看到`commit`信息都变成了`Deploy...`，访问博客页面就能看到更新了。
 
 :tada: :tada: :tada: :tada:
 
 ## 使用Coding Pages
 
-如果嫌`github`国内访问有些慢，也可以将 `master` 分支同步一份到 [**Coding Pages**](https://coding.net/help/doc/pages) —— [**Coding.net**](https://coding.net) 一家国内的代码托管仓库网站提供的静态网站服务。
+如果嫌`github`国内访问有些慢，也可以将 `master` 分支同步一份到 [**Coding Pages**](https://coding.net/help/doc/pages) —— 国内一家代码托管仓库网站提供的静态网站服务。
 
-这样就多一次手动操作 :joy: ，那能不能在构建的时候也发一份到Coding Pages呢？
+这样发布博客就多一次手动操作 :joy: ，那能不能在构建的时候也发一份到Coding Pages呢？
 
 答案是可以的！:smile:
 
@@ -206,6 +220,7 @@ $ git push
 
 ```yml
 # 构建成功后发一份到Coding Pages
+# <username> <repo> 按照在coding.net新建的仓库设置
 after_success:
   - cd ./public
   - git init
@@ -213,18 +228,18 @@ after_success:
   - git config user.email "coding的email"
   - git add .
   - git commit -m "Travis CI 自动部署"
-  - git push --force "https://opso:${CODING_TOKEN}@git.dev.tencent.com/<username>/<repo>.git" master:master
+  - git push --force "https://<username>:${CODING_TOKEN}@git.dev.tencent.com/<username>/<repo>.git" master:master
 ```
 
-同样的，这里的 **CODING_TOKEN** 环境变量 需要在 `coding.net`的 `个人设置` ->`访问令牌` 中生成一个`Token`
+同样的，这里的 **CODING_TOKEN** 环境变量 需要在 `coding.net`的 `个人设置` -> `访问令牌` 中生成一个`Token`
 
 ![travisci_08](/images/travisci_08.png)
 
-再去`Travis CI`后台配置环境变量  `CODING_TOKEN`
+再去`Travis CI`后台配置环境变量 `CODING_TOKEN`
 
 ![travisci_07](/images/travisci_07.png)
 
-这样`git push`了`source`分支后，`Github Pages`和`Coding Pages`都可以同时更新了~
+这样`git push`了`source`分支后，`Github Pages`和`Coding Pages`都可以同时更新了~ :rocket: :rocket:
 
 ## 其他
 
@@ -244,7 +259,7 @@ after_success:
 
 分享技术，享受开源，感谢 `github`、`coding.net` :+1:  :+1:
 
-我的博客github: https://github.com/opso-code/opso-code.github.io.git
+源代码: https://github.com/opso-code/opso-code.github.io.git
 
 ## 参考
 
