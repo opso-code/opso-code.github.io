@@ -81,7 +81,9 @@ $ hugo 			#在public下生成静态html文件
 
 详细可以参考 [Hugo中文文档](https://www.gohugo.org/)
 
-### Github Pages配置
+### 使用Github Pages
+
+之前的博客中有讲到过 [**Github Pages**](https://pages.github.com/) 是什么，简单来说是`github`提供的一个服务，可以免费的支持用户提交上去的静态html网站。
 
 在github上新建一个仓库，仓库名 **必须** 为`username.github.io`。比如我自己的是 `opso-code.github.io`
 
@@ -131,7 +133,7 @@ $ touch .travis.yml
 
 ```yml
 dist: bionic
-language: python # 不选的化默认是ruby，构建时间挺长
+language: python # 不选的化默认是ruby
 python: 3.7
 
 install:
@@ -199,7 +201,7 @@ $ git push
 - 页面的带宽限制是低于每月100 GB 或是每月100,000 次请求。
 - 每小时最多只能部署10 个静态网站。
 
-注意：这里我用的图片都是放到`/static/images`文件夹中，访问速度很慢，后期最好换CDN加载图片
+注意：这里我用的图片都是放到`/static/images`文件夹中，访问速度很慢，后期最好换CDN加载图片资源。
 
 有一点要提出的是，**Github Pages** 的主旨就是鼓励大家建立自己或是组织团队的页面，分享技术，感谢`github`！
 
@@ -207,4 +209,3 @@ $ git push
 
 - 阮一峰 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)
 - [Traivis-CI 构建Github Pages](https://docs.travis-ci.com/user/deployment/pages/)
-
