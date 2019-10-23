@@ -1,6 +1,6 @@
 {
-  "name": "Ritchie Pub.",
-  "short_name": "ritchie",
+  "name": "opso's blog.",
+  "short_name": "opso",
   "display": "standalone",
   "orientation": "any",
   "start_url": "./?utm_source=homescreen",

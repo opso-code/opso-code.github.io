@@ -6,7 +6,8 @@
 
   
   <title>
-  Posts
+  Tag → travis-CI
+  
    | opso&#39;s blog
 </title>
 
@@ -14,11 +15,13 @@
   
   <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
   <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
   <link href="//at.alicdn.com" rel="dns-prefetch">
+  
   <link href="//fonts.googleapis.com" rel="dns-prefetch">
   <link href="//fonts.gstatic.com" rel="dns-prefetch">
-  <link href="///disqus.com" rel="dns-prefetch">
-  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
   
   
   <link href="//hm.baidu.com" rel="dns-prefetch">
@@ -40,17 +43,17 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="opso&#39;s blog">
   <meta property="og:description" content="opso的技术博客">
-  <meta property="og:url" content="/post/">
+  <meta property="og:url" content="/tags/travis-ci/">
   <meta property="og:image" content="/images/avatar.png">
 
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.59.0">
 
 
-<link rel="canonical" href="/post/">
-<link rel="alternate" type="application/rss+xml" href="/post/index.xml" title="opso's blog">
+<link rel="canonical" href="/tags/travis-ci/">
+<link rel="alternate" type="application/rss+xml" href="/tags/travis-ci/index.xml" title="opso's blog">
 
 <meta name="renderer" content="webkit">
 <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -83,7 +86,9 @@
 <link rel="manifest" href="/manifest.json">
 
 
-<link rel="preload" href="/styles/main.min.css" as="style">
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
 <link rel="preload" href="/images/avatar.png" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
@@ -94,7 +99,9 @@
     background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
   }
 </style>
-<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
 
@@ -119,7 +126,6 @@
 
 </head>
   <body>
-    
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
@@ -127,11 +133,11 @@
     
     
   <header class="site-header">
-  <img class="avatar" src="/images/avatar.png" alt="Avatar">
+  <a href=""><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
   
-  <h2 class="title">opso&#39;s blog</h2>
+  <h2 class="title"><a href="">opso&#39;s blog</a></h2>
   
-  <p class="subtitle">Talk is cheap, show me the code</p>
+  <p class="subtitle">Heroes never die</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -146,13 +152,13 @@
         <li class="menu-item
           
           
-           is-active">
+          ">
           <a href="/">Home</a>
         </li>
       
         <li class="menu-item
           
-          
+           is-active
           ">
           <a href="/tags/">Tags</a>
         </li>
@@ -166,16 +172,12 @@
             <span class="icon icon-email" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//github.com/opso-code" title="GitHub" aria-label="GitHub">
-            <span class="icon icon-github" aria-hidden="true"></span>
+          <a href="//github.com/opso-code" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//www.instagram.com/opso92" title="Instagram" aria-label="Instagram">
+          <a href="//www.instagram.com/opso92" rel="me" title="Instagram" aria-label="Instagram">
             <span class="icon icon-instagram" aria-hidden="true"></span>
-          </a>
-        </li><li class="social-item">
-          <a href="//weibo.com/234920704" title="Weibo" aria-label="Weibo">
-            <span class="icon icon-weibo" aria-hidden="true"></span>
           </a>
         </li></ul>
   </nav>
@@ -190,90 +192,19 @@
       
         <article class="post-entry">
   <header class="post-header">
-    <h3 class="post-title"><a href="/post/docker-note/" class="post-link">Docker安装笔记</a></h3>
-    <p class="post-meta">@opso · Dec 26, 2015 · 1 min read</p>
+    <h3 class="post-title"><a href="/post/hugo-auto-deploy/" class="post-link">Travis CI自动化部署hugo静态博客</a></h3>
+    <p class="post-meta">@opso · Oct 22, 2019 · 1 min read</p>
   </header>
   
-    <img class="post-cover" src="/images/docker_logo.png" alt="Docker安装笔记" lazyload="on">
-  
-  <p class="post-summary">环境：Ubuntu14.04
-Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口(类似 iPhone 的 app)。几乎没有性能开销,可以很容易地在机器和数据中心中运行。最重要的是,他们不依赖于任何语言、框架包括系统。
+  <p class="post-summary">Travis CI是什么  Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科
 </p>
   <footer class="post-footer">
-    <a class="read-more" href="/post/docker-note/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/vagrant-note/" class="post-link">用Vagrant搭建跨平台ubuntu开发环境</a></h3>
-    <p class="post-meta">@opso · Dec 20, 2015 · 5 min read</p>
-  </header>
-  
-  <p class="post-summary">Vagrant是一款用来构建虚拟开发环境的工具，非常适合php/python/ruby/java这类语言开发，代码在我机子上运行没有问题`这种说辞将成为历史。
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/vagrant-note/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/php-reward/" class="post-link">PHP游戏抽奖应用</a></h3>
-    <p class="post-meta">@opso · Oct 31, 2015 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="/images/php_logo.jpg" alt="PHP游戏抽奖应用" lazyload="on">
-  
-  <p class="post-summary">PHP游戏概率中的运用
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/php-reward/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/redis-advance/" class="post-link">Redis常用命令和高级特性</a></h3>
-    <p class="post-meta">@opso · Oct 20, 2015 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">Redis常用命令和高级特性
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/redis-advance/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/redis-string/" class="post-link">Redis基本操作</a></h3>
-    <p class="post-meta">@opso · Oct 15, 2015 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">Redis中的类型，String字符串、 Hash哈希、 List列表、 Set集合、 Sort Set有序集合
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/redis-string/">Read More →</a>
+    <a class="read-more" href="/post/hugo-auto-deploy/">Read More →</a>
   </footer>
 </article>
 
       
     
-    
-      <footer class="list-footer">
-        <nav class="pagination">
-          <h3 class="offscreen">Pagination</h3>
-          
-            <a class="pagination-previous" href="/post/page/2/">← Newer Posts</a>
-          
-          
-        </nav>
-      </footer>
     
   </section>
   

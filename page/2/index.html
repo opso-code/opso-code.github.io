@@ -11,11 +11,13 @@
   
   <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
   <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
   <link href="//at.alicdn.com" rel="dns-prefetch">
+  
   <link href="//fonts.googleapis.com" rel="dns-prefetch">
   <link href="//fonts.gstatic.com" rel="dns-prefetch">
-  <link href="///disqus.com" rel="dns-prefetch">
-  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
   
   
   <link href="//hm.baidu.com" rel="dns-prefetch">
@@ -43,7 +45,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.59.0">
 
 
 <link rel="canonical" href="/">
@@ -80,7 +82,9 @@
 <link rel="manifest" href="/manifest.json">
 
 
-<link rel="preload" href="/styles/main.min.css" as="style">
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
 <link rel="preload" href="/images/avatar.png" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
@@ -91,7 +95,9 @@
     background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
   }
 </style>
-<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
 
@@ -116,18 +122,17 @@
 
 </head>
   <body>
-    
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
     </div>
     
      <header class="site-header">
-  <img class="avatar" src="/images/avatar.png" alt="Avatar">
+  <a href=""><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
   
-  <h1 class="title">opso&#39;s blog</h1>
+  <h1 class="title"><a href="">opso&#39;s blog</a></h1>
   
-  <p class="subtitle">Talk is cheap, show me the code</p>
+  <p class="subtitle">Heroes never die</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -162,16 +167,12 @@
             <span class="icon icon-email" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//github.com/opso-code" title="GitHub" aria-label="GitHub">
-            <span class="icon icon-github" aria-hidden="true"></span>
+          <a href="//github.com/opso-code" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//www.instagram.com/opso92" title="Instagram" aria-label="Instagram">
+          <a href="//www.instagram.com/opso92" rel="me" title="Instagram" aria-label="Instagram">
             <span class="icon icon-instagram" aria-hidden="true"></span>
-          </a>
-        </li><li class="social-item">
-          <a href="//weibo.com/234920704" title="Weibo" aria-label="Weibo">
-            <span class="icon icon-weibo" aria-hidden="true"></span>
           </a>
         </li></ul>
   </nav>
@@ -184,61 +185,6 @@
   
   
    <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/linux-swap/" class="post-link">Linux swap虚拟内存设置</a></h3>
-    <p class="post-meta">@opso · May 25, 2016 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="/images/linux_1200x500.jpg" alt="Linux swap虚拟内存设置" lazyload="on">
-  
-  <p class="post-summary">在编译程序经常会出现
- virtual memory exhausted: Cannot allocate memory
- 的异常，表示虚拟内存不足，通常是没有这是swap缓存或者缓存过小，在编译安装的时候经常会遇到这样的报错，需要设置swap虚拟内存。
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/linux-swap/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/vagrant-base-box/" class="post-link">制作Ubuntu16.04 vagrant base box</a></h3>
-    <p class="post-meta">@opso · Apr 24, 2016 · 1 min read</p>
-  </header>
-  
-  <p class="post-summary">前几天，期待已久的 Ubuntu 16.04 LTS (Xenial 好客的非洲松鼠)长期支持版正式发布了！迫不及待的下载好了Ubuntu麒麟版(Kylin)系统镜像，和win10双系统共存，试着将自己的工作环境切换到ubuntu kylin下，不过最终放弃 :(
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/vagrant-base-box/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/php-design-pattern/" class="post-link">PHP常见的设计模式</a></h3>
-    <p class="post-meta">@opso · Apr 21, 2016 · 1 min read</p>
-  </header>
-  
-    <img class="post-cover" src="/images/php_logo.jpg" alt="PHP常见的设计模式" lazyload="on">
-  
-  <p class="post-summary">设计模式 Design Pattern ，让我们发现编程之美。
-所谓PHP常用的设计模式，在了解完这些设计模式之后会发现，啊，原来这个就是xxx模式啊！其实平常接触的框架代码里都能看它们的影子，但是只是知道设计模式还不够，需要在写代码的时候就能想到，并熟练实现和使用。这也是一种进阶。
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/php-design-pattern/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/redis-install/" class="post-link">Redis3.0安装和配置</a></h3>
-    <p class="post-meta">@opso · Apr 7, 2016 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">Redis 是一个开源的C语言编写的key-value类型的NoSQL数据库。由于redis数据库存储在内存中，所以执行速度非常快，同样还有数据持久化，可以将数据备份移动到其他从服务器。Redis的消息队列（原生支持发布/订阅）,能稳定快速的处理高并发下的秒杀或者抢红包之类的需求，在游戏中的排行榜功能也是简单快速了许多。
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/redis-install/">Read More →</a>
-  </footer>
-</article>
-  <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="/post/web-totop/" class="post-link">返回顶部按钮实现</a></h3>
     <p class="post-meta">@opso · Apr 6, 2016 · 1 min read</p>
@@ -374,20 +320,79 @@
     <a class="read-more" href="/post/mysql-install/">Read More →</a>
   </footer>
 </article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="/post/docker-note/" class="post-link">Docker安装笔记</a></h3>
+    <p class="post-meta">@opso · Dec 26, 2015 · 1 min read</p>
+  </header>
+  
+    <img class="post-cover" src="/images/docker_logo.png" alt="Docker安装笔记" lazyload="on">
+  
+  <p class="post-summary">环境：Ubuntu14.04
+Docker 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 Linux 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口(类似 iPhone 的 app)。几乎没有性能开销,可以很容易地在机器和数据中心中运行。最重要的是,他们不依赖于任何语言、框架包括系统。
+</p>
+  <footer class="post-footer">
+    <a class="read-more" href="/post/docker-note/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="/post/vagrant-note/" class="post-link">用Vagrant搭建跨平台ubuntu开发环境</a></h3>
+    <p class="post-meta">@opso · Dec 20, 2015 · 5 min read</p>
+  </header>
+  
+  <p class="post-summary">Vagrant是一款用来构建虚拟开发环境的工具，非常适合php/python/ruby/java这类语言开发，代码在我机子上运行没有问题`这种说辞将成为历史。
+</p>
+  <footer class="post-footer">
+    <a class="read-more" href="/post/vagrant-note/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="/post/php-reward/" class="post-link">PHP游戏抽奖应用</a></h3>
+    <p class="post-meta">@opso · Oct 31, 2015 · 1 min read</p>
+  </header>
+  
+    <img class="post-cover" src="/images/php_logo.jpg" alt="PHP游戏抽奖应用" lazyload="on">
+  
+  <p class="post-summary">PHP游戏概率中的运用
+</p>
+  <footer class="post-footer">
+    <a class="read-more" href="/post/php-reward/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="/post/redis-advance/" class="post-link">Redis常用命令和高级特性</a></h3>
+    <p class="post-meta">@opso · Oct 20, 2015 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Redis常用命令和高级特性
+</p>
+  <footer class="post-footer">
+    <a class="read-more" href="/post/redis-advance/">Read More →</a>
+  </footer>
+</article>
+  <article class="post-entry">
+  <header class="post-header">
+    <h3 class="post-title"><a href="/post/redis-string/" class="post-link">Redis基本操作</a></h3>
+    <p class="post-meta">@opso · Oct 15, 2015 · 1 min read</p>
+  </header>
+  
+  <p class="post-summary">Redis中的类型，String字符串、 Hash哈希、 List列表、 Set集合、 Sort Set有序集合
+</p>
+  <footer class="post-footer">
+    <a class="read-more" href="/post/redis-string/">Read More →</a>
+  </footer>
+</article>
  
    
   <footer class="list-footer">
     <nav class="pagination">
       <h3 class="offscreen">Pagination</h3>
       
-      <a class="pagination-previous" href="/"
-        >← Newer Posts</a
-      >
+      <a class="pagination-previous" href="/">← Newer Posts</a>
        
-      <a class="pagination-next" href="/page/3/"
-        >Older Posts →</a
-      >
-      
     </nav>
   </footer>
   

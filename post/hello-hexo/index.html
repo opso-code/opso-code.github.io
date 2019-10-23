@@ -11,11 +11,13 @@
   
   <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
   <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
   <link href="//at.alicdn.com" rel="dns-prefetch">
+  
   <link href="//fonts.googleapis.com" rel="dns-prefetch">
   <link href="//fonts.gstatic.com" rel="dns-prefetch">
-  <link href="///disqus.com" rel="dns-prefetch">
-  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
   
   
   <link href="//hm.baidu.com" rel="dns-prefetch">
@@ -48,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.59.0">
 
 
 <link rel="canonical" href="/post/hello-hexo/">
@@ -84,7 +86,9 @@
 <link rel="manifest" href="/manifest.json">
 
 
-<link rel="preload" href="/styles/main.min.css" as="style">
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
 <link rel="preload" href="/images/avatar.png" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
@@ -95,7 +99,9 @@
     background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
   }
 </style>
-<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
 
@@ -124,23 +130,20 @@
 
 </head>
   <body>
-    
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
-        
-        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
     
     
   <header class="site-header">
-  <img class="avatar" src="/images/avatar.png" alt="Avatar">
+  <a href=""><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
   
-  <h2 class="title">opso&#39;s blog</h2>
+  <h2 class="title"><a href="">opso&#39;s blog</a></h2>
   
-  <p class="subtitle">Talk is cheap, show me the code</p>
+  <p class="subtitle">Heroes never die</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -175,16 +178,12 @@
             <span class="icon icon-email" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//github.com/opso-code" title="GitHub" aria-label="GitHub">
-            <span class="icon icon-github" aria-hidden="true"></span>
+          <a href="//github.com/opso-code" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//www.instagram.com/opso92" title="Instagram" aria-label="Instagram">
+          <a href="//www.instagram.com/opso92" rel="me" title="Instagram" aria-label="Instagram">
             <span class="icon icon-instagram" aria-hidden="true"></span>
-          </a>
-        </li><li class="social-item">
-          <a href="//weibo.com/234920704" title="Weibo" aria-label="Weibo">
-            <span class="icon icon-weibo" aria-hidden="true"></span>
           </a>
         </li></ul>
   </nav>
@@ -329,30 +328,10 @@ $ hexo deploy</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1037</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1315</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "opso-coding-me" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

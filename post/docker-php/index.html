@@ -11,11 +11,13 @@
   
   <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
   <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
   <link href="//at.alicdn.com" rel="dns-prefetch">
+  
   <link href="//fonts.googleapis.com" rel="dns-prefetch">
   <link href="//fonts.gstatic.com" rel="dns-prefetch">
-  <link href="///disqus.com" rel="dns-prefetch">
-  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
   
   
   <link href="//hm.baidu.com" rel="dns-prefetch">
@@ -48,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.59.0">
 
 
 <link rel="canonical" href="/post/docker-php/">
@@ -84,7 +86,9 @@
 <link rel="manifest" href="/manifest.json">
 
 
-<link rel="preload" href="/styles/main.min.css" as="style">
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
 <link rel="preload" href="/images/avatar.png" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
@@ -95,7 +99,9 @@
     background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
   }
 </style>
-<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
 
@@ -124,23 +130,20 @@
 
 </head>
   <body>
-    
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
-        
-        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
     
     
   <header class="site-header">
-  <img class="avatar" src="/images/avatar.png" alt="Avatar">
+  <a href=""><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
   
-  <h2 class="title">opso&#39;s blog</h2>
+  <h2 class="title"><a href="">opso&#39;s blog</a></h2>
   
-  <p class="subtitle">Talk is cheap, show me the code</p>
+  <p class="subtitle">Heroes never die</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -175,16 +178,12 @@
             <span class="icon icon-email" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//github.com/opso-code" title="GitHub" aria-label="GitHub">
-            <span class="icon icon-github" aria-hidden="true"></span>
+          <a href="//github.com/opso-code" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//www.instagram.com/opso92" title="Instagram" aria-label="Instagram">
+          <a href="//www.instagram.com/opso92" rel="me" title="Instagram" aria-label="Instagram">
             <span class="icon icon-instagram" aria-hidden="true"></span>
-          </a>
-        </li><li class="social-item">
-          <a href="//weibo.com/234920704" title="Weibo" aria-label="Weibo">
-            <span class="icon icon-weibo" aria-hidden="true"></span>
           </a>
         </li></ul>
   </nav>
@@ -340,90 +339,90 @@ sudo chmod +x /usr/local/bin/docker-compose</code></pre></div>
 <p><code>Nginx</code>和<code>mongo</code>可以直接使用<a href="https://hub.docker.com">dockerhub镜像仓库</a>上开箱即用的镜像，比如：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ docker run --rm -p <span style="color:#ae81ff">80</span>:80 --name php-nginx -d nginx:1.12.2-alpine</code></pre></div>
 <p>到了PHP这里，需要满足自己的需求，可以使用 <code>dockerfile</code> 文件构建自己的镜像，这里我使用基于官方<code>php:fpm</code>镜像，额外安装想要的扩展。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-docker" data-lang="docker"><span style="color:#66d9ef">FROM</span><span style="color:#e6db74"> php:fpm</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span>LABEL maintainer<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;opso &lt;945206413@qq.com&gt;&#34;</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span><span style="color:#e6db74"> TIMEZONE Asia/Shanghai</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">ENV</span><span style="color:#e6db74"> SWOOLE_VERSION 4.0.3</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># replace sources.list</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> sed -i <span style="color:#e6db74">&#39;s/deb.debian.org/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> sed -i <span style="color:#e6db74">&#39;s/security.debian.org/mirrors.163.com/g&#39;</span> /etc/apt/sources.list <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> cp /usr/share/zoneinfo/<span style="color:#e6db74">${</span>TIMEZONE<span style="color:#e6db74">}</span> /etc/localtime <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> echo <span style="color:#e6db74">&#34;</span><span style="color:#e6db74">${</span>TIMEZONE<span style="color:#e6db74">}</span><span style="color:#e6db74">&#34;</span> &gt; /etc/timezone<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># init</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> apt-get update <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    apt-get install -y --no-install-recommends <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    curl <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    wget <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    zip <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    git <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    unzip <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    procps <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libz-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libpq-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libjpeg-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libpng-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libfreetype6-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libssl-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libmcrypt-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    libmemcached-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    apt-utils <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> rm -rf /var/lib/apt/lists/*<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># install hiredis</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget https://github.com/redis/hiredis/archive/v0.13.3.tar.gz -O hiredis.tar.gz <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> mkdir -p hiredis <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> tar -xf hiredis.tar.gz -C hiredis --strip-components<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> rm hiredis.tar.gz <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        cd hiredis <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> make install <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> ldconfig <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">)</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> rm -r hiredis<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># install php extentions</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> pecl channel-update pecl.php.net <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> docker-php-ext-configure gd <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --enable-gd-native-ttf <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --with-jpeg-dir<span style="color:#f92672">=</span>/usr/lib <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    --with-freetype-dir<span style="color:#f92672">=</span>/usr/include/freetype2 <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> docker-php-ext-install -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> bcmath mysqli pdo_mysql gd <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> pecl install mongodb <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> docker-php-ext-enable mongodb <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> pecl install memcached <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> docker-php-ext-enable memcached <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> pecl install redis <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> docker-php-ext-enable redis <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> pecl clear-cache<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># install swoole extention</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> wget https://github.com/swoole/swoole-src/archive/v<span style="color:#e6db74">${</span>SWOOLE_VERSION<span style="color:#e6db74">}</span>.tar.gz -O swoole.tar.gz <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> mkdir -p swoole <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> tar -xf swoole.tar.gz -C swoole --strip-components<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> rm swoole.tar.gz <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">(</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        cd swoole <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> phpize <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> ./configure --enable-async-redis --enable-mysqlnd --enable-coroutine --enable-openssl <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> make -j<span style="color:#66d9ef">$(</span>nproc<span style="color:#66d9ef">)</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>        <span style="color:#f92672">&amp;&amp;</span> make install <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">)</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> rm -r swoole <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> docker-php-ext-enable swoole<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#75715e"># install composer</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">RUN</span> curl -sS https://install.phpcomposer.com/installer | php <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> mv composer.phar /usr/local/bin/composer <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> composer config -g repositories.packagist composer https://packagist.phpcomposer.com <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>    <span style="color:#f92672">&amp;&amp;</span> composer self-update --clean-backups<span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">EXPOSE</span><span style="color:#e6db74"> 9000</span><span style="color:#960050;background-color:#1e0010">
-</span><span style="color:#960050;background-color:#1e0010"></span><span style="color:#66d9ef">CMD</span><span style="color:#e6db74"> [&#34;php-fpm&#34;]</span></code></pre></div>
+FROM php:fpm
+
+LABEL maintainer="opso <945206413@qq.com>"
+
+ENV TIMEZONE Asia/Shanghai
+ENV SWOOLE_VERSION 4.0.3
+
+# replace sources.list
+RUN sed -i 's/deb.debian.org/mirrors.163.com/g' /etc/apt/sources.list \
+    && sed -i 's/security.debian.org/mirrors.163.com/g' /etc/apt/sources.list \
+    && cp /usr/share/zoneinfo/${TIMEZONE} /etc/localtime \
+    && echo "${TIMEZONE}" > /etc/timezone
+
+# init
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends \
+    curl \
+    wget \
+    zip \
+    git \
+    unzip \
+    procps \
+    libz-dev \
+    libpq-dev \
+    libjpeg-dev \
+    libpng-dev \
+    libfreetype6-dev \
+    libssl-dev \
+    libmcrypt-dev \
+    libmemcached-dev \
+    apt-utils \
+    && rm -rf /var/lib/apt/lists/*
+
+# install hiredis
+RUN wget https://github.com/redis/hiredis/archive/v0.13.3.tar.gz -O hiredis.tar.gz \
+    && mkdir -p hiredis \
+    && tar -xf hiredis.tar.gz -C hiredis --strip-components=1 \
+    && rm hiredis.tar.gz \
+    && ( \
+        cd hiredis \
+        && make -j$(nproc) \
+        && make install \
+        && ldconfig \
+    ) \
+    && rm -r hiredis
+
+# install php extentions
+RUN pecl channel-update pecl.php.net \
+    && docker-php-ext-configure gd \
+    --enable-gd-native-ttf \
+    --with-jpeg-dir=/usr/lib \
+    --with-freetype-dir=/usr/include/freetype2 \
+    && docker-php-ext-install -j$(nproc) bcmath mysqli pdo_mysql gd \
+    && pecl install mongodb \
+    && docker-php-ext-enable mongodb \
+    && pecl install memcached \
+    && docker-php-ext-enable memcached \
+    && pecl install redis \
+    && docker-php-ext-enable redis \
+    && pecl clear-cache
+
+# install swoole extention
+RUN wget https://github.com/swoole/swoole-src/archive/v${SWOOLE_VERSION}.tar.gz -O swoole.tar.gz \
+    && mkdir -p swoole \
+    && tar -xf swoole.tar.gz -C swoole --strip-components=1 \
+    && rm swoole.tar.gz \
+    && ( \
+        cd swoole \
+        && phpize \
+        && ./configure --enable-async-redis --enable-mysqlnd --enable-coroutine --enable-openssl \
+        && make -j$(nproc) \
+        && make install \
+    ) \
+    && rm -r swoole \
+    && docker-php-ext-enable swoole
+
+# install composer
+RUN curl -sS https://install.phpcomposer.com/installer | php \
+    && mv composer.phar /usr/local/bin/composer \
+    && composer config -g repositories.packagist composer https://packagist.phpcomposer.com \
+    && composer self-update --clean-backups
+
+EXPOSE 9000
+CMD ["php-fpm"]
 <h3 id="docker-compose">docker-compose</h3>
 
 <p>为了方便将<code>nginx</code>、<code>php</code>、<code>mongo</code>环境组成一个集群，便于管理和文件共享，这里推荐使用<code>docker-compose</code>工具，配置也只需一个文件： <code>docker-compose.yaml</code></p>
@@ -481,30 +480,10 @@ $ docker-compose up -d</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>354</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>632</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "opso-coding-me" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

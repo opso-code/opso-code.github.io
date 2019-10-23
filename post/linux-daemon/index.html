@@ -11,11 +11,13 @@
   
   <link href="//cdn.jsdelivr.net" rel="dns-prefetch">
   <link href="//cdnjs.cloudflare.com" rel="dns-prefetch">
+  
   <link href="//at.alicdn.com" rel="dns-prefetch">
+  
   <link href="//fonts.googleapis.com" rel="dns-prefetch">
   <link href="//fonts.gstatic.com" rel="dns-prefetch">
-  <link href="///disqus.com" rel="dns-prefetch">
-  <link href="//c.disquscdn.com" rel="dns-prefetch">
+  
+  
   
   
   <link href="//hm.baidu.com" rel="dns-prefetch">
@@ -51,7 +53,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.51">
+<meta name="generator" content="Hugo 0.59.0">
 
 
 <link rel="canonical" href="/post/linux-daemon/">
@@ -87,7 +89,9 @@
 <link rel="manifest" href="/manifest.json">
 
 
-<link rel="preload" href="/styles/main.min.css" as="style">
+<link rel="preload" href="/styles/main-rendered.min.css" as="style">
+
+
 <link rel="preload" href="https://fonts.googleapis.com/css?family=Lobster" as="style">
 <link rel="preload" href="/images/avatar.png" as="image">
 <link rel="preload" href="/images/grey-prism.svg" as="image">
@@ -98,7 +102,9 @@
     background: rgb(244, 243, 241) url('/images/grey-prism.svg') repeat fixed;
   }
 </style>
-<link rel="stylesheet" href="/styles/main.min.css">
+<link rel="stylesheet" href="/styles/main-rendered.min.css">
+
+
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lobster">
 
 
@@ -127,23 +133,20 @@
 
 </head>
   <body>
-    
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
-        
-        <a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#disqus_thread"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
     
     
   <header class="site-header">
-  <img class="avatar" src="/images/avatar.png" alt="Avatar">
+  <a href=""><img class="avatar" src="/images/avatar.png" alt="Avatar"></a>
   
-  <h2 class="title">opso&#39;s blog</h2>
+  <h2 class="title"><a href="">opso&#39;s blog</a></h2>
   
-  <p class="subtitle">Talk is cheap, show me the code</p>
+  <p class="subtitle">Heroes never die</p>
   <button class="menu-toggle" type="button" aria-label="Main Menu" aria-expanded="false" tab-index="0">
     <span class="icon icon-menu" aria-hidden="true"></span>
   </button>
@@ -178,16 +181,12 @@
             <span class="icon icon-email" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//github.com/opso-code" title="GitHub" aria-label="GitHub">
-            <span class="icon icon-github" aria-hidden="true"></span>
+          <a href="//github.com/opso-code" rel="me" title="GitHub" aria-label="GitHub">
+	    <span class="icon icon-github" aria-hidden="true"></span>
           </a>
         </li><li class="social-item">
-          <a href="//www.instagram.com/opso92" title="Instagram" aria-label="Instagram">
+          <a href="//www.instagram.com/opso92" rel="me" title="Instagram" aria-label="Instagram">
             <span class="icon icon-instagram" aria-hidden="true"></span>
-          </a>
-        </li><li class="social-item">
-          <a href="//weibo.com/234920704" title="Weibo" aria-label="Weibo">
-            <span class="icon icon-weibo" aria-hidden="true"></span>
           </a>
         </li></ul>
   </nav>
@@ -213,17 +212,17 @@
 </span><span style="color:#e6db74"> */</span>
 $http <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">swoole_http_server</span>(<span style="color:#e6db74">&#34;0.0.0.0&#34;</span>, <span style="color:#ae81ff">9501</span>);
 $http<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">set</span>(<span style="color:#66d9ef">array</span>(
-    <span style="color:#e6db74">&#39;reactor_num&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">2</span>, <span style="color:#75715e">// 主进程内事件处理线程的数量 一般设置为CPU核数的1-4倍
-</span><span style="color:#75715e"></span>    <span style="color:#e6db74">&#39;worker_num&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">4</span>, <span style="color:#75715e">// 启动的worker进程数。
+	<span style="color:#e6db74">&#39;reactor_num&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">2</span>, <span style="color:#75715e">// 主进程内事件处理线程的数量 一般设置为CPU核数的1-4倍
+</span><span style="color:#75715e"></span>	<span style="color:#e6db74">&#39;worker_num&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#ae81ff">4</span>, <span style="color:#75715e">// 启动的worker进程数。
 </span><span style="color:#75715e"></span>));
 <span style="color:#75715e">// 计数器
 </span><span style="color:#75715e"></span>$automic <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">swoole_atomic</span>(<span style="color:#ae81ff">1</span>);
 
 $http<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">on</span>(<span style="color:#e6db74">&#39;request&#39;</span>, <span style="color:#66d9ef">function</span> (<span style="color:#a6e22e">swoole_http_request</span> $request, <span style="color:#a6e22e">swoole_http_response</span> $response) {
-    <span style="color:#66d9ef">global</span> $automic;
-    $automic<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">1</span>); <span style="color:#75715e">// 计数+1
-</span><span style="color:#75715e"></span>    $response<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;text/html; charset=utf-8&#34;</span>);
-    $response<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#34;&lt;h2&gt;FROM </span><span style="color:#e6db74">{</span>$request-&gt;fd<span style="color:#e6db74">}</span><span style="color:#e6db74">: Hello Swoole. &lt;br/&gt; COUNT: #</span><span style="color:#e6db74">{</span>$automic-&gt;get()<span style="color:#e6db74">}</span><span style="color:#e6db74"> &lt;br/&gt;TIME: &#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">microtime</span>(<span style="color:#66d9ef">true</span>)<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;&lt;/h2&gt;&#34;</span>);
+	<span style="color:#66d9ef">global</span> $automic;
+	$automic<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">add</span>(<span style="color:#ae81ff">1</span>); <span style="color:#75715e">// 计数+1
+</span><span style="color:#75715e"></span>	$response<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">header</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;text/html; charset=utf-8&#34;</span>);
+	$response<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">end</span>(<span style="color:#e6db74">&#34;&lt;h2&gt;FROM </span><span style="color:#e6db74">{</span>$request-&gt;fd<span style="color:#e6db74">}</span><span style="color:#e6db74">: Hello Swoole. &lt;br/&gt; COUNT: #</span><span style="color:#e6db74">{</span>$automic-&gt;get()<span style="color:#e6db74">}</span><span style="color:#e6db74"> &lt;br/&gt;TIME: &#34;</span><span style="color:#f92672">.</span><span style="color:#a6e22e">microtime</span>(<span style="color:#66d9ef">true</span>)<span style="color:#f92672">.</span><span style="color:#e6db74">&#34;&lt;/h2&gt;&#34;</span>);
 });
 $http<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start</span>();
 </code></pre></div>
@@ -242,8 +241,8 @@ $http<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">start</
 <li><code>--pidfile</code> 指定pid文件</li>
 <li><code>--make-pidfile</code> 如果脚本程序本身不产生pid文件，此选项可以生成pid文件</li>
 <li><code>--exec</code> 执行的脚本程序 后面接 <code>--</code> 可添加参数</li>
-<li><code>--chuid</code> 指定运行用户/用户组</li>
-</ul>
+
+<li><p><code>--chuid</code> 指定运行用户/用户组</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#! /bin/sh
 </span><span style="color:#75715e"></span> 
 <span style="color:#75715e">### BEGIN INIT INFO</span>
@@ -274,46 +273,48 @@ test -x $DAEMON <span style="color:#f92672">||</span> exit <span style="color:#a
 set -e
 
 start_method<span style="color:#f92672">(){</span>
-    echo -n <span style="color:#e6db74">&#34;Starting </span>$NAME<span style="color:#e6db74">&#34;</span>
-    start-stop-daemon $START_OPTS
-    echo <span style="color:#e6db74">&#34; done&#34;</span>
+	echo -n <span style="color:#e6db74">&#34;Starting </span>$NAME<span style="color:#e6db74">&#34;</span>
+	start-stop-daemon $START_OPTS
+	echo <span style="color:#e6db74">&#34; done&#34;</span>
 <span style="color:#f92672">}</span>
 
 stop_method<span style="color:#f92672">(){</span>
-    echo -n <span style="color:#e6db74">&#34;Stopping </span>$NAME<span style="color:#e6db74">&#34;</span>
+	echo -n <span style="color:#e6db74">&#34;Stopping </span>$NAME<span style="color:#e6db74">&#34;</span>
         
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> ! -r $PIDFILE <span style="color:#f92672">]</span> ; <span style="color:#66d9ef">then</span>
-        echo <span style="color:#e6db74">&#34;Warning, no pid file found - </span>$NAME<span style="color:#e6db74"> is not running ?&#34;</span>
-        exit <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">fi</span>
-    
-    start-stop-daemon $STOP_OPTS
-    sleep <span style="color:#ae81ff">1</span>
-    <span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e $PIDFILE <span style="color:#f92672">]</span>
-        <span style="color:#66d9ef">then</span> rm $PIDFILE
-    <span style="color:#66d9ef">fi</span>
-    
-    echo <span style="color:#e6db74">&#34; done&#34;</span>
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> ! -r $PIDFILE <span style="color:#f92672">]</span> ; <span style="color:#66d9ef">then</span>
+		echo <span style="color:#e6db74">&#34;Warning, no pid file found - </span>$NAME<span style="color:#e6db74"> is not running ?&#34;</span>
+		exit <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">fi</span>
+	
+	start-stop-daemon $STOP_OPTS
+	sleep <span style="color:#ae81ff">1</span>
+	<span style="color:#66d9ef">if</span> <span style="color:#f92672">[</span> -e $PIDFILE <span style="color:#f92672">]</span>
+		<span style="color:#66d9ef">then</span> rm $PIDFILE
+	<span style="color:#66d9ef">fi</span>
+	
+	echo <span style="color:#e6db74">&#34; done&#34;</span>
 <span style="color:#f92672">}</span>
 
 <span style="color:#66d9ef">case</span> <span style="color:#e6db74">&#34;</span>$1<span style="color:#e6db74">&#34;</span> in
-  start<span style="color:#f92672">)</span>
-        start_method
-        ;;
-  stop<span style="color:#f92672">)</span>
-        stop_method
-        ;;
-  restart<span style="color:#f92672">)</span>
-        stop_method
-        start_method
-        ;;
-  *<span style="color:#f92672">)</span>
-        echo <span style="color:#e6db74">&#34;Usage: </span>$0<span style="color:#e6db74"> {start|stop|restart}&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
-        exit <span style="color:#ae81ff">1</span>
-        ;;
+start<span style="color:#f92672">)</span>
+    start_method
+		;;
+stop<span style="color:#f92672">)</span>
+    stop_method
+    ;;
+restart<span style="color:#f92672">)</span>
+    stop_method
+    start_method
+    ;;
+*<span style="color:#f92672">)</span>
+    echo <span style="color:#e6db74">&#34;Usage: </span>$0<span style="color:#e6db74"> {start|stop|restart}&#34;</span> &gt;&amp;<span style="color:#ae81ff">2</span>
+    exit <span style="color:#ae81ff">1</span>
+    ;;
 <span style="color:#66d9ef">esac</span>
  
-exit <span style="color:#ae81ff">0</span></code></pre></div>
+exit <span style="color:#ae81ff">0</span></code></pre></div></li>
+</ul>
+
 <p>加入启动项：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 添加</span>
 $ sudo update-rc.d swoole-echo defaults
@@ -363,8 +364,7 @@ $ supervisorctl start swoole-echo // 关闭进程</code></pre></div>
 <p>如果你的系统是 <strong>Ubuntu15.04+/CentOS7+</strong> <code>Systemd</code> 已经默认代替了 <code>init</code> 启动方式，对与第一、第二种后台启动方式，Systemd有更强大的命令参数，更简便的配置文件，不需要额外安装软件包，还支持自动拉起服务，可以说是非常强大了，强烈推荐~</p>
 
 <ol>
-<li>建立 <code>swoole-echo.service</code> 文件</li>
-</ol>
+<li><p>建立 <code>swoole-echo.service</code> 文件</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#f92672">[</span>Unit<span style="color:#f92672">]</span>
 Description<span style="color:#f92672">=</span>Echo Http Server
 After<span style="color:#f92672">=</span>network.target
@@ -378,10 +378,9 @@ ExecReload<span style="color:#f92672">=</span>/bin/kill -USR1 $MAINPID
 Restart<span style="color:#f92672">=</span>always
 
 <span style="color:#f92672">[</span>Install<span style="color:#f92672">]</span>
-WantedBy<span style="color:#f92672">=</span>multi-user.target graphical.target</code></pre></div>
-<ol>
-<li>复制到 <code>/etc/systemd/system/</code> ，赋予755权限</li>
-</ol>
+WantedBy<span style="color:#f92672">=</span>multi-user.target graphical.target</code></pre></div></li>
+
+<li><p>复制到 <code>/etc/systemd/system/</code> ，赋予755权限</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># 创建软连接，加入守护进程列表</span>
 $ sudo systemd enable swoole-echo.service
 <span style="color:#75715e"># 重载守护进程配置</span>
@@ -393,19 +392,21 @@ $ sudo systemctl start swoole-echo.service
 <span style="color:#75715e"># 查看状态</span>
 $ sudo systemctl status swoole-echo.service
 ● swoole-echo.service - Echo Http Server By Swoole
-   Loaded: loaded <span style="color:#f92672">(</span>/etc/systemd/system/swoole-echo.service; enabled; vendor preset: enabled<span style="color:#f92672">)</span>
-   Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since Tue <span style="color:#ae81ff">2018</span>-05-07 <span style="color:#ae81ff">15</span>:08:42 CST; 1s ago
- Main PID: <span style="color:#ae81ff">22385</span> <span style="color:#f92672">(</span>php<span style="color:#f92672">)</span>
-    Tasks: <span style="color:#ae81ff">8</span>
-   Memory: <span style="color:#ae81ff">41</span>.1M
-      CPU: 36ms
-   CGroup: /system.slice/swoole-echo.service
-           ├─22385 /usr/local/php/bin/php /data/wwwroot/swoole/echo/server.php
-           ├─22392 /usr/local/php/bin/php /data/wwwroot/swoole/echo/server.php
-           ├─22395 swoole: worker process: <span style="color:#ae81ff">22385</span>
-           ├─22396 swoole: worker process: <span style="color:#ae81ff">22385</span>
-           ├─22397 swoole: worker process: <span style="color:#ae81ff">22385</span>
-           └─22398 swoole: worker process: <span style="color:#ae81ff">22385</span></code></pre></div>
+Loaded: loaded <span style="color:#f92672">(</span>/etc/systemd/system/swoole-echo.service; enabled; vendor preset: enabled<span style="color:#f92672">)</span>
+Active: active <span style="color:#f92672">(</span>running<span style="color:#f92672">)</span> since Tue <span style="color:#ae81ff">2018</span>-05-07 <span style="color:#ae81ff">15</span>:08:42 CST; 1s ago
+Main PID: <span style="color:#ae81ff">22385</span> <span style="color:#f92672">(</span>php<span style="color:#f92672">)</span>
+Tasks: <span style="color:#ae81ff">8</span>
+Memory: <span style="color:#ae81ff">41</span>.1M
+  CPU: 36ms
+CGroup: /system.slice/swoole-echo.service
+       ├─22385 /usr/local/php/bin/php /data/wwwroot/swoole/echo/server.php
+       ├─22392 /usr/local/php/bin/php /data/wwwroot/swoole/echo/server.php
+       ├─22395 swoole: worker process: <span style="color:#ae81ff">22385</span>
+       ├─22396 swoole: worker process: <span style="color:#ae81ff">22385</span>
+       ├─22397 swoole: worker process: <span style="color:#ae81ff">22385</span>
+       └─22398 swoole: worker process: <span style="color:#ae81ff">22385</span></code></pre></div></li>
+</ol>
+
 <p>这时，即使使用<code>Systemd</code> 创建的守护进程检测到异常会自动拉起服务！
 比如 <code>kill 22385</code>，发现守护进程会自动重新拉起，简直完美！</p>
 
@@ -425,30 +426,10 @@ $ sudo systemctl status swoole-echo.service
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>256</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>534</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
-      <div id="disqus_thread"></div>
-<script type="application/javascript">
-    var disqus_config = function () {
-    
-    
-    
-    };
-    (function() {
-        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
-            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
-            return;
-        }
-        var d = document, s = d.createElement('script'); s.async = true;
-        s.src = '//' + "opso-coding-me" + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
-</script>
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
       
     
   </section>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>travis-CI on opso&#39;s blog</title>
+    <link>/tags/travis-ci/</link>
+    <description>Recent content in travis-CI on opso&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
+    <lastBuildDate>Tue, 22 Oct 2019 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/travis-ci/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Travis CI自动化部署hugo静态博客</title>
+      <link>/post/hugo-auto-deploy/</link>
+      <pubDate>Tue, 22 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>/post/hugo-auto-deploy/</guid>
+      <description>&lt;h2 id=&#34;travis-ci是什么&#34;&gt;Travis CI是什么&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&#34;/images/travis_ci_logo.png&#34; style=&#34;margin:0;box-shadow:none;&#34; alt=&#34;tracis_ci_logo&#34;/&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科&lt;/p&gt;
+&lt;/blockquote&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
