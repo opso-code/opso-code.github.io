@@ -202,13 +202,11 @@
 <p>Travis CI是在软件开发领域中的一个在线的，分布式的持续集成服务，用来构建及测试在GitHub托管的代码。这个软件的代码同时也是开源的，可以在GitHub上下载到，尽管开发者当前并不推荐在闭源项目中单独使用它。——维基百科</p>
 </blockquote>
 
-<p>在一些开源的github项目说明中，我们经常会看到 <embed src="/images/passing.svg" /> 这样的标签，表示该项目使用了<strong>Travis CI</strong>持续集成服务。</p>
+<p>在一些开源的github项目页面说明中，我们经常会看到 <embed src="/images/passing.svg" /> 这样的标签，通常表示该项目使用了 <a href="https://travis-ci.org"><strong>Travis CI</strong></a> 持续集成服务。</p>
 
-<p>结合 <strong>Travis CI</strong>(Continuous Integration)， 它能够检测到你更新了github仓库代码，从github拉取最新代码,在自己的虚拟服务器上运行构建命令(根据<code>.travis.yml</code>)， 再将构建的结果或包，提交到github的特定分支，或是realese列表，或是其他server服务器。</p>
+<p>结合 <strong>Travis CI</strong>(Continuous Integration)服务， 能够检测到github仓库代码的变动，再从github上拉取最新代码在虚拟服务器上运行构建命令(根据<code>.travis.yml</code>)， 构建成功后可以进行脚本测试、或是发布release包到github上，或是提交结果到github的特定分支，或是其他server服务器。</p>
 
-<p>简单来说，Travis CI 类似github的一个Webhook，当检测你的github代码变动的时候，会自动拉取代码，实现自动编译打包、测试等操作，提高了软件开发的效率。</p>
-
-<p>流程说明：</p>
+<p>注：🚨 目前Travis CI 只支持 Github。</p>
 
 <p><img src="/images/travis_ci_deploy.png" style="margin:0;box-shadow:none;" alt="tracis_ci_deploy"/></p>
 
@@ -370,11 +368,13 @@ $ git push</code></pre></div>
 
 <p><img src="/images/travisci_05.png" alt="travisci_05" /></p>
 
-<p>其中有一次构建失败是因为hugo版本使用的最新 <code>hugo_extended_0.59</code>，而我使用的<code>nuo</code>主题，hugo命令会有一个slice索引报错，切换到<code>58.3</code>就好了。</p>
+<p>如果显示构建失败，可以在log日志中定位问题，其中有一次构建失败是因为hugo版本使用的最新 <code>hugo_extended_0.59</code>，而我使用的<code>nuo</code>主题，hugo命令会有一个slice索引报错，切换到<code>58.3</code>就好了。</p>
 
 <p><img src="/images/travisci_06.png" alt="travisci_06" /></p>
 
-<p>🎉🎉🎉🎉</p>
+<p>可以看到<code>commit</code>信息都变成了<code>Deploy...</code>，访问博客页面就能看到效果了。</p>
+
+<p>🎉 🎉 🎉 🎉</p>
 
 <h2 id="其他">其他</h2>
 
@@ -386,15 +386,25 @@ $ git push</code></pre></div>
 <li>每小时最多只能部署10 个静态网站。</li>
 </ul>
 
-<p>注意：这里我用的图片都是放到<code>/static/images</code>文件夹中，访问速度很慢，后期最好换CDN加载图片资源。</p>
+<h3 id="图片加载较慢">图片加载较慢</h3>
 
-<p>有一点要提出的是，<strong>Github Pages</strong> 的主旨就是鼓励大家建立自己或是组织团队的页面，分享技术，感谢<code>github</code>！</p>
+<p>注意：教程里我用的图片都是放到<code>/static/images</code>文件夹中，国内访问速度很慢，后期最好更换CDN加载图片资源。💵 💵</p>
+
+<p>还有一个github国内访问比较慢问题，也可以将 <code>master</code> 分支同步一份到 <a href="https://coding.net"><strong>Coding.net</strong></a> （一个国内的代码托管仓库）的 <a href="https://coding.net/help/doc/pages"><strong>Coding Pages</strong></a>。</p>
+
+<p>这样就多一次手动操作 😂</p>
+
+<h3 id="开源分享">开源分享</h3>
+
+<p>有一点要提出的是，<strong>Github Pages</strong> 的主旨就是鼓励大家建立自己或是组织或团队的静态页面，它是免费的，无需服务器的；</p>
+
+<p>分享技术，享受开源，感谢 <code>github</code>、<code>coding.net</code> 👍  👍</p>
 
 <h2 id="参考">参考</h2>
 
 <ul>
-<li>阮一峰 <a href="http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">持续集成服务 Travis CI 教程</a></li>
-<li><a href="https://docs.travis-ci.com/user/deployment/pages/">Traivis-CI 构建Github Pages</a></li>
+<li>阮一峰博客 <a href="http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html">持续集成服务 Travis CI 教程</a></li>
+<li>Traivis-CI官方文档 <a href="https://docs.travis-ci.com/user/deployment/pages/">GitHub Pages Deployment</a></li>
 </ul></article>
     <footer class="post-footer">
       
