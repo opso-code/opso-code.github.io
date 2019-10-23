@@ -189,6 +189,20 @@ $ git push
 
 ![travisci_06](/images/travisci_06.png)
 
+:tada::tada::tada::tada:
+
+## 其他
+
+### Github Pages限制
+
+- 仓库存储的所有文件不能超过1 GB。
+- 页面的带宽限制是低于每月100 GB 或是每月100,000 次请求。
+- 每小时最多只能部署10 个静态网站。
+
+注意：这里我用的图片都是放到`/static/images`文件夹中，访问速度很慢，后期最好换CDN加载图片
+
+有一点要提出的是，**Github Pages** 的主旨就是鼓励大家建立自己或是组织团队的页面，分享技术，感谢`github`！
+
 ## 参考
 
 - 阮一峰 [持续集成服务 Travis CI 教程](http://www.ruanyifeng.com/blog/2017/12/travis_ci_tutorial.html)

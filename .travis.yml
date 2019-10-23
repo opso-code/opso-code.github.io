@@ -1,5 +1,5 @@
 dist: bionic
-language: python # 不选的化默认是ruby，构建时间挺长
+language: python # 默认是ruby
 python: 3.7
 
 install:
@@ -21,4 +21,4 @@ deploy:
   github-token: $GITHUB_TOKEN
   keep-history: true
   on:
-    branch: source # 博客源码的分支
+    branch: source
