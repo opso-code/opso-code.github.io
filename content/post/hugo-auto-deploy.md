@@ -10,7 +10,7 @@ tags:
 
 ## 什么是Hugo
 
-<svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" stroke-width="27" aria-label="Logo" viewBox="0 0 1493 391" width="50%">
+<svg xmlns="http://www.w3.org/2000/svg" fill-rule="evenodd" stroke-width="25" aria-label="Logo" viewBox="0 0 1493 391" width="470px">
   <path fill="#ebb951" stroke="#fcd804" d="M1345.211 24.704l112.262 64.305a43 43 0 0 1 21.627 37.312v142.237a40 40 0 0 1-20.702 35.037l-120.886 66.584a42 42 0 0 1-41.216-.389l-106.242-61.155a57 57 0 0 1-28.564-49.4V138.71a64 64 0 0 1 31.172-54.939l98.01-58.564a54 54 0 0 1 54.54-.503z"/>
   <path fill="#33ba91" stroke="#00a88a" d="M958.07 22.82l117.31 66.78a41 41 0 0 1 20.72 35.64v139.5a45 45 0 0 1-23.1 39.32L955.68 369.4a44 44 0 0 1-43.54-.41l-105.82-61.6a56 56 0 0 1-27.83-48.4V140.07a68 68 0 0 1 33.23-58.44l98.06-58.35a48 48 0 0 1 48.3-.46z"/>
   <path fill="#0594cb" stroke="#0083c0" d="M575.26 20.97l117.23 68.9a40 40 0 0 1 19.73 34.27l.73 138.67a48 48 0 0 1-24.64 42.2l-115.13 64.11a45 45 0 0 1-44.53-.42l-105.83-61.6a55 55 0 0 1-27.33-47.53V136.52a63 63 0 0 1 29.87-53.59l99.3-61.4a49 49 0 0 1 50.6-.56z"/>
@@ -22,7 +22,7 @@ tags:
 
 <!--more-->
 
-之前博客有讲到过 [**Jekyll**](/post/hello-jekyll/ )、[**Hexo**](/post/hello-hexo/)  等静态博客生成工具，作用都是将`markdown`语法的文件转换为`html`页面文件，对比它们的优缺点，仅代表个人观点：
+之前博客有讲到过 [**Jekyll**](/post/hello-jekyll/ )、[**Hexo**](/post/hello-hexo/)  等静态博客生成工具，作用都是将`markdown`语法的文件转换为`html`静态文件，对比它们的优缺点，仅代表个人观点：
 
 | 博客工具 | 语言 | 优点 | 缺点 |
 | -------- | -------- | ------------------------ | ---------------- |
@@ -32,7 +32,7 @@ tags:
 
 下载地址：[Hugo release](https://github.com/gohugoio/hugo/releases)
 
-注意：:rotating_light: 如果你下载的主题用到了`Sass/SCSS`来生成css样式文件，则需要下载`extended`版本以支持前端打包工具，否则会报错。
+注意：:rotating_light: 如果你下载的主题用到了`Sass/SCSS`来生成css样式文件，则需要下载`extended`版本的hugo，以支持该主题前端资源打包，否则会报错。
 
 ```bash
 # 生成站点项目
@@ -61,20 +61,41 @@ hugo官方推荐的主题列表：[Hugo Themes](https://themes.gohugo.io/)
 选择一个喜欢的主题下载：
 
 ```bash
-$ git clone https://github.com/coderzh/hugo-pacman-theme themes/
+$ git clone https://github.com/zhaohuabing/hugo-theme-cleanwhite.git themes/cleanwhite
 ```
 
-修改项目根目录下`config.toml`，添加`theme = "hugo-pacman-theme"`
+修改项目根目录下`config.toml`，添加`theme = "cleanwhite"`
 
 还有其他相关配置，每个主题不尽相同，这里就省略了。详细设置可以参考 [Hugo中文文档](https://www.gohugo.org/)
 
 ```bash
 $ cd ..
 $ hugo new post/hello.md #生成一个md文件
+$ echo "# Hello World" >> content/post/hello.md
+$ echo "This is a page for testing" >> content/post/hello.md
 $ hugo server
 ```
 
-打开浏览器访问：http://localhost:1313 就可以看到博客主页了，第一条博客就是根据 `content/post/hello.md` 文件生产的页面，修改此文件时候，浏览器可以实时预览
+打开`content/post/hello.md`，我们可以看到根据主题模板初始化生成的一些文本：
+
+```markdown
+---
+title:       "An Example Post"
+subtitle:    ""
+description: ""
+date:        2018-06-04
+author:      ""
+image:       ""
+tags:        ["tag1", "tag2"]
+categories:  ["Tech" ]
+---
+# Hello World
+This is a page for testing
+```
+
+注意：如果文件头里有`draft`（”草稿“的意思），默认是不解析这个文件的，设置成`false`后解析，也可以在运行hugo的时候加上 `-D`。
+
+打开浏览器访问：http://localhost:1313 就可以看到第一条就是 `content/post/hello.md` 文件生产的页面内容了，浏览器上可以实时预览修改。
 
 hugo命令会在当前目录下生成`public`文件夹，里面就是生成的html文件了。
 
@@ -157,7 +178,7 @@ $ vim .travis.yml
 
 ```yml
 dist: bionic
-language: python # 不选的化默认是ruby
+language: python # 默认是ruby
 python: 3.7
 
 install:
@@ -166,19 +187,18 @@ install:
   - sudo dpkg -i hugo*.deb
 
 script:
-# 运行hugo命令
   - hugo
 
 # 构建完成后会自动更新Github Pages
 deploy:
-  provider: pages # 重要，指定这是一份github pages的部署配置
-  skip-cleanup: true # 重要，不能省略
-  local-dir: public # 静态站点文件所在目录
-  target-branch: master # 要将静态站点文件发布到哪个分支，默认gh-pages
-  github-token: $GITHUB_TOKEN # 重要，$GITHUB_TOKEN是变量，需要在GitHub上申请、再到配置到Travis
+  provider: pages
+  skip-cleanup: true
+  local-dir: public
+  target-branch: master
+  github-token: $GITHUB_TOKEN
   keep-history: true
   on:
-    branch: source # 博客源码的分支
+    branch: source
 ```
 
 在`.travis.yml`配置文件中有个环境变量`$GITHUB_TOKEN`需要设置，接着在github申请一个 [personal access token](https://github.com/settings/tokens/new)，只需要勾选 `repo` 权限，取名随意。
@@ -268,8 +288,6 @@ after_success:
 有一点要提出的是，**Github Pages** 的主旨就是鼓励大家建立自己或是组织或团队的静态页面，它是免费的，无需服务器的；
 
 分享技术，享受开源，感谢 `github`、`coding.net` :+1:  :+1:
-
-源代码: https://github.com/opso-code/opso-code.github.io.git
 
 ## 参考
 
