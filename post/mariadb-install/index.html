@@ -18,7 +18,7 @@
   <link href="//fonts.gstatic.com" rel="dns-prefetch">
   
   
-  
+  <link href="//imsun.github.io" rel="dns-prefetch">
   
   <link href="//hm.baidu.com" rel="dns-prefetch">
 
@@ -133,6 +133,8 @@
     <div class="suspension">
       <a role="button" aria-label="Go to top" title="Go to top" class="to-top is-hide"><span class="icon icon-up" aria-hidden="true"></span></a>
       
+        
+	<a role="button" aria-label="Go to comments" title="Go to comments" class="to-comment" href="#gitment-container"><span class="icon icon-comment" aria-hidden="true"></span></a>
         
       
     </div>
@@ -313,10 +315,43 @@ mysql&gt; SET PASSWORD <span style="color:#f92672">=</span> PASSWORD<span style=
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1303</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1307</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
+      <div id="gitment-container"></div>
+<link rel="stylesheet" href="//imsun.github.io/gitment/style/default.css">
+<script src="//imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+  (function() {
+    var page_url = decodeURI("/post/mariadb-install/");
+    var page_uniqueid = "e92801f0970c9fc9b2780c7defb07bfb";
+
+    if (page_url.length >= 50) {
+      console.log("文章的路径", "[" + page_url + "]:" + page_url.length, "超过了50个字符，使用 UniqueID 设置评论ID");
+      comment_id = page_uniqueid
+    } else {
+      comment_id = page_url
+    }
+
+    if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+      console.log(comment_id, comment_id.length);
+      document.getElementById('gitment-container').innerHTML = 'Gitment comments not available by default when the website is previewed locally.';
+    } else {
+      var gitment = new Gitment({
+        id: comment_id,
+        owner:  null ,
+        repo:  null ,
+        oauth: {
+          client_id: "49e019d3a542f81b2c64",
+          client_secret: "dc3ad86113e35cd1335ca5d52e313e13829730ea",
+        },
+      })
+      gitment.render('gitment-container');
+    }
+  })();
+</script>
+
       
     
   </section>
