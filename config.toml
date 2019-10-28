@@ -61,7 +61,7 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
 
   Gitment = true
   GitmentOwner = "opso-code"
-  GitmentRepo = "https://github.com/opso-code/opso-code.github.io"
+  GitmentRepo = "opso-code.github.io"
   GitmentClientId = "49e019d3a542f81b2c64"
   GitmentClientSecret = "dc3ad86113e35cd1335ca5d52e313e13829730ea"
 
