@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
     <copyright>© This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.</copyright>
-    <lastBuildDate>Tue, 22 Oct 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 25 Nov 2019 15:14:09 +0800</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>通过swoole理解TCP粘包</title>
+      <link>/post/swoole-tcp-pack/</link>
+      <pubDate>Mon, 25 Nov 2019 15:14:09 +0800</pubDate>
+      
+      <guid>/post/swoole-tcp-pack/</guid>
+      <description>&lt;h2 id=&#34;什么是粘包&#34;&gt;什么是粘包&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;TCP&lt;/strong&gt;是字节流协议，数据传输像流水一样。数据发送者会有一个缓存池，可能会将多个数据包一次性发送出去，或是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并解析正确的包数据了，这就是常说的 &lt;strong&gt;粘包&lt;/strong&gt;，下面结合swoole和自定义协议来详细说明。&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Travis CI自动化部署hugo静态博客</title>

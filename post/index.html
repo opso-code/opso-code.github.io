@@ -191,6 +191,22 @@
       
         <article class="post-entry">
   <header class="post-header">
+    <h3 class="post-title"><a href="/post/swoole-tcp-pack/" class="post-link">通过swoole理解TCP粘包</a></h3>
+    <p class="post-meta">@opso · Nov 25, 2019 · 1 min read</p>
+  </header>
+  
+    <img class="post-cover" src="/images/swoole_logo.png" alt="通过swoole理解TCP粘包" lazyload="on">
+  
+  <p class="post-summary">什么是粘包 TCP是字节流协议，数据传输像流水一样。数据发送者会有一个缓存池，可能会将多个数据包一次性发送出去，或是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并解析正确的包数据了，这就是常说的 粘包，下面结合swoole和自定义协议来详细说明。
+</p>
+  <footer class="post-footer">
+    <a class="read-more" href="/post/swoole-tcp-pack/">Read More →</a>
+  </footer>
+</article>
+
+      
+        <article class="post-entry">
+  <header class="post-header">
     <h3 class="post-title"><a href="/post/hugo-auto-deploy/" class="post-link">Travis CI自动化部署hugo静态博客</a></h3>
     <p class="post-meta">@opso · Oct 22, 2019 · 3 min read</p>
   </header>
@@ -483,20 +499,6 @@ swoole 的进程之间有两种通信方式，一种是消息队列(queue)，另
 </p>
   <footer class="post-footer">
     <a class="read-more" href="/post/php-design-pattern/">Read More →</a>
-  </footer>
-</article>
-
-      
-        <article class="post-entry">
-  <header class="post-header">
-    <h3 class="post-title"><a href="/post/redis-install/" class="post-link">Redis3.0安装和配置</a></h3>
-    <p class="post-meta">@opso · Apr 7, 2016 · 2 min read</p>
-  </header>
-  
-  <p class="post-summary">Redis 是一个开源的C语言编写的key-value类型的NoSQL数据库。由于redis数据库存储在内存中，所以执行速度非常快，同样还有数据持久化，可以将数据备份移动到其他从服务器。Redis的消息队列（原生支持发布/订阅）,能稳定快速的处理高并发下的秒杀或者抢红包之类的需求，在游戏中的排行榜功能也是简单快速了许多。
-</p>
-  <footer class="post-footer">
-    <a class="read-more" href="/post/redis-install/">Read More →</a>
   </footer>
 </article>
 
