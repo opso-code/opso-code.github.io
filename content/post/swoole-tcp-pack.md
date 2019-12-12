@@ -9,7 +9,7 @@ draft: false
 
 ## 什么是粘包
 
-**TCP**是字节流协议，数据传输像流水一样。数据发送者会有一个缓存池，可能会将多个数据包一次性发送出去，或是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并解析正确的包数据了，这就是常说的 **粘包**，下面结合swoole和自定义协议来详细说明。
+**TCP**是字节流协议，数据传输像流水一样。数据发送者会存在一个发送缓冲区，每次可能会将多个数据包一次性发送出去，也可能是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并正确解析数据包了，这就是常说的 **粘包**，下面结合`swoole_server`和自定义协议来详细说明。
 
 <!--more-->
 
@@ -37,15 +37,39 @@ draft: false
 
 <img src="/images/swoole_pack.png" style="margin:0;box-shadow:none;" alt="swoole_pack"/>
 
-这里涉及到大小端字节序的问题，推荐看看知乎专栏 [“字节序”是个什么鬼？](https://zhuanlan.zhihu.com/p/21388517) ，这里不再说明。
+这里涉及到大小端字节序的问题，推荐看看知乎专栏 [“字节序”是个什么鬼？](https://zhuanlan.zhihu.com/p/21388517)
 
 ## 二、Swoole\Server
 
-使用`swoole_server` 我们能很轻易的实现一个TCP服务，使用者无需关注底层实现细节，就能达到使用 `TCP`/`UDP`/`UnixSocket` 搭建异步服务器的要求，且一般使用 [`pack/unpack`](https://www.php.net/manual/zh/function.pack.php) 方法封包解包二进制数据；
+使用`swoole_server` 我们能很轻易的实现一个TCP服务，使用者无需关注底层实现细节，就能达到使用 `TCP`/`UDP`/`UnixSocket` 搭建异步服务器的要求；在php中，一般使用 [`pack/unpack`](https://www.php.net/manual/zh/function.pack.php) 方法封包解包二进制数据，再通过swoole发送出去。
 
 在`swoole_server->set()` 方法中提供了一些自定义协议的 [属性设置]( https://wiki.swoole.com/wiki/page/287.html)，这些设置在底层已经帮你封装好了，只要简单的设置，swoole基本不用考虑粘包问题了，真好 :tada: 
 
-根据我们上面自定义的协议，索引`0`到`5`用于协议头校验，索引`6`和`7`两位表示包体长度，所以需要设置 `package_length_type` 为 `n` 表示无符号短整型大端序，`package_length_offset`和 `package_body_offset` 表示包体长度的索引范围，剩下的拆包分发，swoole都会帮你做好；这样，在 `onReceive` 回调中，不用再关心粘包问题。
+根据我们上面自定义的协议：
+
+- 索引 `0` 到 `5` 用于协议头校验，
+- 索引 `6` 和 `7` 两位表示包体长度，
+- 设置 `package_length_type` 为 `n` ，表示无符号短整型大端序，
+- 设置 `package_length_offset` 为 `6`，表示从索引 `6` 开始是表示包体大小的开始索引
+- 设置 `package_body_offset` 为 `8`，表示以索引 `8` 为包体大小的结束索引，配合上面的`package_length_offset`，就能确定包体长度的数据在索引 `6` 到 `8` 之间，占 `2` 个字节
+- 截取`6`到`8`之间的数据，根据 `package_length_type` 里的类型，转换为短整型就是包体的长度
+
+剩下的拆包分发，swoole都会帮你做好；这样，在 `onReceive` 回调中接收到的参数 `$data`，永远会是一个完整的协议包。
+
+### package_length_type
+
+> 长度值的类型，接受一个字符参数，与php的 pack 函数一致。目前Swoole支持10种类型：
+
+- `c`：有符号、`1`字节
+- `C`：无符号、`1`字节
+- `s`：有符号、主机字节序、`2`字节
+- `S`：无符号、主机字节序、`2`字节
+- `n`：无符号、网络字节序、`2`字节 (常用)
+- `N`：无符号、网络字节序、`4`字节 (常用)
+- `l`：有符号、主机字节序、`4`字节(小写L)
+- `L`：无符号、主机字节序、`4`字节(大写L)
+- `v`：无符号、小端字节序、`2`字节
+- `V`：无符号、小端字节序、`4`字节
 
 ```php
 <?php
@@ -75,7 +99,6 @@ $serv->on('Close', function ($serv, $fd) {
     echo "Client: Close.\n";
 });
 $serv->start();
-}
 ```
 
 ```php
@@ -86,8 +109,7 @@ if (!$client->connect('127.0.0.1', 9501)) {
 	exit("connect failed. Error: {$client->errCode}\n");
 }
 $msg = 'Hello World!';
-$data = sendMsg($msg);
-$client->send($data); // 正常发包
+$client->send(sendMsg($msg)); // 正常发包
 $client->send(sendMsg($msg.0).sendMsg($msg.1).sendMsg($msg.2));// 模拟粘包
 echo $client->recv();
 $client->close();
@@ -102,7 +124,7 @@ function sendMsg($msg) {
 
 试试去掉 `$serv->set()` 属性设置，看看有啥不同  :smile:
 
-## 参考
+## 附录：
 
 - php pack()方法：https://www.php.net/manual/zh/function.pack.php
 - swoole_server文档：https://wiki.swoole.com/wiki/page/287.html
