@@ -187,12 +187,12 @@
    <article class="post-entry">
   <header class="post-header">
     <h3 class="post-title"><a href="/post/swoole-tcp-pack/" class="post-link">通过swoole理解TCP粘包</a></h3>
-    <p class="post-meta">@opso · Nov 25, 2019 · 1 min read</p>
+    <p class="post-meta">@opso · Nov 25, 2019 · 2 min read</p>
   </header>
   
     <img class="post-cover" src="/images/swoole_logo.png" alt="通过swoole理解TCP粘包" lazyload="on">
   
-  <p class="post-summary">什么是粘包 TCP是字节流协议，数据传输像流水一样。数据发送者会有一个缓存池，可能会将多个数据包一次性发送出去，或是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并解析正确的包数据了，这就是常说的 粘包，下面结合swoole和自定义协议来详细说明。
+  <p class="post-summary">什么是粘包 TCP是字节流协议，数据传输像流水一样。数据发送者会存在一个发送缓冲区，每次可能会将多个数据包一次性发送出去，也可能是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并正确解析数据包了，这就是常说的 粘包，下面结合swoole_server和自定义协议来详细说明。
 </p>
   <footer class="post-footer">
     <a class="read-more" href="/post/swoole-tcp-pack/">Read More →</a>
