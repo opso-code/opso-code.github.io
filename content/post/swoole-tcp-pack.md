@@ -2,7 +2,7 @@
 title: "通过swoole理解TCP粘包"
 author: "opso"
 cover: "/images/swoole_logo.png"
-tags: ["swoole", "tcp"]
+tags: ["swoole", "tcp", "粘包"]
 date: 2019-11-25T15:14:09+08:00
 draft: false
 ---
@@ -43,33 +43,38 @@ draft: false
 
 使用`swoole_server` 我们能很轻易的实现一个TCP服务，使用者无需关注底层实现细节，就能达到使用 `TCP`/`UDP`/`UnixSocket` 搭建异步服务器的要求；在php中，一般使用 [`pack/unpack`](https://www.php.net/manual/zh/function.pack.php) 方法封包解包二进制数据，再通过swoole发送出去。
 
-在`swoole_server->set()` 方法中提供了一些自定义协议的 [属性设置]( https://wiki.swoole.com/wiki/page/287.html)，这些设置在底层已经帮你封装好了，只要简单的设置，swoole基本不用考虑粘包问题了，真好 :tada: 
+`swoole_server()->set()` 方法中提供了一些处理自定义协议的 [属性设置]( https://wiki.swoole.com/wiki/page/287.html)，通过这些设置，swoole基本不用考虑粘包问题了，真好 :tada: :tada: 
 
-根据我们上面自定义的协议：
+根据我们上面自定义的通讯协议：
 
-- 索引 `0` 到 `5` 用于协议头校验，
-- 索引 `6` 和 `7` 两位表示包体长度，
-- 设置 `package_length_type` 为 `n` ，表示无符号短整型大端序，
+- 包头为 `8` 个字节
+- 索引 `0` 到 `5` 用于协议头校验，固定为 `SWOOLE`
+- 索引 `6` 和 `7` 两位表示包体长度 `length`
+- 设置 `package_length_type` 为 `n` ，表示 `length` 类型为无符号短整型大端序
 - 设置 `package_length_offset` 为 `6`，表示从索引 `6` 开始是表示包体大小的开始索引
-- 设置 `package_body_offset` 为 `8`，表示以索引 `8` 为包体大小的结束索引，配合上面的`package_length_offset`，就能确定包体长度的数据在索引 `6` 到 `8` 之间，占 `2` 个字节
-- 截取`6`到`8`之间的数据，根据 `package_length_type` 里的类型，转换为短整型就是包体的长度
+- 设置 `package_body_offset` 为 `8`，表示以索引 `8` 为包体大小的结束索引，配合上面的`package_length_offset`，就能确定包体长度`length`的数据在索引 `6` 到 `8` 之间，占 `2` 个字节
+- 截取`6`到`8`之间的数据，根据 `package_length_type` 里的类型，转换为短整型就是包体的长度；（还有一种情况`length`表示整个包头加包体的长度，整个值可以不用设置）
 
 剩下的拆包分发，swoole都会帮你做好；这样，在 `onReceive` 回调中接收到的参数 `$data`，永远会是一个完整的协议包。
 
 ### package_length_type
 
+文档说明：https://wiki.swoole.com/wiki/page/463.html
+
 > 长度值的类型，接受一个字符参数，与php的 pack 函数一致。目前Swoole支持10种类型：
 
-- `c`：有符号、`1`字节
-- `C`：无符号、`1`字节
-- `s`：有符号、主机字节序、`2`字节
-- `S`：无符号、主机字节序、`2`字节
-- `n`：无符号、网络字节序、`2`字节 (常用)
-- `N`：无符号、网络字节序、`4`字节 (常用)
-- `l`：有符号、主机字节序、`4`字节(小写L)
-- `L`：无符号、主机字节序、`4`字节(大写L)
-- `v`：无符号、小端字节序、`2`字节
-- `V`：无符号、小端字节序、`4`字节
+- `c`：有符号、`1` 字节
+- `C`：无符号、`1` 字节
+- `s`：有符号、主机字节序、`2` 字节
+- `S`：无符号、主机字节序、`2` 字节
+- `n`：无符号、网络字节序、`2` 字节(常用)
+- `N`：无符号、网络字节序、`4` 字节(常用)
+- `l`：有符号、主机字节序、`4` 字节(小写L)
+- `L`：无符号、主机字节序、`4` 字节(大写L)
+- `v`：无符号、小端字节序、`2` 字节
+- `V`：无符号、小端字节序、`4` 字节
+
+## 三、示例
 
 ```php
 <?php
@@ -113,7 +118,6 @@ $client->send(sendMsg($msg)); // 正常发包
 $client->send(sendMsg($msg.0).sendMsg($msg.1).sendMsg($msg.2));// 模拟粘包
 echo $client->recv();
 $client->close();
-
 function sendMsg($msg) {
 	$p = 'SWOOLE';
 	$p .= pack('n', strlen($msg));
@@ -122,7 +126,7 @@ function sendMsg($msg) {
 }
 ```
 
-试试去掉 `$serv->set()` 属性设置，看看有啥不同  :smile:
+通过累计多个包再发送模拟缓存池逻辑，一次性发出去，在不设置 `$serv->set()` 方法的情况下，server无法正确的把各个包拆开，识别的只有第一个包，设置了后就都能识别了  :smile:
 
 ## 附录：
 
