@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/mariadb-install/">
@@ -198,15 +198,11 @@
     </header>
     <article class="post-content"><p><strong>MariaDB</strong> 数据库管理系统是 <strong>MySQL</strong> 的一个分支，主要由开源社区在维护，采用GPL授权许可。开发这个分支的原因之一是：Oracle公司收购了MySQL后，有将MySQL闭源的潜在风险，因此社区采用分支的方式来避开这个风险。
 —— <a href="https://zh.wikipedia.org/wiki/MariaDB">维基百科</a></p>
-
 <h3 id="下载">下载</h3>
-
-<p><img src="https://mariadb.org/wp-content/uploads/2015/05/MariaDB-Foundation-horizontal-x52.png" alt="mariadb" />
+<p><img src="https://mariadb.org/wp-content/uploads/2015/05/MariaDB-Foundation-horizontal-x52.png" alt="mariadb">
 <a href="https://downloads.mariadb.org/">MariaDB官网</a>
 <a href="http://mirrors.opencas.cn/mariadb//mariadb-10.1.13/source/mariadb-10.1.13.tar.gz">mariadb-10.1.13.tar.gz</a></p>
-
 <h3 id="编译环境">编译环境</h3>
-
 <p>从 <code>MySQL 5.5</code>之后，源码编译安装都需要用到<code>cmake</code>，<code>cmake</code>特性是独立于源码编译，编译工作可以在另外一个目录中而非源码目录中进行。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
 sudo apt-get upgrade -y
@@ -222,9 +218,8 @@ sudo apt-get install -y <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>unzip <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>libxml2-dev <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>libboost-dev <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>libjudy-dev </code></pre></div>
-<h3 id="开始编译">开始编译</h3>
-
+</span><span style="color:#ae81ff"></span>libjudy-dev 
+</code></pre></div><h3 id="开始编译">开始编译</h3>
 <p>下载好<code>mariadb-10.1.13.tar.gz</code>后解压，开始编译。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ cd mariadb-10.1.13
 $ cmake <span style="color:#ae81ff">\
@@ -249,8 +244,8 @@ $ cmake <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>-DMYSQL_MAINTAINER_MODE<span style="color:#f92672">=</span><span style="color:#ae81ff">0</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>-DWITH_SSL:STRING<span style="color:#f92672">=</span>bundled <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>-DWITH_ZLIB:STRING<span style="color:#f92672">=</span>bundled <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>-DWITHOUT_MROONGA_STORAGE_ENGINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span></code></pre></div>
-<p><code>cmake</code>是个漫长的等待。。大概有十几分钟。中间有次报错，编译到<code>mroonga</code>引擎默认配置的时候进程被kill了，于是加了上面配置的最后一行，关闭了mroonga引擎，之后编译顺利，也不排除是内存不足的原因 : )</p>
+</span><span style="color:#ae81ff"></span>-DWITHOUT_MROONGA_STORAGE_ENGINE<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>
+</code></pre></div><p><code>cmake</code>是个漫长的等待。。大概有十几分钟。中间有次报错，编译到<code>mroonga</code>引擎默认配置的时候进程被kill了，于是加了上面配置的最后一行，关闭了mroonga引擎，之后编译顺利，也不排除是内存不足的原因 : )</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ make
 $ sudo make install
 support-files/mysql.server to the right place <span style="color:#66d9ef">for</span> your system
@@ -270,40 +265,40 @@ cd <span style="color:#e6db74">&#39;/usr/local/mysql&#39;</span> ; /usr/local/my
 You can test the MariaDB daemon with mysql-test-run.pl
 cd <span style="color:#e6db74">&#39;/usr/local/mysql/mysql-test&#39;</span> ; perl mysql-test-run.pl
 
-Please report any problems at http://mariadb.org/jira</code></pre></div>
-<h3 id="添加mysql环境变量">添加mysql环境变量</h3>
+Please report any problems at http://mariadb.org/jira
+</code></pre></div><h3 id="添加mysql环境变量">添加mysql环境变量</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e"># echo -e &#39;\n\nexport PATH=$PATH:/usr/local/mysql/bin\n&#39; &gt;&gt; /etc/profile &amp;&amp; source /etc/profile</span>
-echo -e <span style="color:#e6db74">&#39;\n\nexport PATH=$PATH:/usr/local/mysql/bin\n&#39;</span> &gt;&gt; ~/.bashrc <span style="color:#f92672">&amp;&amp;</span> source ~/.bashrc</code></pre></div>
-<h3 id="修改权限">修改权限</h3>
+echo -e <span style="color:#e6db74">&#39;\n\nexport PATH=$PATH:/usr/local/mysql/bin\n&#39;</span> &gt;&gt; ~/.bashrc <span style="color:#f92672">&amp;&amp;</span> source ~/.bashrc
+</code></pre></div><h3 id="修改权限">修改权限</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo groupadd mysql
 sudo useradd -g mysql mysql
 sudo mkdir -p /data/mysql
 sudo mkdir /var/run/mysqld
 sudo mkdir /etc/mysql
 sudo chown -R mysql:mysql /data/mysql/
-sudo chown -R mysql:mysql /var/run/mysqld/</code></pre></div>
-<h3 id="添加配置文件">添加配置文件</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp support-files/my-small.cnf /etc/mysql/my.conf</code></pre></div>
-<h3 id="修改配置文件">修改配置文件</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-cnf" data-lang="cnf">[client]
+sudo chown -R mysql:mysql /var/run/mysqld/
+</code></pre></div><h3 id="添加配置文件">添加配置文件</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp support-files/my-small.cnf /etc/mysql/my.conf
+</code></pre></div><h3 id="修改配置文件">修改配置文件</h3>
+<pre><code class="language-cnf" data-lang="cnf">[client]
 default-character-set = utf8
 
 [mysqld]
 datadir = /data/mysql
-character-set-server = utf8</code></pre></div>
-<h3 id="初始化数据库">初始化数据库</h3>
+character-set-server = utf8
+</code></pre><h3 id="初始化数据库">初始化数据库</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">cd /usr/local/mysql
-scripts/mysql_install_db --basedir<span style="color:#f92672">=</span>/usr/local/mysql --datadir<span style="color:#f92672">=</span>/data/mysql --user<span style="color:#f92672">=</span>mysql</code></pre></div>
-<h3 id="开机启动">开机启动</h3>
+scripts/mysql_install_db --basedir<span style="color:#f92672">=</span>/usr/local/mysql --datadir<span style="color:#f92672">=</span>/data/mysql --user<span style="color:#f92672">=</span>mysql
+</code></pre></div><h3 id="开机启动">开机启动</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp support-files/mysql.server /etc/init.d/mysql
 sudo sysv-rc-conf mysql on
-sudo service mysql start</code></pre></div>
-<h3 id="修改root密码">修改root密码</h3>
+sudo service mysql start
+</code></pre></div><h3 id="修改root密码">修改root密码</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">mysqladmin -uroot password <span style="color:#e6db74">&#39;123456&#39;</span>
 <span style="color:#75715e">#或</span>
 mysql -uroot  
-mysql&gt; SET PASSWORD <span style="color:#f92672">=</span> PASSWORD<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;123456&#39;</span><span style="color:#f92672">)</span>;</code></pre></div>
-<p>安装完成 : )</p></article>
+mysql&gt; SET PASSWORD <span style="color:#f92672">=</span> PASSWORD<span style="color:#f92672">(</span><span style="color:#e6db74">&#39;123456&#39;</span><span style="color:#f92672">)</span>;
+</code></pre></div><p>安装完成 : )</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -315,7 +310,7 @@ mysql&gt; SET PASSWORD <span style="color:#f92672">=</span> PASSWORD<span style=
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1353</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1589</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -357,7 +352,7 @@ mysql&gt; SET PASSWORD <span style="color:#f92672">=</span> PASSWORD<span style=
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -416,7 +411,7 @@ mysql&gt; SET PASSWORD <span style="color:#f92672">=</span> PASSWORD<span style=
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

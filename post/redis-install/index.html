@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/redis-install/">
@@ -197,23 +197,21 @@
       <p class="post-meta">@opso · Apr 7, 2016 · 2 min read</p>
     </header>
     <article class="post-content"><p><strong>Redis</strong> 是一个开源的C语言编写的<code>key-value</code>类型的<code>NoSQL</code>数据库。由于redis数据库存储在内存中，所以执行速度非常快，同样还有数据持久化，可以将数据备份移动到其他从服务器。Redis的消息队列（原生支持发布/订阅）,能稳定快速的处理高并发下的秒杀或者抢红包之类的需求，在游戏中的排行榜功能也是简单快速了许多。</p>
-
 <h2 id="下载">下载</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ wget http://download.redis.io/releases/redis-3.0.7.tar.gz
 $ cd redis-3.0.7
 $ make
 $ cd src <span style="color:#f92672">&amp;&amp;</span> make test
-make<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>: Entering directory <span style="color:#e6db74">&#39;/home/vagrant/src/redis-3.0.7/src&#39;</span>
-You need tcl <span style="color:#ae81ff">8</span>.5 or newer in order to run the Redis test
-make<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>: *** <span style="color:#f92672">[</span>test<span style="color:#f92672">]</span> Error <span style="color:#ae81ff">1</span>
-make<span style="color:#f92672">[</span><span style="color:#ae81ff">1</span><span style="color:#f92672">]</span>: Leaving directory <span style="color:#e6db74">&#39;/home/vagrant/src/redis-3.0.7/src&#39;</span>
-make: *** <span style="color:#f92672">[</span>test<span style="color:#f92672">]</span> Error <span style="color:#ae81ff">2</span></code></pre></div>
-<p>官方建议在make之后执行<code>make test</code>，不过需要安装<code>tcl</code>，后来才知道也可以不装。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install tcl</code></pre></div>
-<h2 id="安装">安装</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo make PREFIX<span style="color:#f92672">=</span>/usr/local/redis install</code></pre></div>
-<p>安装完后，在<code>/usr/local/redis/bin</code>下生成了</p>
-
+make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Entering directory <span style="color:#e6db74">&#39;/home/vagrant/src/redis-3.0.7/src&#39;</span>
+You need tcl 8.5 or newer in order to run the Redis test
+make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: *** <span style="color:#f92672">[</span>test<span style="color:#f92672">]</span> Error <span style="color:#ae81ff">1</span>
+make<span style="color:#f92672">[</span>1<span style="color:#f92672">]</span>: Leaving directory <span style="color:#e6db74">&#39;/home/vagrant/src/redis-3.0.7/src&#39;</span>
+make: *** <span style="color:#f92672">[</span>test<span style="color:#f92672">]</span> Error <span style="color:#ae81ff">2</span>
+</code></pre></div><p>官方建议在make之后执行<code>make test</code>，不过需要安装<code>tcl</code>，后来才知道也可以不装。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo apt-get install tcl
+</code></pre></div><h2 id="安装">安装</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo make PREFIX<span style="color:#f92672">=</span>/usr/local/redis install
+</code></pre></div><p>安装完后，在<code>/usr/local/redis/bin</code>下生成了</p>
 <ul>
 <li>redis-benchmark</li>
 <li>redis-check-dump</li>
@@ -222,11 +220,10 @@ make: *** <span style="color:#f92672">[</span>test<span style="color:#f92672">]<
 <li>redis-cli</li>
 <li>redis-server</li>
 </ul>
-
 <p>几个文件，整个安装目录也很小。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo cp redis.conf /usr/local/redis/6379.conf
-$ sudo cp utils/redis_init_script /etc/init.d/redis</code></pre></div>
-<p><code>redis_init_script</code>是redis自带的启动脚本，我们可以用sysv-rc-conf命令把redis加入到自启动中，也可以快速启动/停止，修改成我们需要的，启动默认配置文件是<code>/usr/local/redis/端口号.conf</code>，pid文件路径为<code>var/run/redis_端口号.pid</code>。</p>
+$ sudo cp utils/redis_init_script /etc/init.d/redis
+</code></pre></div><p><code>redis_init_script</code>是redis自带的启动脚本，我们可以用sysv-rc-conf命令把redis加入到自启动中，也可以快速启动/停止，修改成我们需要的，启动默认配置文件是<code>/usr/local/redis/端口号.conf</code>，pid文件路径为<code>var/run/redis_端口号.pid</code>。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e">#!/bin/sh
 </span><span style="color:#75715e"></span>REDISPORT<span style="color:#f92672">=</span><span style="color:#ae81ff">6379</span>
 EXEC<span style="color:#f92672">=</span>/usr/local/redis/bin/redis-server
@@ -263,29 +260,28 @@ CONF<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/usr/lo
     *<span style="color:#f92672">)</span>
         echo <span style="color:#e6db74">&#34;Please use start or stop as first argument&#34;</span>
         ;;
-<span style="color:#66d9ef">esac</span></code></pre></div>
-<h2 id="配置">配置</h2>
+<span style="color:#66d9ef">esac</span>
+</code></pre></div><h2 id="配置">配置</h2>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo mkdir -p /data/redis/logs
-$ sudo mkdir -p /data/redis/data</code></pre></div>
-<p>修改<code>6379.conf</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-conf" data-lang="conf">logfile &#34;/data/redis/logs/redis_6379.log&#34;
+$ sudo mkdir -p /data/redis/data
+</code></pre></div><p>修改<code>6379.conf</code></p>
+<pre><code class="language-conf" data-lang="conf">logfile &quot;/data/redis/logs/redis_6379.log&quot;
 dir ./data/redis/data
 appendonly no
-requirepass password</code></pre></div>
-<h2 id="phpredis扩展安装">phpredis扩展安装</h2>
-
+requirepass password
+</code></pre><h2 id="phpredis扩展安装">phpredis扩展安装</h2>
 <p><strong>phpredis</strong> 是官方推荐的连接redis的扩展，不过正式版本不支持php7，在开发者的github上php7分支已经支持了php7。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git clone https://github.com/phpredis/phpredis -b php7
 $ cd phpredis
 $ phpize
 $ ./configure
-$ make <span style="color:#f92672">&amp;&amp;</span> sudo make install</code></pre></div>
-<p><code>php.ini</code>加上</p>
+$ make <span style="color:#f92672">&amp;&amp;</span> sudo make install
+</code></pre></div><p><code>php.ini</code>加上</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#66d9ef">[redis]</span>
-<span style="color:#a6e22e">extension</span><span style="color:#f92672">=</span><span style="color:#e6db74">redis.so</span></code></pre></div>
-<h2 id="启动">启动</h2>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo service redis start</code></pre></div>
-<p>随机插入100条数据，如果不存在则创建，存在则跳过</p>
+<span style="color:#a6e22e">extension</span><span style="color:#f92672">=</span><span style="color:#e6db74">redis.so</span>
+</code></pre></div><h2 id="启动">启动</h2>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo service redis start
+</code></pre></div><p>随机插入100条数据，如果不存在则创建，存在则跳过</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 $redis <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Redis</span>();
 $redis<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connect</span>(<span style="color:#e6db74">&#39;127.0.0.1&#39;</span>,<span style="color:#ae81ff">6379</span>);
@@ -293,9 +289,7 @@ $redis<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connec
     $key <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;test&#39;</span><span style="color:#f92672">.</span>$i;
     $redis<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">setnx</span>($key,<span style="color:#a6e22e">rand</span>(<span style="color:#ae81ff">1</span>,<span style="color:#ae81ff">1000</span>));
 }
-</code></pre></div>
-<p>Bingo!</p>
-
+</code></pre></div><p>Bingo!</p>
 <p>另外推荐window下一款redis可视化管理工具：<a href="http://redisdesktop.com/download">Redis Desktop Manager</a></p></article>
     <footer class="post-footer">
       
@@ -308,7 +302,7 @@ $redis<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connec
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1344</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1580</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -350,7 +344,7 @@ $redis<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connec
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -409,7 +403,7 @@ $redis<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">connec
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

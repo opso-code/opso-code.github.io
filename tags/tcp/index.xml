@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>tcp on opso&#39;s blog</title>
@@ -19,7 +19,6 @@
       
       <guid>/post/swoole-tcp-pack/</guid>
       <description>&lt;h2 id=&#34;什么是粘包&#34;&gt;什么是粘包&lt;/h2&gt;
-
 &lt;p&gt;&lt;strong&gt;TCP&lt;/strong&gt;是字节流协议，数据传输像流水一样。数据发送者会存在一个发送缓冲区，每次可能会将多个数据包一次性发送出去，也可能是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并正确解析数据包了，这就是常说的 &lt;strong&gt;粘包&lt;/strong&gt;，下面结合&lt;code&gt;swoole_server&lt;/code&gt;和自定义协议来详细说明。&lt;/p&gt;</description>
     </item>
     

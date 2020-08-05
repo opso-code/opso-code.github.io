@@ -56,7 +56,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/linux-swap/">
@@ -203,13 +203,10 @@
       <p class="post-meta">@opso · May 25, 2016 · 1 min read</p>
     </header>
     <article class="post-content"><p>在编译程序经常会出现</p>
-
 <blockquote>
 <p>virtual memory exhausted: Cannot allocate memory</p>
 </blockquote>
-
 <p>的异常，表示虚拟内存不足，通常是没有这是swap缓存或者缓存过小，在编译安装的时候经常会遇到这样的报错，需要设置swap虚拟内存。</p>
-
 <p>我是在虚拟机中安装的<code>ubuntu 14.04</code> ，可以用<code>free -m</code>命令查看是否有设置swap缓存。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ free -m
              total       used       free     shared    buffers     cached
@@ -218,23 +215,24 @@ Mem:           <span style="color:#ae81ff">993</span>        <span style="color:
 Swap:            <span style="color:#ae81ff">0</span>          <span style="color:#ae81ff">0</span>          <span style="color:#ae81ff">0</span>
 $ sudo mkdir /opt/images
 $ sudo dd <span style="color:#66d9ef">if</span><span style="color:#f92672">=</span>/dev/zero of<span style="color:#f92672">=</span>/opt/images/swap bs<span style="color:#f92672">=</span><span style="color:#ae81ff">1024</span> count<span style="color:#f92672">=</span><span style="color:#ae81ff">2048000</span>
-<span style="color:#ae81ff">2048000</span>+0 records in
-<span style="color:#ae81ff">2048000</span>+0 records out
-<span style="color:#ae81ff">2097152000</span> bytes <span style="color:#f92672">(</span><span style="color:#ae81ff">2</span>.1 GB<span style="color:#f92672">)</span> copied, <span style="color:#ae81ff">4</span>.69898 s, <span style="color:#ae81ff">446</span> MB/s
+2048000+0 records in
+2048000+0 records out
+<span style="color:#ae81ff">2097152000</span> bytes <span style="color:#f92672">(</span>2.1 GB<span style="color:#f92672">)</span> copied, 4.69898 s, <span style="color:#ae81ff">446</span> MB/s
 $ mkswap /opt/images/swap
 /opt/images/swap: Permission denied
 $ sudo mkswap /opt/images/swap
-Setting up swapspace version <span style="color:#ae81ff">1</span>, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2047996</span> KiB
+Setting up swapspace version 1, size <span style="color:#f92672">=</span> <span style="color:#ae81ff">2047996</span> KiB
 no label, UUID<span style="color:#f92672">=</span>a8a831fb-a691-485f-aec0-cf94163a35e4
 $ sudo swapon /opt/images/swap
 $ free -m
              total       used       free     shared    buffers     cached
 Mem:           <span style="color:#ae81ff">993</span>        <span style="color:#ae81ff">928</span>         <span style="color:#ae81ff">64</span>          <span style="color:#ae81ff">0</span>          <span style="color:#ae81ff">0</span>        <span style="color:#ae81ff">771</span>
 -/+ buffers/cache:        <span style="color:#ae81ff">156</span>        <span style="color:#ae81ff">836</span>
-Swap:         <span style="color:#ae81ff">1999</span>          <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">1999</span></code></pre></div>
-<p>之后编译正常，如果嫌swap占用空间的话，编译完成后也可以关掉或者删除。</p>
+Swap:         <span style="color:#ae81ff">1999</span>          <span style="color:#ae81ff">0</span>       <span style="color:#ae81ff">1999</span>
+</code></pre></div><p>之后编译正常，如果嫌swap占用空间的话，编译完成后也可以关掉或者删除。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo swapoff swap  
-$ sudo rm -f /opt/images/swap </code></pre></div></article>
+$ sudo rm -f /opt/images/swap 
+</code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -246,7 +244,7 @@ $ sudo rm -f /opt/images/swap </code></pre></div></article>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1297</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1533</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -288,7 +286,7 @@ $ sudo rm -f /opt/images/swap </code></pre></div></article>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -347,7 +345,7 @@ $ sudo rm -f /opt/images/swap </code></pre></div></article>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>opso&#39;s blog</title>
@@ -19,7 +19,6 @@
       
       <guid>/post/swoole-tcp-pack/</guid>
       <description>&lt;h2 id=&#34;什么是粘包&#34;&gt;什么是粘包&lt;/h2&gt;
-
 &lt;p&gt;&lt;strong&gt;TCP&lt;/strong&gt;是字节流协议，数据传输像流水一样。数据发送者会存在一个发送缓冲区，每次可能会将多个数据包一次性发送出去，也可能是一个数据包拆分多次发出去；如果协议没有约定好分隔符或者不明确数据包大小边界，接收者就无法获取并正确解析数据包了，这就是常说的 &lt;strong&gt;粘包&lt;/strong&gt;，下面结合&lt;code&gt;swoole_server&lt;/code&gt;和自定义协议来详细说明。&lt;/p&gt;</description>
     </item>
     
@@ -30,15 +29,7 @@
       
       <guid>/post/hugo-auto-deploy/</guid>
       <description>&lt;h2 id=&#34;什么是hugo&#34;&gt;什么是Hugo&lt;/h2&gt;
-
-&lt;p&gt;&lt;svg xmlns=&#34;http://www.w3.org/2000/svg&#34; fill-rule=&#34;evenodd&#34; stroke-width=&#34;25&#34; aria-label=&#34;Logo&#34; viewBox=&#34;0 0 1493 391&#34; width=&#34;470px&#34;&gt;
-  &lt;path fill=&#34;#ebb951&#34; stroke=&#34;#fcd804&#34; d=&#34;M1345.211 24.704l112.262 64.305a43 43 0 0 1 21.627 37.312v142.237a40 40 0 0 1-20.702 35.037l-120.886 66.584a42 42 0 0 1-41.216-.389l-106.242-61.155a57 57 0 0 1-28.564-49.4V138.71a64 64 0 0 1 31.172-54.939l98.01-58.564a54 54 0 0 1 54.54-.503z&#34;/&gt;
-  &lt;path fill=&#34;#33ba91&#34; stroke=&#34;#00a88a&#34; d=&#34;M958.07 22.82l117.31 66.78a41 41 0 0 1 20.72 35.64v139.5a45 45 0 0 1-23.1 39.32L955.68 369.4a44 44 0 0 1-43.54-.41l-105.82-61.6a56 56 0 0 1-27.83-48.4V140.07a68 68 0 0 1 33.23-58.44l98.06-58.35a48 48 0 0 1 48.3-.46z&#34;/&gt;
-  &lt;path fill=&#34;#0594cb&#34; stroke=&#34;#0083c0&#34; d=&#34;M575.26 20.97l117.23 68.9a40 40 0 0 1 19.73 34.27l.73 138.67a48 48 0 0 1-24.64 42.2l-115.13 64.11a45 45 0 0 1-44.53-.42l-105.83-61.6a55 55 0 0 1-27.33-47.53V136.52a63 63 0 0 1 29.87-53.59l99.3-61.4a49 49 0 0 1 50.6-.56z&#34;/&gt;
-  &lt;path fill=&#34;#ff4088&#34; stroke=&#34;#c9177e&#34; d=&#34;M195.81 24.13l114.41 66.54a44 44 0 0 1 21.88 38.04v136.43a48 48 0 0 1-24.45 41.82L194.1 370.9a49 49 0 0 1-48.48-.23L41.05 310.48a53 53 0 0 1-26.56-45.93V135.08a55 55 0 0 1 26.1-46.8l102.8-63.46a51 51 0 0 1 52.42-.69z&#34;/&gt;
-  &lt;path fill=&#34;#fff&#34; d=&#34;M1320.72 89.15c58.79 0 106.52 47.73 106.52 106.51 0 58.8-47.73 106.52-106.52 106.52-58.78 0-106.52-47.73-106.52-106.52 0-58.78 47.74-106.51 106.52-106.51zm0 39.57c36.95 0 66.94 30 66.94 66.94a66.97 66.97 0 0 1-66.94 66.94c-36.95 0-66.94-29.99-66.94-66.94a66.97 66.97 0 0 1 66.93-66.94h.01zm-283.8 65.31c0 47.18-8.94 60.93-26.81 80.58-17.87 19.65-41.57 27.57-71.1 27.57-27 0-48.75-9.58-67.61-26.23-20.88-18.45-36.08-47.04-36.08-78.95 0-31.37 11.72-58.48 32.49-78.67 18.22-17.67 45.34-29.18 73.3-29.18 33.77 0 68.83 15.98 90.44 47.53l-31.73 26.82c-13.45-25.03-32.94-33.46-60.82-34.26-30.83-.88-64.77 28.53-62.25 67.75 1.4 21.94 11.65 59.65 60.96 66.57 25.9 3.63 55.36-24.02 55.36-39.04H944.4v-37.5h92.5V194l.02.03zm-562.6-94.65h42.29v112.17c0 17.8.49 29.33 1.47 34.61 1.69 8.48 4.81 14.37 11.17 19.5 6.37 5.13 13.8 6.59 24.84 6.59 11.2 0 14.96-1.74 20.66-6.6 5.69-4.85 9.12-9.46 10.28-16.53 1.15-7.07 3.07-18.8 3.07-35.18V99.38h42.28v108.78c0 24.86-1.07 42.43-3.21 52.69-2.14 10.27-6.08 18.93-11.82 26-5.74 7.06-13.42 12.69-23.03 16.88-9.62 4.19-22.16 6.28-37.65 6.28-18.7 0-32.87-2.28-42.52-6.85-9.66-4.57-17.3-10.5-22.9-17.8-5.61-7.3-9.3-14.95-11.08-22.96-2.58-11.86-3.88-29.38-3.88-52.55V99.38h.03zM93.91 299.92V92.7h43.35v75.48h71.92V92.7h43.48v207.22h-43.48v-90.61h-71.92v90.61z&#34;/&gt;
-&lt;/svg&gt;&lt;/p&gt;
-
+&lt;!-- raw HTML omitted --&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Hugo&lt;/strong&gt; 是由Go语言实现的静态网站生成器。简单、易用、高效、易扩展、快速部署。&lt;/p&gt;
 &lt;/blockquote&gt;</description>
@@ -69,9 +60,7 @@
       
       <guid>/post/swoole-process/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Swoole&lt;/strong&gt; —— 重新定义PHP&lt;/p&gt;
-
 &lt;p&gt;作为一个使用C语言底层实现的PHP扩展，弥补了PHP在多线程、常驻内存相关领域的短处，为广大phper打开了眼界。&lt;/p&gt;
-
 &lt;p&gt;&lt;code&gt;swoole&lt;/code&gt; 的进程之间有两种通信方式，一种是&lt;code&gt;消息队列(queue)&lt;/code&gt;，另一种是&lt;code&gt;管道(pipe)&lt;/code&gt;，对&lt;code&gt;swoole_process&lt;/code&gt; 的研究在swoole中显得尤为重要。&lt;/p&gt;</description>
     </item>
     
@@ -82,7 +71,6 @@
       
       <guid>/post/linux-daemon/</guid>
       <description>&lt;p&gt;在开发过程中，我们一般都是使用 &lt;code&gt;ssh&lt;/code&gt; 登录linux，在命令行下直接使用 &lt;code&gt;php-cli&lt;/code&gt; 模式运行 &lt;code&gt;swoole&lt;/code&gt;，一旦退出&lt;code&gt;ssh&lt;/code&gt; 或者使用 &lt;code&gt;ctrl&lt;/code&gt;+&lt;code&gt;c&lt;/code&gt;，终端会收到 &lt;strong&gt;HUP&lt;/strong&gt;（hangup）信号从而关闭其所有子进程 ,&lt;code&gt;swoole&lt;/code&gt; 进程会自动关闭。&lt;/p&gt;
-
 &lt;p&gt;那有问题来了，没有靠谱的、可以让脚本在后台长期运行呢，答案是有的 :)&lt;/p&gt;</description>
     </item>
     
@@ -122,7 +110,6 @@
       
       <guid>/post/mongodb-note/</guid>
       <description>&lt;p&gt;MongoDB  是一个基于分布式文件存储的数据库。由C++语言编写。旨在为WEB应用提供可扩展的高性能数据存储解决方案。&lt;/p&gt;
-
 &lt;p&gt;在接触了 &lt;code&gt;Redis&lt;/code&gt;、&lt;code&gt;Memcache&lt;/code&gt;、&lt;code&gt;MySQL&lt;/code&gt;这些数据库之后，由于工作需要，最近在学习另外一个常见的 &lt;strong&gt;NoSQL数据库&lt;/strong&gt; ： &lt;code&gt;MongoDB&lt;/code&gt;，下面是整理的资料和笔记。&lt;/p&gt;</description>
     </item>
     
@@ -160,7 +147,6 @@
       
       <guid>/post/ubuntu-web-user/</guid>
       <description>&lt;p&gt;&lt;strong&gt;Composer&lt;/strong&gt; 作为php的包管理工具，今天在运行&lt;code&gt;composer&lt;/code&gt;命令的时候，遇到了 &lt;code&gt;Do not run Composer as root/super user!&lt;/code&gt; 权限提示问题，才知道是不能在root用户下运行的。&lt;/p&gt;
-
 &lt;p&gt;为了统一&lt;code&gt;php-fpm&lt;/code&gt;、&lt;code&gt;nginx&lt;/code&gt;、&lt;code&gt;web&lt;/code&gt;目录三者权限，今天有空查了一些资料，实际操作了一遍。&lt;/p&gt;</description>
     </item>
     
@@ -171,7 +157,6 @@
       
       <guid>/post/bash_on_window/</guid>
       <description>&lt;p&gt;微软已经在北京时间8月3日开始推送Win10一周年更新正式版，版本号为1607，增加了许多新的特性，包括Edge浏览器扩展和Linux子系统（ubuntu）。今天心血来潮，体验下一周年新特性 —— Bash on Ubuntu on Windows。&lt;/p&gt;
-
 &lt;p&gt;这是一项能让Ubuntu作为Windows子系统运行的黑科技，这个东西表面上看就像个模拟器，类似cygwin，也可能有人会想到虚拟机(之前用过vagrant，也不错)，但是它实际上要更直接，它是在用 Windows 内核实现了对 Linux 系统调用的兼容支持，性能接近原生，看来微软对于Docker能在Windows上运行努力地铺路啊。。&lt;/p&gt;</description>
     </item>
     
@@ -200,11 +185,9 @@
       
       <guid>/post/linux-swap/</guid>
       <description>&lt;p&gt;在编译程序经常会出现&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;virtual memory exhausted: Cannot allocate memory&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;的异常，表示虚拟内存不足，通常是没有这是swap缓存或者缓存过小，在编译安装的时候经常会遇到这样的报错，需要设置swap虚拟内存。&lt;/p&gt;</description>
     </item>
     
@@ -224,7 +207,6 @@
       
       <guid>/post/php-design-pattern/</guid>
       <description>&lt;p&gt;设计模式 &lt;strong&gt;Design Pattern&lt;/strong&gt; ，让我们发现编程之美。&lt;/p&gt;
-
 &lt;p&gt;所谓PHP常用的设计模式，在了解完这些设计模式之后会发现，啊，原来这个就是xxx模式啊！其实平常接触的框架代码里都能看它们的影子，但是只是知道设计模式还不够，需要在写代码的时候就能想到，并熟练实现和使用。这也是一种进阶。&lt;/p&gt;</description>
     </item>
     
@@ -273,7 +255,6 @@
       
       <guid>/post/cheerio-shadowsocks/</guid>
       <description>&lt;h3 id=&#34;cheerio&#34;&gt;cheerio&lt;/h3&gt;
-
 &lt;p&gt;&lt;strong&gt;cheerio&lt;/strong&gt; 是一个为服务器特别定制的，快速、灵活、封装jQuery核心功能工具包。Cheerio包括了 jQuery核心的子集，从jQuery库中去除了所有DOM不一致性和浏览器不兼容的部分，揭示了它真正优雅的API。Cheerio工作在一个非常简单，一致的DOM模型之上，解析、操作、渲染都变得难以置信的高效。基础的端到端的基准测试显示Cheerio大约比JSDOM快八倍(8x)。Cheerio封装了@FB55兼容的htmlparser，几乎能够解析任何的 HTML 和 XML document。&lt;/p&gt;</description>
     </item>
     
@@ -349,7 +330,6 @@
       
       <guid>/post/docker-note/</guid>
       <description>&lt;p&gt;&lt;em&gt;环境：Ubuntu14.04&lt;/em&gt;&lt;/p&gt;
-
 &lt;p&gt;&lt;strong&gt;Docker&lt;/strong&gt; 是一个开源的应用容器引擎，让开发者可以打包他们的应用以及依赖包到一个可移植的容器中，然后发布到任何流行的 &lt;code&gt;Linux&lt;/code&gt; 机器上，也可以实现虚拟化。容器是完全使用沙箱机制，相互之间不会有任何接口(类似 iPhone 的 app)。几乎没有性能开销,可以很容易地在机器和数据中心中运行。最重要的是,他们不依赖于任何语言、框架包括系统。&lt;/p&gt;</description>
     </item>
     

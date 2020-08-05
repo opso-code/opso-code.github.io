@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/cheerio-shadowsocks/">
@@ -197,23 +197,18 @@
       <p class="post-meta">@opso · Mar 24, 2016 · 2 min read</p>
     </header>
     <article class="post-content"><h3 id="cheerio">cheerio</h3>
-
 <p><strong>cheerio</strong> 是一个为服务器特别定制的，快速、灵活、封装jQuery核心功能工具包。Cheerio包括了 jQuery核心的子集，从jQuery库中去除了所有DOM不一致性和浏览器不兼容的部分，揭示了它真正优雅的API。Cheerio工作在一个非常简单，一致的DOM模型之上，解析、操作、渲染都变得难以置信的高效。基础的端到端的基准测试显示Cheerio大约比JSDOM快八倍(8x)。Cheerio封装了@FB55兼容的htmlparser，几乎能够解析任何的 HTML 和 XML document。</p>
-
 <h3 id="shadowsocks">shadowsocks</h3>
-
 <p><strong>shadowsocks</strong> 一个轻量级科学上网利器，中文名为“影梭”，是使用Python等语言开发的、基于Apache许可证开源的代理软件。Shadowsocks使用socks5代理，用于保护网络流量。在中国大陆被广泛用于突破防火长城（GFW），以浏览被封锁的内容。目前开发者已宣布停止维护。但仍有更新陆续推送。</p>
-
-<p>当然我个人使用一般也之是用用Google，看看Youtube，了解下墙外的世界。
-* windows客户端下载：<a href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/3.0/Shadowsocks-3.0.zip">shadowsocks-windows</a>
-* 服务商 <a href="http://www.ishadowsocks.net/">ishadowsocks</a>，首页也会有免费的账号，每6小时更新一次，我要做的就是抓取页面里的账号信息，修改shadowsocks的json配置文件。</p>
-
+<p>当然我个人使用一般也之是用用Google，看看Youtube，了解下墙外的世界。</p>
+<ul>
+<li>windows客户端下载：<a href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/3.0/Shadowsocks-3.0.zip">shadowsocks-windows</a></li>
+<li>服务商 <a href="http://www.ishadowsocks.net/">ishadowsocks</a>，首页也会有免费的账号，每6小时更新一次，我要做的就是抓取页面里的账号信息，修改shadowsocks的json配置文件。</li>
+</ul>
 <p>项目源码：<a href="https://git.coding.net/opso/mysock.git">https://git.coding.net/opso/mysock.git</a></p>
-
 <h3 id="cheerioo模块安装">cheerioo模块安装</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install cheerio</code></pre></div>
-<h3 id="使用http模块">使用http模块</h3>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install cheerio
+</code></pre></div><h3 id="使用http模块">使用http模块</h3>
 <p>使用node内置模块http请求页面信息
 <code>html-curl.js</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">http</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;http&#34;</span>);
@@ -233,9 +228,7 @@
 }
 
 <span style="color:#a6e22e">exports</span>.<span style="color:#a6e22e">download</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">download</span>;
-</code></pre></div>
-<h3 id="页面抓取">页面抓取</h3>
-
+</code></pre></div><h3 id="页面抓取">页面抓取</h3>
 <p>加载cheerio抓取账号保存到文件
 <code>index.js</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js"><span style="color:#66d9ef">var</span> <span style="color:#a6e22e">cheerio</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">require</span>(<span style="color:#e6db74">&#34;cheerio&#34;</span>);
@@ -323,8 +316,7 @@
       <span style="color:#a6e22e">console</span>.<span style="color:#a6e22e">log</span>(<span style="color:#e6db74">&#34;error&#34;</span>);
   } 
 });
-</code></pre></div>
-<p>操作Dom出乎意料的方便有没有！</p></article>
+</code></pre></div><p>操作Dom出乎意料的方便有没有！</p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -338,7 +330,7 @@
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1358</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1594</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -380,7 +372,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -439,7 +431,7 @@
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

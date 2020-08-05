@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/elasticsearch_note/">
@@ -197,13 +197,9 @@
       <p class="post-meta">@opso · Aug 2, 2017 · 1 min read</p>
     </header>
     <article class="post-content"><p>ELK 其实并不是一款软件，而是一整套解决方案，是三个软件产品的首字母缩写，Elasticsearch，Logstash 和 Kibana。这三款软件都是开源软件，通常是配合使用，而且又先后归于 Elastic.co 公司名下，故被简称为 ELK 协议栈</p>
-
 <h2 id="elasticsearch">ElasticSearch</h2>
-
 <p>是一个基于Lucene的搜索服务器。它提供了一个分布式多用户能力的全文搜索引擎，基于RESTful web接口。</p>
-
 <p>主要特点：</p>
-
 <ul>
 <li>实时分析</li>
 <li>分布式实时文件存储，并将每一个字段都编入索引</li>
@@ -211,61 +207,44 @@
 <li>高可用性，易扩展，支持集群（Cluster）、分片和复制（Shards 和 Replicas）</li>
 <li>接口友好，支持 JSON</li>
 </ul>
-
 <h2 id="logstash">Logstash</h2>
-
 <p>Logstash 是一个具有实时渠道能力的数据收集引擎。使用 JRuby 语言编写。其作者是世界著名的运维工程师乔丹西塞 (JordanSissel)</p>
-
 <ul>
 <li>几乎可以访问任何数据</li>
 <li>可以和多种外部应用结合</li>
 <li>支持弹性扩展</li>
 </ul>
-
 <h2 id="kibana">Kibana</h2>
-
 <p>Kibana 是一款基于 Apache 开源协议，使用 JavaScript 语言编写，为 Elasticsearch 提供分析和可视化的 Web 平台。它可以在 Elasticsearch 的索引中查找，交互数据，并生成各种维度的表图</p>
-
 <h2 id="安装">安装</h2>
-
-<h3 id="1-安装jdk">1.安装JDK</h3>
-
+<h3 id="1安装jdk">1.安装JDK</h3>
 <p>安装依赖<code>java</code>环境，这里通过命令来装</p>
-
 <blockquote>
 <p>sudo apt install openjdk-8-jdk</p>
 </blockquote>
-
-<h3 id="2-安装elasticsearch">2.安装elasticsearch</h3>
-
+<h3 id="2安装elasticsearch">2.安装elasticsearch</h3>
 <p>可以在<a href="https://www.elastic.co/downloads/elasticsearch">官网下载</a>好对应系统的包，通过tar源码安装方式，你也可以下载deb文件使用<code>dpkg -i elasticsearch-xxx.deb</code>方式安装；目前最新为5.5版本，电脑内存要求最好1.5G以上。</p>
-
 <p>启动的方式也很简单</p>
-
 <pre><code>./elasticsearch/bin/elasticsearch
-</code></pre>
-
-<p>这里一直在提示<code>low disk watermark</code>，表示磁盘空间不太够 : )</p>
-
+</code></pre><p>这里一直在提示<code>low disk watermark</code>，表示磁盘空间不太够 : )</p>
 <blockquote>
 <p>[1]: max file descriptors [65535] for elasticsearch process is too low, increase to at least [65536]
 [2]: max virtual memory areas vm.max_map_count [65530] is too low, increase to at least [262144]</p>
 </blockquote>
-
 <p>修改内核参数<code>vm.max_map_count</code> 进程中内存映射区域的最大数量：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ sudo vim /etc/sysctl.conf
 vm.max_map_count <span style="color:#f92672">=</span> <span style="color:#ae81ff">262144</span>
 $ sudo sysctl -p
 $ sudo vim /etc/security/limits.conf
-elasticsearch  -  nofile  <span style="color:#ae81ff">65536</span></code></pre></div>
-<p>修改JVM启动内存大小</p>
+elasticsearch  -  nofile  <span style="color:#ae81ff">65536</span>
+</code></pre></div><p>修改JVM启动内存大小</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim config/jvm.options  
 -Xms2g  
 -Xmx2g  
 修改为  
 -Xms512m  
--Xmx512m</code></pre></div>
-<p>服务默认在<code>localhost:9200</code>启动，可使用浏览器或者<code>curl</code>命令请求：</p>
+-Xmx512m
+</code></pre></div><p>服务默认在<code>localhost:9200</code>启动，可使用浏览器或者<code>curl</code>命令请求：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ curl <span style="color:#e6db74">&#39;http://localhost:9200/?pretty&#39;</span>
 <span style="color:#f92672">{</span>
   <span style="color:#e6db74">&#34;name&#34;</span> : <span style="color:#e6db74">&#34;Mp3BR27&#34;</span>,
@@ -279,11 +258,11 @@ elasticsearch  -  nofile  <span style="color:#ae81ff">65536</span></code></pre><
     <span style="color:#e6db74">&#34;lucene_version&#34;</span> : <span style="color:#e6db74">&#34;6.6.0&#34;</span>
   <span style="color:#f92672">}</span>,
   <span style="color:#e6db74">&#34;tagline&#34;</span> : <span style="color:#e6db74">&#34;You Know, for Search&#34;</span>
-<span style="color:#f92672">}</span></code></pre></div>
-<p>由于是在虚拟机中安装，在主机中远程访问的时候，发现端口9200无法访问。
+<span style="color:#f92672">}</span>
+</code></pre></div><p>由于是在虚拟机中安装，在主机中远程访问的时候，发现端口9200无法访问。
 首先将elasticsearch和kibana配置文件中host改为0.0.0.0,然后开启防火墙端口或者直接关闭防火墙，这样就可以远程访问了。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim elasticsearch/config/elasticsearch.yml
-network.host: <span style="color:#ae81ff">0</span>.0.0.0
+network.host: 0.0.0.0
 $ vim kinaba/config/kibana.yml
 server.host: <span style="color:#e6db74">&#34;0.0.0.0&#34;</span>
 <span style="color:#75715e"># 查看防火墙端口情况</span>
@@ -291,20 +270,16 @@ sudo iptables -L -n
 <span style="color:#75715e"># 开启端口</span>
 sudo iptables -A INPUT -p tcp --dport <span style="color:#ae81ff">9200</span> -j ACCEPT
 <span style="color:#75715e"># 或者直接关闭防火墙</span>
-$ sudo ufw disable</code></pre></div>
-<h3 id="3-安装kibana">3.安装Kibana</h3>
-
+$ sudo ufw disable
+</code></pre></div><h3 id="3安装kibana">3.安装Kibana</h3>
 <p><a href="https://download.elastic.co/kibana/kibana/kibana-4.3.0-linux-x64.tar.gz">kibana-4.3.0-linux-x64.tar.gz</a></p>
-
 <p>解压后修改配置文件中 <code>server.host</code>：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">server.host:<span style="color:#e6db74">&#34;localhost&#34;</span></code></pre></div>
-<p>启动</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml">server.host:<span style="color:#e6db74">&#34;localhost&#34;</span>
+</code></pre></div><p>启动</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd kibana/bin
-./kibana</code></pre></div>
-<h3 id="4-安装logstash">4.安装Logstash</h3>
-
+./kibana
+</code></pre></div><h3 id="4安装logstash">4.安装Logstash</h3>
 <p><a href="https://download.elastic.co/logstash/logstash/logstash-2.1.1.tar.gz">logstash-2.1.1.tar.gz</a></p>
-
 <p>接下来有时间整理下ElasticSearch常见存入查询操作</p></article>
     <footer class="post-footer">
       
@@ -321,7 +296,7 @@ $ sudo ufw disable</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>863</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1099</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -363,7 +338,7 @@ $ sudo ufw disable</code></pre></div>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -422,7 +397,7 @@ $ sudo ufw disable</code></pre></div>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

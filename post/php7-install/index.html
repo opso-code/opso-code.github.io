@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/php7-install/">
@@ -198,17 +198,13 @@
     </header>
     <article class="post-content"><p><strong>PHP7</strong> 一个划时代的大版本，性能比<code>PHP5.6</code>提升两倍，让无数PHPer奔走相告！
 <code>php7.0</code>正式版出来也好久了，之前在灵雀云上试着装过，太慢，这次在本地的虚拟机里装，也没遇到什么坎坷，包括<code>php-fpm</code>、<code>nginx</code>配置，整理记录。</p>
-
-<p><img src="/images/blog-lnmp.jpg" alt="lnmp" /></p>
-
+<p><img src="/images/blog-lnmp.jpg" alt="lnmp"></p>
 <h1 id="替换中文源">替换中文源</h1>
-
 <p>环境：Ubuntu14.04（虚拟机）</p>
-
 <p>首先更改ubuntu源为本地源，下载更新ubuntu更快 =、=</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo cp /etc/apt/sources.list /etc/apt/sources.list_backup
-sudo vim /etc/apt/sources.list</code></pre></div>
-<p>添加中科院源和163网易源</p>
+sudo vim /etc/apt/sources.list
+</code></pre></div><p>添加中科院源和163网易源</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">deb http://mirrors.ustc.edu.cn/ubuntu/ trusty main restricted universe multiverse
 deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-security main restricted universe multiverse
 deb http://mirrors.ustc.edu.cn/ubuntu/ trusty-updates main restricted universe multiverse
@@ -223,27 +219,27 @@ deb-src http://mirrors.163.com/ubuntu/ vivid main restricted universe multiverse
 deb-src http://mirrors.163.com/ubuntu/ vivid-security main restricted universe multiverse
 deb-src http://mirrors.163.com/ubuntu/ vivid-updates main restricted universe multiverse
 deb-src http://mirrors.163.com/ubuntu/ vivid-proposed main restricted universe multiverse
-deb-src http://mirrors.163.com/ubuntu/ vivid-backports main restricted universe multiverse</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
-sudo apt-get upgrade -y</code></pre></div>
-<p>更新源的时候如果遇到</p>
+deb-src http://mirrors.163.com/ubuntu/ vivid-backports main restricted universe multiverse
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update
+sudo apt-get upgrade -y
+</code></pre></div><p>更新源的时候如果遇到</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">E: Could not get lock /var/lib/dpkg/lock - open (11: Resource temporarily unavailable)
-E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?</code></pre></div>
-<p>解决办法： 删除锁，重新更新</p>
+E: Unable to lock the administration directory (/var/lib/dpkg/), is another process using it?
+</code></pre></div><p>解决办法： 删除锁，重新更新</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo rm -rf /var/cache/apt/archives/lock
 sudo rm /var/lib/dpkg/lock
-sudo apt-get update</code></pre></div>
-<h1 id="下载php源码">下载php源码</h1>
-
+sudo apt-get update
+</code></pre></div><h1 id="下载php源码">下载php源码</h1>
 <p>一种是使用git方式获取最新源码，这个方法下载的代码都是正在开发中，适合体验新版本功能；</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get install git
 mkdir $HOME/php7
 cd $HOME/php7
-git clone https://git.php.net/repository/php-src.git</code></pre></div>
-<p>另外一种是去php官网下载源码包</p>
+git clone https://git.php.net/repository/php-src.git
+</code></pre></div><p>另外一种是去php官网下载源码包</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo wget http://cn2.php.net/distributions/php-7.0.1.tar.gz
 sudo tar zxf php-7.0.1.tar.gz
-cd php-7.0.1</code></pre></div>
-<h1 id="安装必要组件命令">安装必要组件命令</h1>
+cd php-7.0.1
+</code></pre></div><h1 id="安装必要组件命令">安装必要组件命令</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo apt-get update 
 
 sudo apt-get install -y <span style="color:#ae81ff">\
@@ -275,8 +271,8 @@ sudo apt-get install -y <span style="color:#ae81ff">\
 
 <span style="color:#75715e">#sudo ln -s /usr/lib/`arch`-linux-gnu/libldap.so /usr/lib/</span>
 <span style="color:#75715e">#sudo ln -s /usr/lib/`arch`-linux-gnu/liblber.so /usr/lib/</span>
-sudo ln -s /usr/include/<span style="color:#e6db74">`</span>arch<span style="color:#e6db74">`</span>-linux-gnu/gmp.h /usr/include/gmp.h </code></pre></div>
-<h1 id="编译php">编译php</h1>
+sudo ln -s /usr/include/<span style="color:#e6db74">`</span>arch<span style="color:#e6db74">`</span>-linux-gnu/gmp.h /usr/include/gmp.h 
+</code></pre></div><h1 id="编译php">编译php</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">./buildconf
 ./configure <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--prefix<span style="color:#f92672">=</span>/usr/local/php7 <span style="color:#ae81ff">\
@@ -332,20 +328,18 @@ sudo ln -s /usr/include/<span style="color:#e6db74">`</span>arch<span style="col
 </span><span style="color:#ae81ff"></span>--with-zlib-dir<span style="color:#f92672">=</span>/usr <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--with-zlib<span style="color:#f92672">=</span>/usr <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--with-fpm-group<span style="color:#f92672">=</span>www <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>--with-fpm-user<span style="color:#f92672">=</span>www</code></pre></div>
-<p>编译报错</p>
-
+</span><span style="color:#ae81ff"></span>--with-fpm-user<span style="color:#f92672">=</span>www
+</code></pre></div><p>编译报错</p>
 <blockquote>
 <p>configure: WARNING: This bison version is not supported for regeneration of the Zend/PHP parsers</p>
 </blockquote>
-
 <p>下载最新 <code>bison3.0.4</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://mirror.hust.edu.cn/gnu/bison/bison-3.0.4.tar.gz
 tar -zxf bison-3.0.4.tar.gz
 cd bison-3.0.4
 ./configure
-make <span style="color:#f92672">&amp;&amp;</span> sudo make install</code></pre></div>
-<p>继续编译php7，无报错
+make <span style="color:#f92672">&amp;&amp;</span> sudo make install
+</code></pre></div><p>继续编译php7，无报错
 <code>make &amp;&amp; sudo make install</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">Installing shared extensions:     /usr/local/php7/lib/php/extensions/no-debug-non-zts-20151012/
 Installing PHP CLI binary:        /usr/local/php7/bin/
@@ -371,8 +365,8 @@ Wrote PEAR system config file at: /usr/local/php7/etc/pear.conf
 You may want to add: /usr/local/php7/lib/php to your php.ini include_path
 /home/vagrant/php7/php-src/build/shtool install -c ext/phar/phar.phar /usr/local/php7/bin
 ln -s -f phar.phar /usr/local/php7/bin/phar
-Installing PDO headers:          /usr/local/php7/include/php/ext/pdo/</code></pre></div>
-<h1 id="php配置文件">php配置文件</h1>
+Installing PDO headers:          /usr/local/php7/include/php/ext/pdo/
+</code></pre></div><h1 id="php配置文件">php配置文件</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#php安装目录下</span>
 sudo cp php.ini-* /usr/local/php7/lib/
 <span style="color:#75715e">#sudo cp sapi/fpm/init.d.php-fpm /usr/local/php7/php-fpm</span>
@@ -386,18 +380,18 @@ sudo sysv-rc-conf php-fpm on
 sudo cp sapi/fpm/php-fpm.service /usr/local/php7/
 sudo cp /usr/local/php7/lib/php.ini-production /usr/local/php7/lib/php.ini
 sudo cp /usr/local/php7/etc/php-fpm.conf.default /usr/local/php7/etc/php-fpm.conf
-sudo cp /usr/local/php7/etc/php-fpm.d/www.conf.default /usr/local/php7/etc/php-fpm.d/www.conf</code></pre></div>
-<p>这里的<code>www.conf</code>是php-fpm的配置，默认是用编译参数生成的<code>www</code>用户组和用户名，如果没有这个用户，我们需要先创建，否组php-fpm将不能运行</p>
+sudo cp /usr/local/php7/etc/php-fpm.d/www.conf.default /usr/local/php7/etc/php-fpm.d/www.conf
+</code></pre></div><p>这里的<code>www.conf</code>是php-fpm的配置，默认是用编译参数生成的<code>www</code>用户组和用户名，如果没有这个用户，我们需要先创建，否组php-fpm将不能运行</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo groupadd www
-sudo useradd www www</code></pre></div>
-<p>如果需要开启opcache，修改<code>php.ini</code></p>
+sudo useradd www www
+</code></pre></div><p>如果需要开启opcache，修改<code>php.ini</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-Ini" data-lang="Ini"><span style="color:#a6e22e">sudo vim /usr/local/php7/lib/php.ini</span>
 <span style="color:#75715e">#搜索opcache</span>
 <span style="color:#66d9ef">[opcache]</span>
 <span style="color:#a6e22e">zend_extension</span><span style="color:#f92672">=</span> <span style="color:#e6db74">/usr/local/php7/lib/php/extensions/no-debug-non-zts-20151012/opcache.so</span>
 <span style="color:#a6e22e">opcache.enable</span><span style="color:#f92672">=</span><span style="color:#e6db74">1</span>
-<span style="color:#a6e22e">opcache.enable_cli</span><span style="color:#f92672">=</span><span style="color:#e6db74">1</span></code></pre></div>
-<h1 id="安装nginx">安装Nginx</h1>
+<span style="color:#a6e22e">opcache.enable_cli</span><span style="color:#f92672">=</span><span style="color:#e6db74">1</span>
+</code></pre></div><h1 id="安装nginx">安装Nginx</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#Nginx官网提供了三个类型的版本</span>
 <span style="color:#75715e">#Mainline version：Mainline 是 Nginx 目前主力在做的版本，可以说是开发版</span>
 <span style="color:#75715e">#Stable version：最新稳定版，生产环境上建议使用的版本</span>
@@ -420,10 +414,10 @@ cd nginx-1.8.0/
   nginx http fastcgi temporary files: <span style="color:#e6db74">&#34;fastcgi_temp&#34;</span>
   nginx http uwsgi temporary files: <span style="color:#e6db74">&#34;uwsgi_temp&#34;</span>
   nginx http scgi temporary files: <span style="color:#e6db74">&#34;scgi_temp&#34;</span>
-make <span style="color:#f92672">&amp;&amp;</span> sudo make install </code></pre></div>
-<p>接下来需要修改<code>/usr/local/nginx/conf/nginx.conf</code>，有时候一台主机并不是只有一个域名或者站点，为了方便管理，可以将虚拟主机配置统一放到一起，在同一目录下新建<code>vhosts.conf</code>，我们需要在nginx.conf中添加下面一句引入</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">include vhosts.conf</code></pre></div>
-<p>之后就可以在vhosts.conf中加入对php解析</p>
+make <span style="color:#f92672">&amp;&amp;</span> sudo make install 
+</code></pre></div><p>接下来需要修改<code>/usr/local/nginx/conf/nginx.conf</code>，有时候一台主机并不是只有一个域名或者站点，为了方便管理，可以将虚拟主机配置统一放到一起，在同一目录下新建<code>vhosts.conf</code>，我们需要在nginx.conf中添加下面一句引入</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">include vhosts.conf
+</code></pre></div><p>之后就可以在vhosts.conf中加入对php解析</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-nginx" data-lang="nginx"><span style="color:#66d9ef">server</span> {
 	<span style="color:#f92672">listen</span>       <span style="color:#ae81ff">80</span>;
 	<span style="color:#f92672">server_name</span>  <span style="color:#e6db74">ubuntu.dev</span>;
@@ -442,12 +436,12 @@ make <span style="color:#f92672">&amp;&amp;</span> sudo make install </code></pr
 		<span style="color:#f92672">fastcgi_param</span>  <span style="color:#e6db74">PATH_TRANSLATED</span>  $document_root$fastcgi_path_info;
 		<span style="color:#f92672">include</span>        <span style="color:#e6db74">fastcgi_params</span>;
 	}
-}</code></pre></div>
-<h1 id="启动nginx">启动Nginx</h1>
+}
+</code></pre></div><h1 id="启动nginx">启动Nginx</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#制定记载配置（如果是在sbin目录下则不需要）</span>
 /usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
-/usr/local/nginx/sbin/nginx -s reload</code></pre></div>
-<p>这样是不能通过 <code>service nginx start|stop</code> 来启动停止的，下面是个脚本nginx，放到 <code>/etc/ini.d/</code>目录下，然后执行</p>
+/usr/local/nginx/sbin/nginx -s reload
+</code></pre></div><p>这样是不能通过 <code>service nginx start|stop</code> 来启动停止的，下面是个脚本nginx，放到 <code>/etc/ini.d/</code>目录下，然后执行</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#网上下载一个nginx启动的脚本</span>
 <span style="color:#75715e">#git https://github.com/JasonGiedymin/nginx-init-ubuntu.git</span>
 sudo wget http://dlj.bz/OHaQ -O /etc/init.d/nginx
@@ -455,26 +449,25 @@ sudo chmod +x /etc/init.d/nginx
 <span style="color:#75715e">#加入系统启动项</span>
 sudo sysv-rc-conf nginx
 <span style="color:#75715e">#开启开机启动</span>
-sudo sysv-rc-conf nginx on</code></pre></div>
-<h1 id="其他">其他</h1>
+sudo sysv-rc-conf nginx on
+</code></pre></div><h1 id="其他">其他</h1>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#创建网站根目录</span>
 mkdir /vagrant/www
 <span style="color:#75715e">#提升权限</span>
 sudo chmod <span style="color:#ae81ff">775</span> -R /vagrant/www
 <span style="color:#75715e">#或更改所属用户</span>
-sudo chown vagrant:vagrant -R /vagrant/www</code></pre></div>
-<p>ubuntu里没有<code>chkconfig</code>命令，通过<code>apt-get install sysv-rc-conf</code> 替代</p>
+sudo chown vagrant:vagrant -R /vagrant/www
+</code></pre></div><p>ubuntu里没有<code>chkconfig</code>命令，通过<code>apt-get install sysv-rc-conf</code> 替代</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">sudo sysv-rc-conf php-fpm
-sudo sysv-rc-conf php-fpm on</code></pre></div>
-<p>查看nginx日志的时候，发现Ubuntu的时区有问题，<code>date</code>命令返回的都是晚8小时，修改Ubuntu系统时区。</p>
+sudo sysv-rc-conf php-fpm on
+</code></pre></div><p>查看nginx日志的时候，发现Ubuntu的时区有问题，<code>date</code>命令返回的都是晚8小时，修改Ubuntu系统时区。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#按照提示修改时区</span>
 sudo tzselect
 sudo cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
 
 <span style="color:#75715e">#或者 使用tzdata 视图中重新选择时区</span>
-sudo dpkg-reconfigure tzdata</code></pre></div>
-<h1 id="资料">资料</h1>
-
+sudo dpkg-reconfigure tzdata
+</code></pre></div><h1 id="资料">资料</h1>
 <blockquote>
 <p>视频：<a href="http://www.imooc.com/learn/438">php7.0新特性</a>
 鸟哥的博客：<a href="http://www.laruence.com/2015/12/04/3086.html">让PHP7达到最高性能的几个Tips</a></p>
@@ -494,7 +487,7 @@ sudo dpkg-reconfigure tzdata</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1423</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1659</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -536,7 +529,7 @@ sudo dpkg-reconfigure tzdata</code></pre></div>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -595,7 +588,7 @@ sudo dpkg-reconfigure tzdata</code></pre></div>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

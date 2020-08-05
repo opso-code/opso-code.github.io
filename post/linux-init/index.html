@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/linux-init/">
@@ -197,44 +197,32 @@
       <p class="post-meta">@opso · Mar 5, 2018 · 1 min read</p>
     </header>
     <article class="post-content"><p>近年来，Linux 系统的 init 进程经历了两次重大的演进，传统的 <code>sysvinit</code> 已经逐渐淡出历史舞台，新的 <code>UpStart</code> 和 <code>systemd</code> 各有特点，越来越多的 Linux 发行版采纳了 <code>systemd</code> (<strong>Ubuntu15.04+/CentOS7+</strong>)。</p>
-
 <h3 id="sysvint">Sysvint</h3>
-
 <p><code>Sysvinit</code> 有比较历史悠久，其主要就是一个Shell脚本，并且是放置在 <code>/etc/init.d</code> 文件夹下。然后通过<code>update-rc.d</code> 命令进行运行级别的操作来达到服务的启动。</p>
-
 <h3 id="upstart">Upstart</h3>
-
 <p><code>UpStart</code> 解决了之前提到的 <code>sysvinit</code> 的缺点。采用事件驱动模型，<code>UpStart</code> 可以：</p>
-
 <ul>
 <li>更快地启动系统</li>
 <li>当新硬件被发现时动态启动服务</li>
 <li>硬件被拔除时动态停止服务</li>
 </ul>
-
 <p>这些特点使得 <code>UpStart</code> 可以很好地应用在桌面或者便携式系统中，处理这些系统中的动态硬件插拔特性。</p>
-
 <h3 id="systemd">Systemd</h3>
-
 <ol>
 <li>更快的启动速度</li>
 </ol>
-
 <p><code>Systemd</code> 提供了比 <code>UpStart</code> 更激进的并行启动能力，采用了 <code>socket</code> / <code>D-Bus activation</code> 等技术启动服务。</p>
-
-<p>为了减少系统启动时间，<code>systemd</code> 的目标是：
-- 尽可能启动更少的进程
-- 尽可能将更多进程并行启动</p>
-
+<p>为了减少系统启动时间，<code>systemd</code> 的目标是：</p>
+<ul>
+<li>尽可能启动更少的进程</li>
+<li>尽可能将更多进程并行启动</li>
+</ul>
 <p>同样地，<code>UpStart</code> 也试图实现这两个目标。<code>UpStart</code> 采用事件驱动机制，服务可以暂不启动，当需要的时候才通过事件触发其启动，这符合第一个设计目标；此外，不相干的服务可以并行启动，这也实现了第二个目标。</p>
-
 <ul>
 <li><code>Systemd</code> 提供了和 <code>Sysvinit</code> 以及 <code>LSB initscripts</code> 兼容的特性</li>
 <li><code>Systemd</code> 自带日志服务 <code>journald</code>，该日志服务的设计初衷是克服现有的 <code>syslog</code> 服务的缺点</li>
 </ul>
-
 <h3 id="资料">资料</h3>
-
 <ul>
 <li><a href="https://zh.wikipedia.org/wiki/Init">维基百科init系统</a></li>
 <li><a href="http://www.ibm.com/developerworks/cn/linux/1407_liuming_init1">浅析 Linux 初始化 init 系统01</a></li>
@@ -252,7 +240,7 @@
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>648</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>884</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -294,7 +282,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -353,7 +341,7 @@
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

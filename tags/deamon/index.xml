@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>deamon on opso&#39;s blog</title>
@@ -19,7 +19,6 @@
       
       <guid>/post/linux-daemon/</guid>
       <description>&lt;p&gt;在开发过程中，我们一般都是使用 &lt;code&gt;ssh&lt;/code&gt; 登录linux，在命令行下直接使用 &lt;code&gt;php-cli&lt;/code&gt; 模式运行 &lt;code&gt;swoole&lt;/code&gt;，一旦退出&lt;code&gt;ssh&lt;/code&gt; 或者使用 &lt;code&gt;ctrl&lt;/code&gt;+&lt;code&gt;c&lt;/code&gt;，终端会收到 &lt;strong&gt;HUP&lt;/strong&gt;（hangup）信号从而关闭其所有子进程 ,&lt;code&gt;swoole&lt;/code&gt; 进程会自动关闭。&lt;/p&gt;
-
 &lt;p&gt;那有问题来了，没有靠谱的、可以让脚本在后台长期运行呢，答案是有的 :)&lt;/p&gt;</description>
     </item>
     

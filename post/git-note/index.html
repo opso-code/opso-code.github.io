@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/git-note/">
@@ -197,18 +197,15 @@
       <p class="post-meta">@opso · Jan 13, 2016 · 1 min read</p>
     </header>
     <article class="post-content"><p><code>git</code>是一个快速的分布式版本控制系统。之前也有了解过，虽然现在公司里用的是<code>SVN</code>，对照着官方文档，<code>git</code>的基础入门。</p>
-
 <h3 id="git安装">Git安装</h3>
-
 <p>官方下载: <a href="http://git-scm.com/download/">http://git-scm.com/download/</a></p>
-
 <h3 id="全局配置">全局配置</h3>
-
 <p>配置<code>user</code>和<code>email</code>，也可以在<code>.gitconfig</code>文件里修改</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ git config --global user.name <span style="color:#e6db74">&#34;opso&#34;</span>
 $ git config --global user.email <span style="color:#e6db74">&#34;945206413@qq.com&#34;</span>
 <span style="color:#75715e">#列出config选项</span>
-$ git config --global --list</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#初始化仓库</span>
+$ git config --global --list
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash"><span style="color:#75715e">#初始化仓库</span>
 $ cd project
 $ git init .
 
@@ -238,29 +235,26 @@ $ git commit -m <span style="color:#e6db74">&#34;注释内容&#34;</span>
 $ git commit -am <span style="color:#e6db74">&#34;注释内容&#34;</span>
 
 <span style="color:#75715e">#提交代码</span>
-$ git push origin master</code></pre></div>
-<h3 id="ssh方式连接git">SSH方式连接git</h3>
-
+$ git push origin master
+</code></pre></div><h3 id="ssh方式连接git">SSH方式连接git</h3>
 <p>首先生成sshkey</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">ssh-keygen -t rsa -C <span style="color:#e6db74">&#34;xxxxx@xxxxx.com&#34;</span>
 <span style="color:#75715e">#默认生成在用户目录/.ssh/id_rsa.pub</span>
 cat ~/.ssh/id_rsa.pub
 ssh-rsa ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDTjS036fU0t4xxxxxx
-...</code></pre></div>
-<p>然后在 <a href="https://git.oschina.net/profile/sshkeys">https://git.oschina.net/profile/sshkeys</a> 页面复制添加这个key，验证下</p>
+...
+</code></pre></div><p>然后在 <a href="https://git.oschina.net/profile/sshkeys">https://git.oschina.net/profile/sshkeys</a> 页面复制添加这个key，验证下</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ ssh -T git@git.oschina.net
 The authenticity of host <span style="color:#e6db74">&#39;git.oschina.net (101.201.241.32)&#39;</span> can<span style="color:#e6db74">&#39;t be established.
 </span><span style="color:#e6db74">ECDSA key fingerprint is SHA256:FQGC9Knxxxxxxxxxxxxxxxxxxxxxx.
 </span><span style="color:#e6db74">Are you sure you want to continue connecting (yes/no)? yes
 </span><span style="color:#e6db74">Warning: Permanently added &#39;</span>git.oschina.net,101.201.241.32<span style="color:#960050;background-color:#1e0010">&#39;</span> <span style="color:#f92672">(</span>ECDSA<span style="color:#f92672">)</span> to the list of known hosts.
-Welcome to Git@OSC, opso!</code></pre></div>
-<p>返回welcome证明成功，以后pull和push就不用输密码啦 :)</p>
-
+Welcome to Git@OSC, opso!
+</code></pre></div><p>返回welcome证明成功，以后pull和push就不用输密码啦 :)</p>
 <h3 id="参考">参考</h3>
-
 <p>Git官方基础文档：<a href="http://git-scm.com/book/zh/v2/">http://git-scm.com/book/zh/v2/</a>
 一张图片了解git：
-<img src="/images/git_map.png" alt="git_map" /></p></article>
+<img src="/images/git_map.png" alt="git_map"></p></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -270,7 +264,7 @@ Welcome to Git@OSC, opso!</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1430</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1666</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -312,7 +306,7 @@ Welcome to Git@OSC, opso!</code></pre></div>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -371,7 +365,7 @@ Welcome to Git@OSC, opso!</code></pre></div>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

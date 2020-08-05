@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/mysql-install/">
@@ -197,14 +197,10 @@
       <p class="post-meta">@opso · Jan 7, 2016 · 1 min read</p>
     </header>
     <article class="post-content"><p>Ubuntu14.04下<code>apt-get install</code>安装的MySQL版本是5.5，想要安装5.7，编译源码方式安装太麻烦，在官网找到了一个比较方便的安装方式，通过deb添加mysql的安装源，最新可安装的版本是5.7.10；记录下安装过程和<code>phpmyadmin</code>使用配置。</p>
-
 <p>[2016-03-29] 更新 <a href="../mariadb-install">MariaDB 10.1.13 编译安装</a></p>
-
-<h3 id="环境-ubuntu14-04">环境：ubuntu14.04</h3>
-
+<h3 id="环境ubuntu1404">环境：ubuntu14.04</h3>
 <p><a href="http://dev.mysql.com/downloads/mysql/">MySQL官网下载地址</a>
 首页找到<code>Download</code> ==&gt; <code>APT Repository</code></p>
-
 <p><a href="http://dev.mysql.com/downloads/repo/apt/">mysql-apt-config_0.6.0-1_all.deb</a></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">wget http://dev.mysql.com/get/mysql-apt-config_0.6.0-1_all.deb
 sudo dpkg -i mysql-apt-config_0.6.0-1_all.deb
@@ -213,11 +209,12 @@ sudo apt-get update
 sudo apt-get install mysql-server
 <span style="color:#75715e">#然后开始下载安装，中间会让你设置密码</span>
 $ mysql -V
- mysql  Ver <span style="color:#ae81ff">14</span>.14 Distrib <span style="color:#ae81ff">5</span>.7.10, <span style="color:#66d9ef">for</span> Linux <span style="color:#f92672">(</span>x86_64<span style="color:#f92672">)</span> using  EditLine wrapper</code></pre></div>
-<p>然后下载 <a href="https://www.phpmyadmin.net/">phpmyadmin</a>
+ mysql  Ver 14.14 Distrib 5.7.10, <span style="color:#66d9ef">for</span> Linux <span style="color:#f92672">(</span>x86_64<span style="color:#f92672">)</span> using  EditLine wrapper
+</code></pre></div><p>然后下载 <a href="https://www.phpmyadmin.net/">phpmyadmin</a>
 修改根目录下数据库连接配置<code>config.inc.php</code>，如果根目录下不存在</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-text" data-lang="text">cp libraries/config.default.php config.inc.php
-sudo vim config.inc.php</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+sudo vim config.inc.php
+</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 <span style="color:#75715e">/* Authentication type */</span>
 $cfg[<span style="color:#e6db74">&#39;Servers&#39;</span>][$i][<span style="color:#e6db74">&#39;auth_type&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;config&#39;</span>;
 $cfg[<span style="color:#e6db74">&#39;Servers&#39;</span>][$i][<span style="color:#e6db74">&#39;user&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;root&#39;</span>;
@@ -229,17 +226,14 @@ $cfg[<span style="color:#e6db74">&#39;Servers&#39;</span>][$i][<span style="colo
 <span style="color:#75715e">/* Select mysql if your server does not have mysqli */</span>
 $cfg[<span style="color:#e6db74">&#39;Servers&#39;</span>][$i][<span style="color:#e6db74">&#39;extension&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;mysqli&#39;</span>;
 $cfg[<span style="color:#e6db74">&#39;Servers&#39;</span>][$i][<span style="color:#e6db74">&#39;AllowNoPassword&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">true</span>;
-</code></pre></div>
-<p>这时候提示 <code>配置文件权限错误，不应任何用户都能修改!</code></p>
+</code></pre></div><p>这时候提示 <code>配置文件权限错误，不应任何用户都能修改!</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 $cfg[<span style="color:#e6db74">&#39;CheckConfigurationPermissions&#39;</span>] <span style="color:#f92672">=</span> <span style="color:#66d9ef">false</span>;<span style="color:#75715e">//改为false
-</span></code></pre></div>
-<p>修改mysql配置文件<code>/etc/mysql/my.cnf</code>，修改为<code>uft8</code></p>
+</span></code></pre></div><p>修改mysql配置文件<code>/etc/mysql/my.cnf</code>，修改为<code>uft8</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 [<span style="color:#a6e22e">mysqld</span>]
 <span style="color:#a6e22e">character_set_server</span> <span style="color:#f92672">=</span> <span style="color:#a6e22e">utf8</span>
-</code></pre></div>
-<p>重启mysql，登录后查看编码</p>
+</code></pre></div><p>重启mysql，登录后查看编码</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service mysql restart
 mysql&gt; show variables like <span style="color:#e6db74">&#39;character_set%&#39;</span>;
 +--------------------------+----------------------------+
@@ -253,17 +247,15 @@ mysql&gt; show variables like <span style="color:#e6db74">&#39;character_set%&#3
 | character_set_server     | utf8                       |
 | character_set_system     | utf8                       |
 | character_sets_dir       | /usr/share/mysql/charsets/ |
-+--------------------------+----------------------------+</code></pre></div>
-<h3 id="新建user">新建user</h3>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">user</span> <span style="color:#e6db74">&#39;vagrant&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> identified <span style="color:#66d9ef">by</span> <span style="color:#e6db74">&#39;vagrant&#39;</span>; </code></pre></div>
-<h3 id="赋予权限">赋予权限</h3>
-
++--------------------------+----------------------------+
+</code></pre></div><h3 id="新建user">新建user</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">create</span> <span style="color:#66d9ef">user</span> <span style="color:#e6db74">&#39;vagrant&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> identified <span style="color:#66d9ef">by</span> <span style="color:#e6db74">&#39;vagrant&#39;</span>; 
+</code></pre></div><h3 id="赋予权限">赋予权限</h3>
 <p>通配符<code>%</code>,可以让该用户从任意远程主机登陆</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">ALL</span> <span style="color:#66d9ef">PRIVILEGES</span> <span style="color:#66d9ef">ON</span> <span style="color:#f92672">*</span>.<span style="color:#f92672">*</span> <span style="color:#66d9ef">TO</span> <span style="color:#e6db74">&#39;vagrant&#39;</span><span style="color:#f92672">@</span><span style="color:#e6db74">&#39;%&#39;</span> IDENTIFIED <span style="color:#66d9ef">BY</span> <span style="color:#e6db74">&#39;vagrant&#39;</span> <span style="color:#66d9ef">WITH</span> <span style="color:#66d9ef">GRANT</span> <span style="color:#66d9ef">OPTION</span>;
-flush <span style="color:#66d9ef">privileges</span>;</code></pre></div>
-<p>这时候发现依旧不能登陆
+flush <span style="color:#66d9ef">privileges</span>;
+</code></pre></div><p>这时候发现依旧不能登陆
 <code>#2002 服务器没有响应（或本地服务器的套接字没有正确设置）。</code></p>
-
 <p>继续修改<code>config.inc.php</code>;</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 <span style="color:#75715e">// $cfg[&#39;Servers&#39;][$i][&#39;host&#39;] = &#39;localhost&#39;;
@@ -283,7 +275,7 @@ flush <span style="color:#66d9ef">privileges</span>;</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1436</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1672</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -325,7 +317,7 @@ flush <span style="color:#66d9ef">privileges</span>;</code></pre></div>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -384,7 +376,7 @@ flush <span style="color:#66d9ef">privileges</span>;</code></pre></div>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

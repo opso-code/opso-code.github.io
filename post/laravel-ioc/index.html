@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/laravel-ioc/">
@@ -197,9 +197,7 @@
       <p class="post-meta">@opso · Apr 20, 2017 · 2 min read</p>
     </header>
     <article class="post-content"><p><strong>IOC</strong>( inversion of controller )叫做控制反转模式，也可以称为(dependency injection ) 依赖注入模式。这也是<strong>Laravel</strong>框架的核心“容器IOC”概念。</p>
-
 <p>这里通过 bind 方式绑定了一些依赖关系， 然后通过make 方法 获取到到我们想要的实例. 在make中有牵扯到了闭包函数，反射等概念。</p>
-
 <p>举例：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 <span style="color:#75715e">//支付类接口
@@ -255,13 +253,9 @@
 <span style="color:#75715e">//注入依赖
 </span><span style="color:#75715e"></span>$pb <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">PayBill</span>($payMethod);
 $pb<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">payMyBill</span>();
-</code></pre></div>
-<p>把class Alipay 的实例通过constructor注入的方式去实例化一个 class PayBill. 在这里我们的注入是手动注入, 不是自动的. 而Laravel 框架实现则是自动注入。</p>
-
+</code></pre></div><p>把class Alipay 的实例通过constructor注入的方式去实例化一个 class PayBill. 在这里我们的注入是手动注入, 不是自动的. 而Laravel 框架实现则是自动注入。</p>
 <p><strong>反射</strong>(reflection)</p>
-
 <p>「 反射它指在PHP运行状态中，扩展分析PHP程序，导出或提取出关于类、方法、属性、参数等的详细信息，包括注释。这种动态获取的信息以及动态调用对象的方法的功能称为反射API。反射是操纵面向对象范型中元模型的API，其功能十分强大，可帮助我们构建复杂，可扩展的应用。其用途如：自动加载插件，自动生成文档，甚至可用来扩充PHP语言」</p>
-
 <p>下面通过一个例子来进一步了解IOC容器</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
@@ -373,7 +367,7 @@ $paybill<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">payM
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>967</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1203</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -415,7 +409,7 @@ $paybill<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">payM
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -474,7 +468,7 @@ $paybill<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">payM
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

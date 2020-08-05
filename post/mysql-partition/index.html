@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/mysql-partition/">
@@ -197,7 +197,6 @@
       <p class="post-meta">@opso · Mar 20, 2017 · 2 min read</p>
     </header>
     <article class="post-content"><p>前段时间有几台MySQL服务器内容警告，已经超过了80%，达到了40G/50G，这些数据库主要是记录用户的一些操作日志，查看表大小后锁定三个数据量比较大的表。</p>
-
 <p>先来看下表结构</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 表1：
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#f92672">`</span>jy_cuser_item_log<span style="color:#f92672">`</span> (
@@ -228,15 +227,12 @@
   <span style="color:#f92672">`</span>create_time<span style="color:#f92672">`</span> int(<span style="color:#ae81ff">10</span>) <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> <span style="color:#e6db74">&#39;0&#39;</span>,
   <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> (<span style="color:#f92672">`</span>Id<span style="color:#f92672">`</span>),
   <span style="color:#66d9ef">KEY</span> <span style="color:#f92672">`</span>user_id<span style="color:#f92672">`</span> (<span style="color:#f92672">`</span>user_id<span style="color:#f92672">`</span>)
-) ENGINE<span style="color:#f92672">=</span>InnoDB AUTO_INCREMENT<span style="color:#f92672">=</span><span style="color:#ae81ff">5932063</span> <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8</code></pre></div>
-<p>查看了表结构后发现所有的表都有<code>create_time</code>  <code>int</code> 类型时间戳字段，最早的数据能到 <code>2015-11-05</code> ，已经超过半年以上，之前也没有相关的清除数据的策略，于是决定删除 <code>2016-09-01</code> 前的数据，自然而然有了下面的语句：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">`</span>jy_com_break_log<span style="color:#f92672">`</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#f92672">`</span>create_time<span style="color:#f92672">`&lt;</span>unix_timestamp(<span style="color:#ae81ff">20160602</span>)</code></pre></div>
-<p>删除了差不多35%的数据，然而查看MySQL容量，丝毫未减，原来<code>DELETE FROM</code>并不会释放表空间。新增的数据会使用这些没有释放的空间，但也不是长久之计。</p>
-
+) ENGINE<span style="color:#f92672">=</span>InnoDB AUTO_INCREMENT<span style="color:#f92672">=</span><span style="color:#ae81ff">5932063</span> <span style="color:#66d9ef">DEFAULT</span> CHARSET<span style="color:#f92672">=</span>utf8
+</code></pre></div><p>查看了表结构后发现所有的表都有<code>create_time</code>  <code>int</code> 类型时间戳字段，最早的数据能到 <code>2015-11-05</code> ，已经超过半年以上，之前也没有相关的清除数据的策略，于是决定删除 <code>2016-09-01</code> 前的数据，自然而然有了下面的语句：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">DELETE</span> <span style="color:#66d9ef">FROM</span> <span style="color:#f92672">`</span>jy_com_break_log<span style="color:#f92672">`</span> <span style="color:#66d9ef">WHERE</span> <span style="color:#f92672">`</span>create_time<span style="color:#f92672">`&lt;</span>unix_timestamp(<span style="color:#ae81ff">20160602</span>)
+</code></pre></div><p>删除了差不多35%的数据，然而查看MySQL容量，丝毫未减，原来<code>DELETE FROM</code>并不会释放表空间。新增的数据会使用这些没有释放的空间，但也不是长久之计。</p>
 <p>在了解了分区（<code>PARTITION</code>）的好处后，决定建立新表，按时间分区，每月一个人分区，定期删除旧的分区，这样能马上释放分区且查询更快.</p>
-
 <p>这里将表后缀都加上了<code>_2017</code>，同时修改程序中的指定，去除了主键，修改了索引，添加分区的字段必须是主键或是索引字段，否则将会报错:</p>
-
 <blockquote>
 <p>A PRIMARY KEY must include all columns in the table&rsquo;s partitioning function</p>
 </blockquote>
@@ -286,8 +282,8 @@ PARTITION p201704 <span style="color:#66d9ef">VALUES</span> <span style="color:#
 PARTITION p201705 <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">LESS</span> <span style="color:#66d9ef">THAN</span> (unix_timestamp(<span style="color:#ae81ff">20170601</span>))ENGINE<span style="color:#f92672">=</span>InnoDB,
 PARTITION p201706 <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">LESS</span> <span style="color:#66d9ef">THAN</span> (unix_timestamp(<span style="color:#ae81ff">20170701</span>))ENGINE<span style="color:#f92672">=</span>InnoDB,
 PARTITION p201707 <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">LESS</span> <span style="color:#66d9ef">THAN</span> (unix_timestamp(<span style="color:#ae81ff">20170801</span>))ENGINE<span style="color:#f92672">=</span>InnoDB
-);</code></pre></div>
-<p>建好表后，插入几条数据，查看分区是否成功：</p>
+);
+</code></pre></div><p>建好表后，插入几条数据，查看分区是否成功：</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">SELECT</span>
   partition_name part, 
   partition_expression expr, 
@@ -297,8 +293,8 @@ PARTITION p201707 <span style="color:#66d9ef">VALUES</span> <span style="color:#
   INFORMATION_SCHEMA.partitions 
 <span style="color:#66d9ef">WHERE</span>
   TABLE_SCHEMA <span style="color:#f92672">=</span> <span style="color:#66d9ef">schema</span>() 
-  <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">TABLE_NAME</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;jy_com_break_log_2017&#39;</span>;</code></pre></div>
-<pre><code>+---------+-------------+------------+------------+
+  <span style="color:#66d9ef">AND</span> <span style="color:#66d9ef">TABLE_NAME</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#39;jy_com_break_log_2017&#39;</span>;
+</code></pre></div><pre><code>+---------+-------------+------------+------------+
 | part    | expr        | descr      | table_rows |
 +---------+-------------+------------+------------+
 | p201704 | create_time | 1493568000 |          3 |
@@ -306,14 +302,13 @@ PARTITION p201707 <span style="color:#66d9ef">VALUES</span> <span style="color:#
 | p201706 | create_time | 1498838400 |          0 |
 | p201707 | create_time | 1501516800 |          0 |
 +---------+-------------+------------+------------+
-</code></pre>
-
-<p>分区成功！之后定期删除旧的分区，就能释放表空间了！</p>
+</code></pre><p>分区成功！之后定期删除旧的分区，就能释放表空间了！</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#75715e">-- 添加分区
 </span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> jy_cuser_item_log_2017 <span style="color:#66d9ef">ADD</span> PARTITION (PARTITION p201708 <span style="color:#66d9ef">VALUES</span> <span style="color:#66d9ef">LESS</span> <span style="color:#66d9ef">THAN</span> (unix_timestamp(<span style="color:#ae81ff">20170901</span>)));
 
 <span style="color:#75715e">-- 删除分区
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> jy_cuser_item_log_2017 <span style="color:#66d9ef">DROP</span> PARTITION p201704;</code></pre></div></article>
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">ALTER</span> <span style="color:#66d9ef">TABLE</span> jy_cuser_item_log_2017 <span style="color:#66d9ef">DROP</span> PARTITION p201704;
+</code></pre></div></article>
     <footer class="post-footer">
       
       <ul class="post-tags">
@@ -325,7 +320,7 @@ PARTITION p201707 <span style="color:#66d9ef">VALUES</span> <span style="color:#
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>998</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1234</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -367,7 +362,7 @@ PARTITION p201707 <span style="color:#66d9ef">VALUES</span> <span style="color:#
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -426,7 +421,7 @@ PARTITION p201707 <span style="color:#66d9ef">VALUES</span> <span style="color:#
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

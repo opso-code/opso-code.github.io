@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/hello-hexo/">
@@ -197,22 +197,19 @@
       <p class="post-meta">@opso · Mar 16, 2016 · 2 min read</p>
     </header>
     <article class="post-content"><p><strong>Hexo</strong> &ndash; A fast, simple &amp; powerful blog framework 一个简单、强大、且快速的静态博客生成工具。</p>
-
-<p>相比于<strong>Jekyll</strong>(基于<code>ruby</code>环境)，<strong>Hexo</strong> 要简单方便些，首先原因
-* Hexo是基于<strong>nodejs</strong>生成静态页面，js执行效率要比Jekyll高，占内存小，特别是文件多的时候
-* Jekyll好久没更新了，中文主题资源较少，找了半天才在知乎上找到一个比较好看的；
-* 其次Hexo的作者是个中国(台湾)人！ 开源的中文主题很多，中文文档也很详细。
-<!--more-->
-于是决定在Hexo上试试，当然首先安装nodejs！由于是在windows下，下载<a href="https://nodejs.org/dist/v5.9.1/node-v5.9.1-x64.msi">node-v5.9.1-x64.msi</a>，一路next</p>
-
+<p>相比于<strong>Jekyll</strong>(基于<code>ruby</code>环境)，<strong>Hexo</strong> 要简单方便些，首先原因</p>
+<ul>
+<li>Hexo是基于<strong>nodejs</strong>生成静态页面，js执行效率要比Jekyll高，占内存小，特别是文件多的时候</li>
+<li>Jekyll好久没更新了，中文主题资源较少，找了半天才在知乎上找到一个比较好看的；</li>
+<li>其次Hexo的作者是个中国(台湾)人！ 开源的中文主题很多，中文文档也很详细。</li>
+</ul>
+<!-- raw HTML omitted -->
+<p>于是决定在Hexo上试试，当然首先安装nodejs！由于是在windows下，下载<a href="https://nodejs.org/dist/v5.9.1/node-v5.9.1-x64.msi">node-v5.9.1-x64.msi</a>，一路next</p>
 <ol>
 <li><a href="https://nodejs.org/en/">nodejs官网</a></li>
 </ol>
-
 <p>官网有<code>LST 4.4.1</code>长期支持版和<code>Stable 5.9.1</code>最新稳定版，可见nodejs是个版本狂魔。。个人建议安装最新稳定版，<code>npm</code>升级到了<code>3.4</code>，没有了windows下文件夹层数过多而无法移动的问题。</p>
-
 <h3 id="npm常用命令">npm常用命令</h3>
-
 <ul>
 <li>npm config ls 列出npm配置/npm config ls -l 列出npm详细配置 也可以查看~/.npmrc</li>
 <li>npm config set prefix &ldquo;D:\nodejs\node_global&rdquo; 设置安装模块路遥</li>
@@ -223,99 +220,94 @@
 <li>npm uninstall [-g] name （全局）卸载模块</li>
 <li>npm cache clean 清理缓存</li>
 </ul>
-
-<ol>
+<ol start="2">
 <li><a href="https://hexo.io/zh-cn">Hexo.io官网</a></li>
 </ol>
-
 <h3 id="安装hexo">安装Hexo</h3>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install -g hexo-cli 
 $ mkdir blog <span style="color:#f92672">&amp;&amp;</span> cd blog
 $ hexo init
-$ npm install</code></pre></div>
-<p>这里我遇到了一个问题，由于我实在Windows下安装，<code>Git bash</code>环境下(<code>MINGW</code>)执行hexo会找不到命令，检查了几遍环境变量，添加了<code>NODE_PATH</code>，修改npm全局目录，都不行，最后才发现可能是MINGW里的环境配置没有添加。</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo $PATH</code></pre></div>
-<p>输出系统变量，发现的确没有Hexo模块的目录于是</p>
+$ npm install
+</code></pre></div><p>这里我遇到了一个问题，由于我实在Windows下安装，<code>Git bash</code>环境下(<code>MINGW</code>)执行hexo会找不到命令，检查了几遍环境变量，添加了<code>NODE_PATH</code>，修改npm全局目录，都不行，最后才发现可能是MINGW里的环境配置没有添加。</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">echo $PATH
+</code></pre></div><p>输出系统变量，发现的确没有Hexo模块的目录于是</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ vim ~/.bashrc
 export PATH<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PATH<span style="color:#e6db74">:/d/nodejs/node_global&#34;</span>
-$ source /etc/profile</code></pre></div>
-<p>这时候再使用hexo命令终于可以了</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ hexo server</code></pre></div>
-<p>这时候又出现问题了，<code>server</code>参数无效。。原因是hexo 3.x以后server服务独立开了，解决办法：</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install hexo-server --save</code></pre></div>
-<p>运行后访问<code>http://localhost:4000</code>，成功，默认主题太简单，后面在来配置和更换主题</p>
-
-<h3 id="配置文件-config-yml">配置文件_config.yml</h3>
-
+$ source /etc/profile
+</code></pre></div><p>这时候再使用hexo命令终于可以了</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ hexo server
+</code></pre></div><p>这时候又出现问题了，<code>server</code>参数无效。。原因是hexo 3.x以后server服务独立开了，解决办法：</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install hexo-server --save
+</code></pre></div><p>运行后访问<code>http://localhost:4000</code>，成功，默认主题太简单，后面在来配置和更换主题</p>
+<h3 id="配置文件_configyml">配置文件_config.yml</h3>
 <p>文档里已经说的很详细了，这里就不在多说了，大多配置都很明显，这里挑几个值得注意的</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yml" data-lang="yml"><span style="color:#75715e"># Site</span>
-title: opso<span style="color:#e6db74">&#39;s blog
+<span style="color:#66d9ef">title</span>: opso<span style="color:#e6db74">&#39;s blog
 </span><span style="color:#e6db74">subtitle: &#34;洛阳亲友如相问，人丑就该多读书。&#34;
 </span><span style="color:#e6db74">description: &#34;opso&#39;</span>s 技术博客&#34;
-author: opso
-language: 
+<span style="color:#66d9ef">author</span>: opso
+<span style="color:#66d9ef">language</span>: 
 - zh-cn
 - en
-timezone: Asia/Shanghai
-url: http://yoursite.com
-root: /
-permalink: :year/:month/:day/:title/
-permalink_defaults:
+<span style="color:#66d9ef">timezone</span>: Asia/Shanghai
+<span style="color:#66d9ef">url</span>: http://yoursite.com
+<span style="color:#66d9ef">root</span>: /
+<span style="color:#66d9ef">permalink</span>: :year/:month/:day/:title/
+<span style="color:#66d9ef">permalink_defaults</span>:
 <span style="color:#75715e"># Directory</span>
-source_dir: source
-public_dir: public
-tag_dir: tags
-archive_dir: archives
-category_dir: categories
-code_dir: downloads/code
-i18n_dir: :lang
-skip_render:
+<span style="color:#66d9ef">source_dir</span>: source
+<span style="color:#66d9ef">public_dir</span>: public
+<span style="color:#66d9ef">tag_dir</span>: tags
+<span style="color:#66d9ef">archive_dir</span>: archives
+<span style="color:#66d9ef">category_dir</span>: categories
+<span style="color:#66d9ef">code_dir</span>: downloads/code
+<span style="color:#66d9ef">i18n_dir</span>: :lang
+<span style="color:#66d9ef">skip_render</span>:
 <span style="color:#75715e"># Writing</span>
-new_post_name: :title.md <span style="color:#75715e"># File name of new posts</span>
-default_layout: post
-titlecase: <span style="color:#66d9ef">false</span> <span style="color:#75715e"># Transform title into titlecase</span>
-external_link: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># Open external links in new tab</span>
-filename_case: <span style="color:#ae81ff">0</span>
-render_drafts: <span style="color:#66d9ef">false</span>
-post_asset_folder: <span style="color:#66d9ef">false</span>
-relative_link: <span style="color:#66d9ef">false</span>
-future: <span style="color:#66d9ef">true</span>
-highlight:
-  enable: <span style="color:#66d9ef">true</span>
-  line_number: <span style="color:#66d9ef">true</span>
-  auto_detect: <span style="color:#66d9ef">false</span>
-  tab_replace:
+<span style="color:#66d9ef">new_post_name</span>: :title.md <span style="color:#75715e"># File name of new posts</span>
+<span style="color:#66d9ef">default_layout</span>: post
+<span style="color:#66d9ef">titlecase</span>: <span style="color:#66d9ef">false</span> <span style="color:#75715e"># Transform title into titlecase</span>
+<span style="color:#66d9ef">external_link</span>: <span style="color:#66d9ef">true</span> <span style="color:#75715e"># Open external links in new tab</span>
+<span style="color:#66d9ef">filename_case</span>: <span style="color:#ae81ff">0</span>
+<span style="color:#66d9ef">render_drafts</span>: <span style="color:#66d9ef">false</span>
+<span style="color:#66d9ef">post_asset_folder</span>: <span style="color:#66d9ef">false</span>
+<span style="color:#66d9ef">relative_link</span>: <span style="color:#66d9ef">false</span>
+<span style="color:#66d9ef">future</span>: <span style="color:#66d9ef">true</span>
+<span style="color:#66d9ef">highlight</span>:
+  <span style="color:#66d9ef">enable</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#66d9ef">line_number</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#66d9ef">auto_detect</span>: <span style="color:#66d9ef">false</span>
+  <span style="color:#66d9ef">tab_replace</span>:
 <span style="color:#75715e"># Category &amp; Tag</span>
-default_category: uncategorized
-category_map:
-tag_map:
+<span style="color:#66d9ef">default_category</span>: uncategorized
+<span style="color:#66d9ef">category_map</span>:
+<span style="color:#66d9ef">tag_map</span>:
 <span style="color:#75715e"># Archives 默认值为2，这里都修改为1，相应页面就只会列出标题，而非全文</span>
-archive: <span style="color:#ae81ff">1</span>
-category: <span style="color:#ae81ff">1</span>
-tag: <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">archive</span>: <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">category</span>: <span style="color:#ae81ff">1</span>
+<span style="color:#66d9ef">tag</span>: <span style="color:#ae81ff">1</span>
 <span style="color:#75715e"># Date / Time format</span>
 <span style="color:#75715e">## Hexo uses Moment.js to parse and display date</span>
 <span style="color:#75715e">## You can customize the date format as defined in</span>
 <span style="color:#75715e">## http://momentjs.com/docs/#/displaying/format/</span>
-date_format: YYYY-MM-DD
-time_format: HH:mm:ss
+<span style="color:#66d9ef">date_format</span>: YYYY-MM-DD
+<span style="color:#66d9ef">time_format</span>: HH:mm:ss
 <span style="color:#75715e"># Pagination</span>
 <span style="color:#75715e">## Set per_page to 0 to disable pagination</span>
-per_page: <span style="color:#ae81ff">10</span>
-pagination_dir: page
+<span style="color:#66d9ef">per_page</span>: <span style="color:#ae81ff">10</span>
+<span style="color:#66d9ef">pagination_dir</span>: page
 <span style="color:#75715e"># theme</span>
-theme: indigo
+<span style="color:#66d9ef">theme</span>: indigo
 <span style="color:#75715e"># Deployment</span>
-deploy:
-  type: git
-  repository: git@github.com:opso-code/opso-code.github.io.git
-  branch: master</code></pre></div>
-<h3 id="主题和hexo部署">主题和hexo部署</h3>
-
+<span style="color:#66d9ef">deploy</span>:
+  <span style="color:#66d9ef">type</span>: git
+  <span style="color:#66d9ef">repository</span>: git@github.com:opso-code/opso-code.github.io.git
+  <span style="color:#66d9ef">branch</span>: master
+</code></pre></div><h3 id="主题和hexo部署">主题和hexo部署</h3>
 <p>Hexo主题更换很方便，只要将主题文件夹下载好放到<code>theme</code>文件夹下，修改主题的<code>_config.yml</code>,然后修改根目录下的<code>_config.yml</code>里<code>theme</code>主题名。</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-bash" data-lang="bash">$ npm install hexo-deployer-git --save
-$ hexo deploy</code></pre></div>
-<p>将生成的静态页面文件自动提交到GIT上，github地址可以在<code>_config.yml</code>里配置，非常方便，
+$ hexo deploy
+</code></pre></div><p>将生成的静态页面文件自动提交到GIT上，github地址可以在<code>_config.yml</code>里配置，非常方便，
 配置好<code>Git pages</code>上传之后过会就可以访问了 :)</p></article>
     <footer class="post-footer">
       
@@ -330,7 +322,7 @@ $ hexo deploy</code></pre></div>
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1366</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1602</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -372,7 +364,7 @@ $ hexo deploy</code></pre></div>
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -431,7 +423,7 @@ $ hexo deploy</code></pre></div>
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();

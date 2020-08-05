@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>swap on opso&#39;s blog</title>
@@ -19,11 +19,9 @@
       
       <guid>/post/linux-swap/</guid>
       <description>&lt;p&gt;在编译程序经常会出现&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;virtual memory exhausted: Cannot allocate memory&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;的异常，表示虚拟内存不足，通常是没有这是swap缓存或者缓存过小，在编译安装的时候经常会遇到这样的报错，需要设置swap虚拟内存。&lt;/p&gt;</description>
     </item>
     

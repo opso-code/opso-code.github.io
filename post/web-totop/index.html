@@ -50,7 +50,7 @@
 
 
 
-<meta name="generator" content="Hugo 0.58.3">
+<meta name="generator" content="Hugo 0.74.3">
 
 
 <link rel="canonical" href="/post/web-totop/">
@@ -197,12 +197,10 @@
       <p class="post-meta">@opso · Apr 6, 2016 · 1 min read</p>
     </header>
     <article class="post-content"><p>返回顶部按钮常常出现在各大博客网站、购物网站、新闻门户网站等右下角，方便用户快速浏览。IOS设备上点击状态栏也会返回顶部。有两种方式实现返回顶部，一种使用 <code>JavaScript</code> 实现，一种是在页面顶部增加<code>id</code>为 <code>top</code> 的标签，赋值返回顶部按钮 <code>a</code> 标签 <code>href='#top'</code> 属性。</p>
-
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-html" data-lang="html">&lt;<span style="color:#f92672">div</span> <span style="color:#a6e22e">id</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;totop&#34;</span>&gt;
     &lt;<span style="color:#f92672">a</span> <span style="color:#a6e22e">title</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;返回顶部&#34;</span>&gt;&lt;<span style="color:#f92672">img</span> <span style="color:#a6e22e">src</span><span style="color:#f92672">=</span><span style="color:#e6db74">&#34;/img/scrollup.png&#34;</span>/&gt;&lt;/<span style="color:#f92672">a</span>&gt;
-&lt;/<span style="color:#f92672">div</span>&gt;</code></pre></div>
-<p><img src="/img/scrollup.png" alt="totop" /></p>
-
+&lt;/<span style="color:#f92672">div</span>&gt;
+</code></pre></div><p><img src="/img/scrollup.png" alt="totop"></p>
 <p>css样式</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-css" data-lang="css">#totop {
   <span style="color:#66d9ef">position</span>: <span style="color:#66d9ef">fixed</span>;
@@ -210,9 +208,8 @@
   <span style="color:#66d9ef">right</span>: <span style="color:#ae81ff">50</span><span style="color:#66d9ef">px</span>;
   <span style="color:#66d9ef">cursor</span>: <span style="color:#66d9ef">pointer</span>;
   <span style="color:#66d9ef">z-index</span>: <span style="color:#ae81ff">10000</span>;
-}</code></pre></div>
-<h2 id="jquery实现">jQuery实现</h2>
-
+}
+</code></pre></div><h2 id="jquery实现">jQuery实现</h2>
 <p>jQuery实现很简单，封装的方法兼容性好。
 <code>totop.js</code></p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">(<span style="color:#66d9ef">function</span>(<span style="color:#a6e22e">$</span>) {
@@ -240,9 +237,7 @@
     <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">false</span>;
   });
 })(<span style="color:#a6e22e">jQuery</span>);
-</code></pre></div>
-<h2 id="js原生实现">js原生实现</h2>
-
+</code></pre></div><h2 id="js原生实现">js原生实现</h2>
 <p>原生js实现也很简单，不过没有了动态效果</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-js" data-lang="js">window.<span style="color:#a6e22e">onload</span> <span style="color:#f92672">=</span> <span style="color:#66d9ef">function</span>() {
   <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">oTop</span> <span style="color:#f92672">=</span> document.<span style="color:#a6e22e">getElementById</span>(<span style="color:#e6db74">&#34;top&#34;</span>);
@@ -270,7 +265,7 @@
       </ul>
       
       <p class="post-copyright">
-        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1345</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
+        © This post is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License，please give source if you wish to quote or reproduce.This post was published <strong>1581</strong> days ago, content in the post may be inaccurate, even wrong now, please take risk yourself.
       </p>
     </footer>
     
@@ -312,7 +307,7 @@
   </section>
   
 <footer class="site-footer">
-  <p>© 2017-2019 opso&#39;s blog</p>
+  <p>© 2017-2020 opso&#39;s blog</p>
   <p>Powered by <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> with theme <a href="https://github.com/laozhu/hugo-nuo" target="_blank" rel="noopener">Nuo</a>.</p>
   
 </footer>
@@ -371,7 +366,7 @@
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?6b465630c0fa541cd6b4a9ce07137d82";
+  hm.src = "https://hm.baidu.com/hm.js?f4b4545fe62e6e3a4f63e68324f24c95";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
 })();
