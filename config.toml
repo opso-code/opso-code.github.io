@@ -8,7 +8,7 @@ canonifyurls = true
 enableEmoji = true
 
 # Disqus Username
-# disqusShortname = "opso-coding-me"
+# disqusShortname = ""
 
 # Google Analytics UA number
 # googleAnalytics = "UA-XXXXXXXX-X"
@@ -49,15 +49,10 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   email = "945206413@qq.com"
   github = "opso-code"
   instagram = "opso92"
-  # weibo = "234920704"
+  # weibo = "weibo_username"
   # twitter = "twitter_username"
   # linkedin = "linkedin_username"
   # wechat= "images/qrcode.jpg"  # Replace with your wechat qrcode image
-
-  # Changyan Comments (China Only)
-  # changyan = false
-  # changyanId = "cyt3toRiB"
-  # changyanConf = "prod_0908b1cb9a581501753cce1ed074dbe3"
 
   Gitment = true
   GitmentOwner = "opso-code"
@@ -65,11 +60,6 @@ copyright = "© This post is licensed under a Creative Commons Attribution-NonCo
   GitmentClientId = "49e019d3a542f81b2c64"
   GitmentClientSecret = "dc3ad86113e35cd1335ca5d52e313e13829730ea"
 
-  # Baidu Webmaster (China Only)
-  # https://zhanzhang.baidu.com/
-  # baiduSiteVerification = "MZ23SPxxfa"
-
   # Baidu Tongji (China Only)
   # https://tongji.baidu.com/
-  # baiduTongji = "6b465630c0fa541cd6b4a9ce07137d82"
   baiduTongji = "f4b4545fe62e6e3a4f63e68324f24c95"
