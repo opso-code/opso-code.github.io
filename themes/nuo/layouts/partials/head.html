@@ -134,7 +134,8 @@
     background: rgb(244, 243, 241) url('{{ $bg.RelPermalink }}') repeat fixed;
   }
 </style>
-<link rel="stylesheet" href="{{ $style.RelPermalink }}">
+<!-- <link rel="stylesheet" href="{{ $style.RelPermalink }}"> -->
+<link rel="stylesheet" href="https://opso-code.github.io/styles/main-rendered.min.css">
 {{ with .Site.Params.fontAwesome }}
 <link rel="stylesheet" href="{{ $fontAwesome }}" {{ printf "integrity=%q" $fontAwesomeIntegrity | safeHTMLAttr }} crossorigin="anonymous">
 {{ end }}
