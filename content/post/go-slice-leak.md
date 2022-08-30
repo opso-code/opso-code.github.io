@@ -4,8 +4,9 @@ title: 记一次Go slice内存泄露踩坑
 date: 2022-08-31
 author: opso
 tags:
-- go
-- memory leak
+ - go
+ - memory leak
+cover: "/images/go_logo.png"
 ---
 
 项目最近上了一个服务，内存占用一直会缓慢增加，为了不影响服务稳定，避免出现 `OOM`(Out of memory)，目前临时的解决方式是启用两组服务，一组服务暴露给用户，一组作为备用，内存过大的时候手动切换到备用组上，原先那组服务等没有用户连接之后，重启释放内存，然后另一边使用各种方式查找 `内存泄露`(Memory Leak)的原因。
