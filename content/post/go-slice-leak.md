@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 记一次Go slice内存泄露踩坑
-date: 2022-08-31
+date: 2022-09-01
 author: opso
 tags:
  - go
